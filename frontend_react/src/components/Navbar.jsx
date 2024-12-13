@@ -24,6 +24,19 @@ const Navbar = () => {
   };
 
 
+
+  const closeNav = () => {
+    console.log("Navigation closed!");
+    // Add your logic to close the navigation menu
+  };
+
+  const openNav = () => {
+    console.log("Navigation opened!");
+    // Add your logic to open the navigation menu
+  };
+
+
+
   const logoutUser = async () => {
     if (token) {
       await logout();
@@ -46,73 +59,81 @@ const Navbar = () => {
 
   return (
 
-    <div className="navbar_secion">
-      <nav className="navbar navbar-expand-lg ">
-        <div className="container-fluid">
-          <div>
-            <button className="btn_sidebar_pc">
-              <i className="fa-sharp fa-solid fa-bars-sort" />
-            </button>
-            <button className="btn_sidebar mobile">
-              <i className="fa-sharp fa-solid fa-bars-sort" />
-            </button>
-            <Link className="navbar-brand" to="/">
-              <img src="/images/LOGO.png" className="img-fluid" />
-            </Link>
-          </div>
-          <div className="d-flex align-items-center">
-            <div className="">
-              <div className="">
-                
-                <select
-                  className="form-select"
-                  style={{ backgroundColor: "#292d2e", color: "white" }} value={language}
-                  onChange={(e) => changeLanguage(e.target.value)}>
-                  {getlanguage.map(({ code, name }) => (
-                    <option key={code} value={code} style={{ color: "white" }}>{name}</option>
-                  ))}
-                </select>
-              </div>
+    <div className="row ">
+      <div className="nav_bar" style={{ zIndex: 9999, backgroundImage: 'linear-gradient(45deg, #7565f38a,#cfcafb4a, #c4bdfa61)' }}>
+        <div className="row">
+          <div className="col-12">
+            {/* nav for desktop view  */}
+            <div id="mySidenav" className="sidenav">
+              <div className="head  align-items-center">
+                <div className="row">
+                  <a href="profileinfo.html" className="text-secondary text-decoration-none">
+                    <div className="text-start d-flex align-items-center ms-2 profile_img">
+                      <img src="/theme_fansgames/images/profile-female.jpg" className="rounded-circle" width="40px" height="35px" />
 
+                      <p className="m-0 ms-1">user123</p>
+                    </div>
+                  </a>
+                  <div>
+                    <a href="#" className="closebtn" onClick={closeNav}>×</a>
 
-              <header>
-              </header>
-            </div>
-
-            {token ? (
-              <button className="btn btn_signup mx-2 text-white" onClick={handleRedirect}>{content.level_deposit || 'Deposit'}</button>) : (
-              <button className="btn btn_signup mx-2 text-white" onClick={handleRedirectLogin}>{content.level_deposit || 'Deposit'}</button>
-            )}
-            <div className="button_box">
-              {token ? (
-                <>
-                  <Link to="/dashboard" className="btn_signin">Dashboard</Link>
-                  <Link className="btn_signin" id="bLogin" to="#" onClick={logoutUser}>Logout</Link>
-                </>
-              ) : (
-                <>
-                  <Link to="/login" className="btn_signin">{content.level_sign_in || 'Sign in'}</Link>
-                  <Link to="/signup" className="btn_signup">{content.level_sign_up || 'Sign up'}</Link>
-                </>
-              )}
-            </div>
-
-
-            <div style={{ marginTop: '20px', color: 'white', display: 'none' }}>
-              {Object.keys(content).length > 0 ? (
-                <div>
-                  <p>Greeting: {content.greeting}</p>
-                  <p>Farewell: {content.farewell}</p>
-                  <p>Welcome: {content.welcome}</p>
+                  </div>
                 </div>
-              ) : (
-                <p></p>
-              )}
+                <div className="row">
+                  <div className="col-6"><a href="pricing.html"><img src="/theme_fansgames/images/dimond.png" /> 5000</a></div>
+                  <div className="col-6"><a href="deposite.html"><img src="/theme_fansgames/images/dollar.png" /> 5000</a></div>
+                </div>
+              </div>
+              <div className="body">
+                <a href="index.html"><img src="/theme_fansgames/images/reels-60.png" /> Reels</a>
+                <a href="livestream.html"><img src="/theme_fansgames/images/live-streaming.png" />Stream</a>
+                <a href="ranking.html"><img src="/theme_fansgames/images/trophy.png" />Ranking</a>
+                <a href="gamelist.html"><img src="/theme_fansgames/images/casino (1).png" />Games</a>
+                <a href="wallet.html"><img src="/theme_fansgames/images/wallet.png" />Wallet</a>
+                <a href="referal.html"><img src="/theme_fansgames/images/refferal-transformed-removebg-preview.png" />Reffer</a>
+                <a href="affiliate.html"><img src="/theme_fansgames/images/affiliate-60.png" />Affiliate</a>
+                <a href="deposite.html"><img src="/theme_fansgames/images/money-bag-green60.png" />Deposite</a>
+                <a href="withdraw.html"><img src="/theme_fansgames/images/cash_in.png" />withdraw</a>
+                {/* <a href="profile.html"><img src="/theme_fansgames/images/user.png" ="">Profile</a> */}
+                <a href="login.html"><img src="/theme_fansgames/images/user.png" />Login</a>
+              </div>
             </div>
-
           </div>
         </div>
-      </nav>
+        <div className="row">
+          <div className="col-md-12 col-sm-12">
+            <div className=" nav_profile">
+              <div className="logo_fg">
+                <div>
+                  <a href="#" style={{ textDecoration: 'none' }} className="text-dark bg-transparent">
+                    <img src="/theme_fansgames/images/fav_logo.jpg" className="img-fluid" />
+                  </a>
+                </div>
+                <div>
+                  <h5>Fansgame</h5>
+                  <p>Online Games</p>
+                </div>
+              </div>
+              {/* settings button  */}
+              <div className="ms-auto text-end ">
+                <a className="nav-link" onClick={openNav}>
+                  <div className="grid_dots">
+                    <div className="dots">
+                      <span /><span /><span />
+                    </div>
+                    <div className="dots">
+                      <span /><span /><span />
+                    </div>
+                    <div className="dots">
+                      <span /><span /><span />
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
 
   );

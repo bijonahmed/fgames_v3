@@ -4,8 +4,8 @@ import { Helmet } from "react-helmet";
 import { Link } from "react-router-dom";
 import Loader from "../components/Loader";
 import axios from "/config/axiosConfig";
-import GuestNavbar from "../components/Navbar";
-import SliderComponent from "../components/SliderComponent"; // Adjust path if necessary
+import Navbar from "../components/Navbar";
+import ShortVideoPlayer from "../components/ShortVideoPlayer"; // Adjust path if necessary
 import GameSlider from "../components/GameSlider";
 
 import GameComponentOne from "../components/Games/GameComponentOne";
@@ -42,99 +42,81 @@ const Index = () => {
       </Helmet>
       <div>
         <FullScreenDarkMode />
-        <GuestNavbar />
-        <div className="main_content">
-          <LeftSideBarComponent />
+        <div className="container-fluid p-0" style={{ minHeight: "100vh" }}>
+          <Navbar />
+          {/* space  */}
+          <div style={{ height: 50 }} />
+          {/* navbar end here  */}
+          <button type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#log_modal">
+            Launch demo modal
+          </button>
 
-          <div className="main_section">
-            <div className="container-fluid">
-              <div className="row">
-                <div className="col-xl-9">
-                  <div className="banner_section">
-                    <div className="swiper bannerSlider">
-                      {/* SliderComponent Component */}
-                      <SliderComponent />
-                      <div className="swiper-pagination" />
+          <div className="row m-auto justify-content-center p-0 m-0">
+            <div className="col-md-4 tablet_view_home ">
+              <LeftSideBarComponent />
+            </div>
+            <ShortVideoPlayer />
+            <div className="col-xl-4 col-lg-4 col-md-4  desktop_view">
+              <div className="here " style={{ height: '80vh' }}>
+                <div className="right_index">
+                  <div className="premium_games">
+                    <h5>Free Games</h5>
+                    <div className="game_slide owl-carousel">
+                      <div className="game_content">
+                        <a href="#">
+                          <img src="/theme_fansgames/images/Joker_Poker.png" loading="lazy" className="img-fluid" />
+                        </a>
+                      </div>
+                      <div className="game_content">
+                        <a href="#">
+                          <img src="/theme_fansgames/images/baccarat_512.jpg" loading="lazy" className="img-fluid" />
+                        </a>
+                      </div>
+                      <div className="game_content">
+                        <a href="#">
+                          <img src="/theme_fansgames/images/gaming guide web_BACCARAT 580.jpg" loading="lazy" className="img-fluid" />
+                        </a>
+                      </div>
+
                     </div>
+                    <p>Note: Play free games and collect Dimond</p>
                   </div>
-
-                  {/* GameSlider Component */}
-                  <GameSlider />
-                  <div className="row">
-                    <div className="col-xl-6">
-                      <div className="big_cat">
-                        <div className="category_section cat_casino">
-                          <Link to="/play-game/aviator-100001">
-                            <img
-                              src="/images/Aviator-logo-South-Africa.png"
-                              className="img-fluid"
-                            />
-                            <h1>{content.lvl_index_casino || 'Aviator'}</h1>
-                          </Link>
-                        </div>
-                        <div className="category_section bg_sports">
-                          <Link to="games-list/jili">
-                            <img
-                              src="/images/sports-C-mawjC1.webp"
-                              className="img-fluid"
-                            />
-                            <h1>{content.lvl_index_sports || 'JILI'} </h1>
-                          </Link>
-                        </div>
+                  <div className="premium_games">
+                    <h5 className="premium">Premium Games</h5>
+                    <div className="game_slide owl-carousel">
+                      <div className="game_content">
+                        <a href="#">
+                          <img src="/theme_fansgames/images/Joker_Poker.png" loading="lazy" className="img-fluid" />
+                        </a>
                       </div>
-                    </div>
-                    <div className="col-xl-6">
-                      <div className="smCat_list">
-                        <div className="category_section bg_lottery">
-                          <Link to="games-list/pp_max">
-                            <img
-                              src="/images/lottery-BgL2Ay0X.webp"
-                              className="img-fluid"
-                            />
-                            <h1>{content.lvl_index_lottery || 'PP MAX'} </h1>
-                          </Link>
-                        </div>
-
-                        <div className="category_section bg_updown">
-                          <Link to="games-list/mini_game">
-                            <img
-                              src="/images/updown-DQe7IPIb.webp"
-                              className="img-fluid"
-                            />
-                            <h1>{content.lvl_index_updown || 'Mini Games'} </h1>
-                          </Link>
-                        </div>
-
+                      <div className="game_content">
+                        <a href="#">
+                          <img src="/theme_fansgames/images/baccarat_512.jpg" loading="lazy" className="img-fluid" />
+                        </a>
                       </div>
+                      <div className="game_content">
+                        <a href="#">
+                          <img src="/theme_fansgames/images/gaming guide web_BACCARAT 580.jpg" loading="lazy" className="img-fluid" />
+                        </a>
+                      </div>
+
                     </div>
+                    <p>Note: Subscribe For Play premium games.</p>
                   </div>
-                  <section className="on_games">
-                    {isLoading ? (
-                      // Loader Content
-                      <div className="d-flex justify-content-center">
-                        <div className="spinner-border" role="status">
-                          <span className="visually-hidden">Loading...</span>
-                        </div>
-                      </div>
-                    ) : (
-                      // Content to display after loading
-                      <>
-                        <GameComponentOne />
-                        <GameComponentTwo />
-                        <GameComponentThree />
-                        <GameComponentFour />
-                      </>
-                    )}
-                  </section>
-
+                  <div className="bottom_right">
+                    <img src="/theme_fansgames/images/transparent_img.png" className="img-fluid" />
+                  </div>
                 </div>
-                {/* RightSideBarHoster Component */}
-                <RightSideBarHoster />
               </div>
             </div>
-            <Footer />
           </div>
         </div>
+        {/* Main content part end here  */}
+
+
+        <Footer />
+
+        {/* END */}
       </div>
     </div>
   );

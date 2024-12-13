@@ -21,7 +21,7 @@ export const LanguageProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    fetchTexts(language); // Fetch texts whenever language changes
+    //fetchTexts(language); // Fetch texts whenever language changes
   }, [language]);
 
   // Change language and update localStorage

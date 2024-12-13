@@ -45,22 +45,57 @@ const LeftSideBarComponent = () => {
   }, []); // Dependency array includes slug and currentPage
 
   return (
-    <div className="sidebar_main">
-      <div className="sidebar_main">
-        <ul className="siderbar_items">
-          {menuItems.map((item, index) => (
-            <li key={index} className={`siderbar_item ${activeLink === item.path ? "active" : ""}`}>
-              <Link
-                to={item.path}
-                className="sidebar_link"
-                onClick={() => handleActiveLink(item.path)}>
-                <span>{item.label}</span>
-              </Link>
-            </li>
-          ))}
-        </ul>
+    // <div className="sidebar_main">
+    //   <div className="sidebar_main">
+    //     <ul className="siderbar_items">
+    //       {menuItems.map((item, index) => (
+    //         <li key={index} className={`siderbar_item ${activeLink === item.path ? "active" : ""}`}>
+    //           <Link
+    //             to={item.path}
+    //             className="sidebar_link"
+    //             onClick={() => handleActiveLink(item.path)}>
+    //             <span>{item.label}</span>
+    //           </Link>
+    //         </li>
+    //       ))}
+    //     </ul>
+    //   </div>
+    // </div>
+
+    <div className="left_index">
+        <div className="top_part">
+          <div className="row">
+            <div className="col-12 ms-auto">
+
+              <div className="page_links">
+                <h6>Pages</h6>
+                <a href="index.html"><img src="/theme_fansgames/images/reels-60.png" /> Reels</a>
+                <a href="livestream.html"><img src="/theme_fansgames/images/live-streaming.png" />Stream</a>
+                <a href="ranking.html"><img src="/theme_fansgames/images/trophy.png" />Ranking</a>
+                <a href="gamelist.html"><img src="/theme_fansgames/images/casino (1).png" />Games</a>
+                <a href="wallet.html"><img src="/theme_fansgames/images/wallet.png" />Wallet</a>
+                <a href="referal.html"><img src="/theme_fansgames/images/refferal-transformed-removebg-preview.png" />Reffer</a>
+                <a href="affiliate.html"><img src="/theme_fansgames/images/affiliate-60.png" />Affiliate</a>
+                <a href="deposite.html"><img src="/theme_fansgames/images/money-bag-green60.png" />Deposite</a>
+                <a href="withdraw.html"><img src="/theme_fansgames/images/cash_in.png" />withdraw</a>
+                <a href="video_gallery.html"><img src="/theme_fansgames/images/video-gallery-100.png" />Vidoe
+                  Gallery</a>
+                <a href="login.html"><img src="/theme_fansgames/images/user.png" />Login</a>
+                <a href="register.html"><img src="/theme_fansgames/images/user.png" />Register</a>
+                <h6>Social Links </h6>
+                <div className="index_social">
+                  <a href="https://www.facebook.com/Fansgame.online/"><img src="/theme_fansgames/images/facebook-100.png" className="img-fluid" /></a>
+                  <a href="https://www.youtube.com/@FansGame.online"><img src="/theme_fansgames/images/youtube-100.png" /></a>
+                  <a href="https://www.instagram.com/fansgame_official/"><img src="/theme_fansgames/images/instagram-100.png" /></a>
+                  <a href="https://twitter.com/Fansgameonline"><img src="/theme_fansgames/images/twitter-circled-100.png" /></a>
+                  <a href="https://www.pinterest.com/fansgame_official"><img src="/theme_fansgames/images/pinterest-100.png" /></a>
+                  <a href="https://www.tiktok.com/@fansgame.online"><img src="/theme_fansgames/images/tiktok-100.png" /></a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
   );
 };
 

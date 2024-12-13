@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5HJD0FX386"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-5HJD0FX386');
+    </script>
+
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>QuickSend Money Transfer</title>
+    <meta content="description" name="Barakah">
+    <meta content="author" name="Muhammad Ibrahim Bin Karim || www.devsstream.com">
+    <meta content="keyword" name="Barakah">
+
+    <!-- Favicons -->
+    <link href="{{ asset('fontend/images/fav-icon.png')}}" style="180x180" rel="icon">
+    <!--  <link href="{{ asset('fontend/images/logo_transparent.png')}}" rel="apple-touch-icon"> -->
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Source+Sans+Pro:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&display=swap"
+        rel="stylesheet">
+
+    <!-- Vendor CSS Files -->
+    <link href="{{ asset('fontend/assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('fontend/assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
+    <link href="{{ asset('fontend/assets/vendor/aos/aos.css')}}" rel="stylesheet">
+    <link href="{{ asset('fontend/assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
+    <link href="{{ asset('fontend/assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+
+    <!-- Cookies alert -->
+    <!--<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Wruczek/Bootstrap-Cookie-Alert@gh-pages/cookiealert.css">-->
+
+
+    <!-- Variables CSS Files. Uncomment your preferred color scheme -->
+    <link href="{{ asset('fontend/assets/css/variables.css')}}" rel="stylesheet">
+    <!-- <link href="{{ asset('fontend/assets/css/variables-blue.css')}}" rel="stylesheet"> -->
+    <!-- <link href="{{ asset('fontend/assets/css/variables-green.css')}}" rel="stylesheet"> -->
+    <!-- <link href="{{ asset('fontend/assets/css/variables-orange.css')}}" rel="stylesheet"> -->
+    <!-- <link href="{{ asset('fontend/assets/css/variables-purple.css')}}" rel="stylesheet"> -->
+    <!-- <link href="{{ asset('fontend/assets/css/variables-red.css')}}" rel="stylesheet"> -->
+    <!-- <link href="{{ asset('fontend/assets/css/variables-pink.css')}}" rel="stylesheet"> -->
+
+    <!-- Template Main CSS File -->
+    <!-- <link href="{{ asset('fontend/assets/css/main.css')}}" rel="stylesheet">-->
+    <link href="{{ asset('fontend/css/styles.css')}}" rel="stylesheet">
+    <style>
+        :root {
+            --marquee-speed: 40s;
+            --marquee-hover-offset: -50px;
+            --marquee-hover-transition-speed: .7s;
+            --marquee-fade-edges: 30%;
+        }
+
+
+        .marquee {
+            overflow: hidden;
+            mask-image: linear-gradient(to right, rgba(0, 0, 0, 0%) 0%, #000 var(--marquee-fade-edges), #000 calc(100% - var(--marquee-fade-edges)), rgba(0, 0, 0, 0%) 100%);
+            color: #fff;
+
+            &,
+            >div {
+                display: flex;
+                white-space: nowrap;
+                gap: 30px;
+            }
+
+            >div {
+                animation: animate-marquee var(--marquee-speed) infinite linear;
+                transition: var(--marquee-hover-transition-speed) margin-left ease-out;
+                will-change: transform, margin-left;
+            }
+
+            &:hover>div {
+                animation-play-state: paused;
+                margin-left: var(--marquee-hover-offset);
+            }
+        }
+
+        @keyframes animate-marquee {
+            0% {
+                transform: translateX(0%) translateZ(0);
+            }
+
+            100% {
+                transform: translateX(-100%) translateZ(0);
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top" data-scrollto-offset="0">
+        <div class="container-fluid" style="background: #1873cb;">
+            <div class="row">
+                <div class="col-md-12">
+                    <!--<h1 style="font-size:14px; margin:0px; padding: 3px 0px; color: #fff;"><marquee behavior=scroll scrollamount="">FAST, RELIABLE, TRUSTED, LOW COST. BANK DEPOSIT, CASH PICKUP</marquee> </h1>-->
+                    <div class="marquee">
+                        <div>
+                            <div>FAST <span style="color:gold;">☆</span> RELIABLE <span style="color:gold;">☆</span>
+                                TRUSTED <span style="color:gold;">☆</span> LOW COST <span style="color:gold;">☆</span>
+                                BANK DEPOSIT <span style="color:gold;">☆</span> CASH PICKUP</div>
+                            <div>FAST <span style="color:gold;">☆</span> RELIABLE <span style="color:gold;">☆</span>
+                                TRUSTED <span style="color:gold;">☆</span> LOW COST <span style="color:gold;">☆</span>
+                                BANK DEPOSIT <span style="color:gold;">☆</span> CASH PICKUP</div>
+                            <div>FAST <span style="color:gold;">☆</span> RELIABLE <span style="color:gold;">☆</span>
+                                TRUSTED <span style="color:gold;">☆</span> LOW COST <span style="color:gold;">☆</span>
+                                BANK DEPOSIT <span style="color:gold;">☆</span> CASH PICKUP</div>
+                        </div>
+
+                        <!-- This clone can be coded using JS, as the number of clones depends on both the text width and screen size. -->
+                        <div>
+                            <div>FAST <span style="color:gold;">☆</span> RELIABLE <span style="color:gold;">☆</span>
+                                TRUSTED <span style="color:gold;">☆</span> LOW COST <span style="color:gold;">☆</span>
+                                BANK DEPOSIT <span style="color:gold;">☆</span> CASH PICKUP</div>
+                            <div>FAST <span style="color:gold;">☆</span> RELIABLE <span style="color:gold;">☆</span>
+                                TRUSTED <span style="color:gold;">☆</span> LOW COST <span style="color:gold;">☆</span>
+                                BANK DEPOSIT <span style="color:gold;">☆</span> CASH PICKUP</div>
+                            <div>FAST <span style="color:gold;">☆</span> RELIABLE <span style="color:gold;">☆</span>
+                                TRUSTED <span style="color:gold;">☆</span> LOW COST <span style="color:gold;">☆</span>
+                                BANK DEPOSIT <span style="color:gold;">☆</span> CASH PICKUP</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid d-flex align-items-center justify-content-between">
+
+
+
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent" style="background: #fff;">
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0 mt-3">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{url('/')}}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{url('/about/')}}">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{url('/services/')}}">Service</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{url('/contact/')}}">Contact</a>
+                    </li>
+                </ul>
+                <p class="btn-getstarted scrollto d-block mt-3 mx-2">
+                    <span>
+                        <a class="text-white " style="font-size: 16px;"
+                            href="http://worldwide.ahmedmoneytransfer.co.uk/">Login/</a>
+                        <a class="text-white" style="font-size: 16px;" href="#">Register</a>
+                    </span>
+                </p>
+            </div>
+
+
+        </div>
+        </nav>
+        <!-- navbar end here-->
+        <!-- <a class="btn-getstarted scrollto d-none d-md-block" href="http://worldwide.ahmedmoneytransfer.co.uk/">Login/Register</a> -->
+        </div>
+        </div>
+        </div>
+
+
+
+        <!--</div>-->
+    </header>
+    <!-- End Header -->

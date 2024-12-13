@@ -64,7 +64,7 @@ const FullScreenDarkMode = () => {
                 rel="noopener noreferrer"
               >
                 <img
-                  src="/images/google-playstore.png" // Replace with a valid Google Play Store icon
+                  src="/theme_fansgames/images//google-playstore.png" // Replace with a valid Google Play Store icon
                   alt="Download on Google Play"
                   className="store-icon"
                 />
@@ -75,7 +75,7 @@ const FullScreenDarkMode = () => {
                 rel="noopener noreferrer">
                 <br /><br />
                 <img
-                  src="/images/apple.png" // Path starts from the public folder
+                  src="/theme_fansgames/images//apple.png" // Path starts from the public folder
                   alt="Download on the App Store"
                   className="store-icon"
                 />
