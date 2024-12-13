@@ -1,0 +1,9 @@
+.games_box {
+    padding: 5px; /* Add padding around each game box */
+  }
+  
+  .game_link img {
+    width: 100%;  /* Ensure the image takes up the full width */
+    display: block;
+    border-radius: 8px; /* Optional: Add border radius to images */
+  }

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Custom Crypto Dropdown</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+
+        .custom-dropdown {
+            position: relative;
+            width: 200px;
+        }
+
+        #dropdownInput {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-options {
+            display: none;
+            position: absolute;
+            width: 100%;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            background-color: white;
+            z-index: 1;
+            max-height: 150px;
+            overflow-y: auto;
+            margin-top: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .dropdown-option {
+            padding: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+        }
+
+        .dropdown-option img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .dropdown-option:hover {
+            background-color: #f0f0f0;
+        }
+
+        .selected-currency {
+            display: flex;
+            align-items: center;
+        }
+
+        .selected-currency img {
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="custom-dropdown">
+        <div id="selectedCurrency" class="selected-currency">
+            <img id="currencyImage" src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Currency">
+            <input type="text" id="dropdownInput" value="Bitcoin" placeholder="Select currency..." onclick="toggleDropdown()" onkeyup="filterOptions()">
+        </div>
+        <div id="dropdownList" class="dropdown-options">
+            <div class="dropdown-option" onclick="selectOption('Bitcoin', 'https://cryptologos.cc/logos/bitcoin-btc-logo.png')">
+                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png" alt="Bitcoin"> Bitcoin
+            </div>
+            <div class="dropdown-option" onclick="selectOption('Ethereum', 'https://cryptologos.cc/logos/ethereum-eth-logo.png')">
+                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png" alt="Ethereum"> Ethereum
+            </div>
+            <div class="dropdown-option" onclick="selectOption('Litecoin', 'https://cryptologos.cc/logos/litecoin-ltc-logo.png')">
+                <img src="https://cryptologos.cc/logos/litecoin-ltc-logo.png" alt="Litecoin"> Litecoin
+            </div>
+            <div class="dropdown-option" onclick="selectOption('Ripple', 'https://cryptologos.cc/logos/xrp-xrp-logo.png')">
+                <img src="https://cryptologos.cc/logos/xrp-xrp-logo.png" alt="Ripple"> Ripple
+            </div>
+            <div class="dropdown-option" onclick="selectOption('Dogecoin', 'https://cryptologos.cc/logos/dogecoin-doge-logo.png')">
+                <img src="https://cryptologos.cc/logos/dogecoin-doge-logo.png" alt="Dogecoin"> Dogecoin
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function toggleDropdown() {
+            const dropdownList = document.getElementById('dropdownList');
+            dropdownList.style.display = dropdownList.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function filterOptions() {
+            const input = document.getElementById('dropdownInput');
+            const filter = input.value.toLowerCase();
+            const options = document.querySelectorAll('.dropdown-option');
+
+            options.forEach(option => {
+                const text = option.textContent.toLowerCase();
+                option.style.display = text.includes(filter) ? 'flex' : 'none';
+            });
+
+            // Show dropdown if there are matching options
+            const dropdownList = document.getElementById('dropdownList');
+            dropdownList.style.display = [...options].some(option => option.style.display === 'flex') ? 'block' : 'none';
+        }
+
+        function selectOption(option, imageSrc) {
+            const input = document.getElementById('dropdownInput');
+            input.value = option; // Set the input value to the selected option
+            const currencyImage = document.getElementById('currencyImage');
+            currencyImage.src = imageSrc; // Set the image source
+            currencyImage.style.display = 'inline'; // Show the image
+            document.getElementById('dropdownList').style.display = 'none'; // Hide the dropdown
+        }
+
+        // Close the dropdown if clicked outside
+        window.onclick = function (event) {
+            if (!event.target.matches('#dropdownInput')) {
+                const dropdownList = document.getElementById('dropdownList');
+                dropdownList.style.display = 'none';
+            }
+        };
+    </script>
+</body>
+
+</html>

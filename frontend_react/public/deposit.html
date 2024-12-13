@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>User Profile | Welcome to FanGames</title>
+    <!-- bootstrap  -->
+    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
+    <!-- fontawesome pro 6 -->
+    <link rel="stylesheet" href="assets/fontawesome/css/all.min.css">
+    <!-- Link Swiper's CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+    <!-- animate css  -->
+    <link rel="stylesheet" href="css/animate.css">
+    <!-- default css  -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+    <!-- navbar part start herere  -->
+    <div class="navbar_secion">
+        <nav class="navbar navbar-expand-lg ">
+            <div class="container-fluid">
+
+                <div class="">
+                    <button class="btn_sidebar_pc">
+                        <i class="fa-sharp fa-solid fa-bars-sort"></i>
+                    </button>
+                    <button class="btn_sidebar mobile">
+                        <i class="fa-sharp fa-solid fa-bars-sort"></i>
+                    </button>
+                    <a class="navbar-brand" href="index.html">
+                        <img src="images/LOGO.png" alt="" class="img-fluid">
+                    </a>
+                </div>
+
+                <div class="button_box">
+                    <a href="signin.html" class="btn_signin">Sign in</a>
+                    <a href="signup.html" class="btn_signup">Sign up</a>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- navbar part end here  -->
+
+    <!-- content part star there  -->
+    <div class="main_content">
+
+        <!-- sidebar section setart here -->
+
+        <div class="sidebar_main">
+            <ul class="siderbar_items">
+                <li class="siderbar_item active">
+                    <a type="button" href="games.html" class="sidebar_link">
+                        <span class="wow fadeIn">Casino</span>
+                        <!-- <i class="fa-regular fa-chevron-down btn_submenu"></i> -->
+                    </a>
+                </li>
+                <li class="siderbar_item">
+                    <a type="button" href="hoster-list.html" class="sidebar_link">
+                        <span>Hoster</span>
+                        <!-- <i class="fa-regular fa-chevron-down btn_submenu"></i> -->
+                    </a>
+                </li>
+                <li type="button" class="siderbar_item">
+                    <a href="" class="sidebar_link">
+                        <span class="wow fadeIn">Casino</span>
+                        <i class="fa-regular fa-chevron-down btn_submenu"></i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="sub-menu_list active">
+                            <a href="games.html" class="">
+                                <span>submenu 1</span>
+                            </a>
+                        </li>
+                        <li class="sub-menu_list">
+                            <a href="games.html" class="">
+                                <span>submenu 2</span>
+                            </a>
+                        </li>
+                        <li class="sub-menu_list">
+                            <a href="games.html" class="">
+                                <span>submenu 3</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+                <li type="button" class="siderbar_item">
+                    <a href="games.html" class="sidebar_link">
+                        <span class="wow fadeIn">Profile</span>
+                        <i class="fa-regular fa-chevron-down btn_submenu"></i>
+                    </a>
+                    <ul class="sub-menu">
+                        <li class="sub-menu_list">
+                            <a href="user-profile.html" class="">
+                                <span>User Profile</span>
+                            </a>
+                        </li>
+                        <li class="sub-menu_list">
+                            <a href="wallet.html" class="">
+                                <span>Wallet</span>
+                            </a>
+                        </li>
+                        <li class="sub-menu_list active">
+                            <a href="deposit.html" class="">
+                                <span>Deposit</span>
+                            </a>
+                        </li>
+                        <li class="sub-menu_list">
+                            <a href="withdraw.html" class="">
+                                <span>Withdraw</span>
+                            </a>
+                        </li>
+                        <li class="sub-menu_list">
+                            <a href="bet-history.html" class="">
+                                <span>Bet History</span>
+                            </a>
+                        </li>
+                        <li class="sub-menu_list">
+                            <a href="transection.html" class="">
+                                <span>Transection</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+                <!-- <li class="siderbar_item">
+                    <a type="button" href="user-profile.html" class="sidebar_link">
+                        <span>User Profile</span>
+                    </a>
+                </li> -->
+                <li class="siderbar_item">
+                    <a type="button" href="#logout" class="sidebar_link">
+                        <span>Logout</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <!-- sidebar sectio end here  -->
+
+        <!-- main content part star herer  -->
+        <div class="main_section">
+            <!--main section start here  -->
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="title_section">
+                            <a href="javascript:history.back()"><i class="fa-solid fa-chevron-left"></i></a>
+                            <h1 class="page_title">Deposit</h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xxl-9">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <div class="mini_sidebar">
+                                    <ul class="siderbar_items">
+                                        <li class="siderbar_item ">
+                                            <a type="" href="wallet.html" class="sidebar_link">
+                                                <span class="">Balance</span>
+                                            </a>
+                                        </li>
+                                        <li class="siderbar_item">
+                                            <a type="" href="deposit.html" class="sidebar_link">
+                                                <span>Deposit</span>
+                                            </a>
+                                        </li>
+                                        <li class="siderbar_item">
+                                            <a type="" href="withdraw.html" class="sidebar_link">
+                                                <span>Withdraw</span>
+                                            </a>
+                                        </li>
+                                        <li class="siderbar_item">
+                                            <a type="" href="transection.html" class="sidebar_link">
+                                                <span>Transaction</span>
+                                            </a>
+                                        </li>
+                                        <li class="siderbar_item">
+                                            <a type="" href="bet-history.html" class="sidebar_link">
+                                                <span>Bet History</span>
+                                            </a>
+                                        </li>
+                                        <li class="siderbar_item">
+                                            <a type="" href="security.html" class="sidebar_link">
+                                                <span>Security</span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <!--------------->
+                                <div class="balance_container">
+                                    <nav class="tab_buttons w-100">
+                                        <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                                            <button class="nav-link active w-50" id="nav-home-tab" data-bs-toggle="tab"
+                                                data-bs-target="#nav-home" type="button" role="tab"
+                                                aria-controls="nav-home" aria-selected="true">Crypto</button>
+                                            <button class="nav-link w-50" id="nav-profile-tab" data-bs-toggle="tab"
+                                                data-bs-target="#nav-profile" type="button" role="tab"
+                                                aria-controls="nav-profile" aria-selected="false"
+                                                tabindex="-1">Fiat</button>
+                                        </div>
+                                    </nav>
+                                </div>
+                                <!----------------->
+                                <div class="tab-content balance_container" id="nav-tabContent">
+                                    <div class="tab-pane fade show active" id="nav-home" role="tabpanel"
+                                        aria-labelledby="nav-home-tab text-white">
+                                        <div class="deposit_sec">
+                                            <div class="row">
+                                                <div class="col-md-6">
+                                                    <h6 class="mb-2">Deposit Currency</h6>
+                                                    <div class="custom-dropdown">
+                                                        <div id="selectedCurrency1" class="selected-currency">
+                                                            <img id="currencyImage1"
+                                                                src="https://cryptologos.cc/logos/bitcoin-btc-logo.png"
+                                                                alt="Currency">
+                                                            <input type="text" id="dropdownInput1" value="Bitcoin"
+                                                                placeholder="Select currency..."
+                                                                onclick="toggleDropdown('dropdownList1')"
+                                                                onkeyup="filterOptions('dropdownInput1', 'dropdownList1')">
+                                                        </div>
+                                                        <div id="dropdownList1" class="dropdown-options">
+                                                            <div class="dropdown-option"
+                                                                onclick="selectOption('Bitcoin', 'https://cryptologos.cc/logos/bitcoin-btc-logo.png', 'dropdownInput1', 'currencyImage1')">
+                                                                <img src="https://cryptologos.cc/logos/bitcoin-btc-logo.png"
+                                                                    alt="Bitcoin"> Bitcoin
+                                                            </div>
+                                                            <div class="dropdown-option"
+                                                                onclick="selectOption('Ethereum', 'https://cryptologos.cc/logos/ethereum-eth-logo.png', 'dropdownInput1', 'currencyImage1')">
+                                                                <img src="https://cryptologos.cc/logos/ethereum-eth-logo.png"
+                                                                    alt="Ethereum"> Ethereum
+                                                            </div>
+                                                            <div class="dropdown-option"
+                                                                onclick="selectOption('Litecoin', 'https://cryptologos.cc/logos/litecoin-ltc-logo.png', 'dropdownInput1', 'currencyImage1')">
+                                                                <img src="https://cryptologos.cc/logos/litecoin-ltc-logo.png"
+                                                                    alt="Litecoin"> Litecoin
+                                                            </div>
+                                                            <div class="dropdown-option"
+                                                                onclick="selectOption('Ripple', 'https://cryptologos.cc/logos/xrp-xrp-logo.png', 'dropdownInput1', 'currencyImage1')">
+                                                                <img src="https://cryptologos.cc/logos/xrp-xrp-logo.png"
+                                                                    alt="Ripple"> Ripple
+                                                            </div>
+                                                            <div class="dropdown-option"
+                                                                onclick="selectOption('Dogecoin', 'https://cryptologos.cc/logos/dogecoin-doge-logo.png', 'dropdownInput1', 'currencyImage1')">
+                                                                <img src="https://cryptologos.cc/logos/dogecoin-doge-logo.png"
+                                                                    alt="Dogecoin"> Dogecoin
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <h6 class="mb-2">Deposit Currency</h6>
+                                                    <select name="" id="" class="form-control">
+                                                        <option value="" disabled selected>Select Network</option>
+                                                        <option value="">TRC20</option>
+                                                        <option value="">ERC20</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <p class="badge bg-warning fs-6 p-2 w-100 mt-2"
+                                                style="--bs-bg-opacity: .1;">Get 180% bonus on minimun of 1`0.00 BCD
+                                                deposit</p>
+                                            <div class="address_box">
+                                                <img src="images/1200px-QR_Code_Example.svg.png" alt=""
+                                                    class="img-fluid">
+                                                <div class="w-100">
+                                                    <div class="form-group">
+                                                        <label for="" class="mb-2">Deposit address</label>
+                                                        <input type="text" class="form-control"
+                                                            value="0x4565446464ed654sd4664644a45e">
+                                                    </div>
+                                                    <button class="more_about btn btn-default w-100"><i
+                                                            class="fa-solid fa-copy me-2"></i>Copy</button>
+                                                    <p class="badge bg-success fs-6 p-2 w-100 mt-3"
+                                                        style="--bs-bg-opacity: .3;">Do not deposit any other currency
+                                                        other than Bitcoin</p>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-profile" role="tabpanel"
+                                        aria-labelledby="nav-profile-tab text-white my-3">
+                                        <form action="" method="post" class="deposit_form deposit_sec">
+                                            <div class="form-group mb-2">
+                                                <label for="" class="mb-2">Deposit Currency</label>
+                                                <select name="" id="" class="form-control">
+                                                    <option value="">BDT</option>
+                                                    <option value="">USD</option>
+                                                    <option value="">INR</option>
+                                                    <option value="">AED</option>
+                                                    <option value="">RM</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group mb-2">
+                                                <label for="" class="mb-2">Deposit Method</label>
+                                                <select name="" id="" class="form-control">
+                                                    <option value="">Paypal</option>
+                                                    <option value="">Payneer</option>
+                                                    <option value="">Stripe</option>
+                                                </select>
+                                            </div>
+                                            <p class="badge bg-warning fs-6 p-2 w-100 my-2"
+                                                style="--bs-bg-opacity: .1;">Get 180% bonus on minimun of 1`0.00 BCD
+                                                deposit</p>
+                                            <div class="form-group mb-2">
+                                                <label for="" class="mb-2">100-25000 USDT</label>
+                                                <input type="text" class="form-control">
+                                            </div>
+                                            <button class="more_about btn btn-default w-100">Deposit</button>
+                                        </form>
+                                    </div>
+                                    <div class="tab-pane fade" id="nav-contact" role="tabpanel"
+                                        aria-labelledby="nav-contact-tab text-white">
+
+                                        <!-- game list part start here  -->
+                                        <section class="game_list_container my-3">
+
+                                            <div class="game_list">
+                                                <div class="games_box game_page_link">
+                                                    <a href="#" class="game_link">
+                                                        <i class="fa-regular fa-circle-play play_btn"></i>
+                                                        <h1><i class="fa-solid fa-user"></i>200</h1>
+                                                        <img src="images/games/games-logo-1.png" alt=""
+                                                            class="img-fluid">
+                                                    </a>
+                                                </div>
+                                            </div>
+                                        </section>
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- right side part start here -->
+                    <div class="col-xxl-3 d-xxl-block d-none ">
+                        <div class="right_sidebar">
+                            <a href="games.html">
+                                <div class="ads_section">
+                                    <img src="images/300x600.gif" alt="" class="ads_image img-fluid">
+                                </div>
+                            </a>
+                            <a href="games.html">
+                                <div class="ads_section_two">
+                                    <img src="images/adsbannar.webp" alt="" class="ads_image img-fluid">
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- footer part start here  -->
+            <footer>
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="footer_top">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <div class="footer_top_right">
+                                            <h4>FG Games</h4>
+                                            <p>Casinos online have not always been around, but we can safely say that
+                                                online casinos have been
+                                                used a lot since they came on the market. And it's not in short demand
+                                                nor options, and now in
+                                                2023, we have 1000s and 1000s to pick from – it's just a matter of what
+                                                you like and what
+                                                payment options you would like to see at the casino.</p>
+                                            <p>Players are always looking for something new, which will help make the
+                                                gaming experience so
+                                                much better and more accessible. Allowing the player to focus on the
+                                                absolute fun of a casino,
+                                                that's right, the games themselves.</p>
+                                            <a href="about.html" class="more_about btn btn-default">More about <i
+                                                    class="fa-solid fa-chevron-right"></i></a>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="footer_top_left">
+                                            <h5>Help us to improve your experience.</h5>
+                                            <h6>Get rewarded for your valuable feedback!</h6>
+                                            <div class="form-group">
+                                                <textarea name="" id="" cols="30" rows="3"
+                                                    class="form-control"></textarea>
+                                            </div>
+                                            <button class="btn more_about">Submit</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="footer_top mb-0">
+                                <div class="row">
+                                    <div class="col-md-2 col-4">
+                                        <div class="footer_link_list">
+                                            <h5>Casino</h5>
+                                            <ul>
+                                                <li><a href="games.html">Casino Home</a></li>
+                                                <li><a href="games.html">Slots</a></li>
+                                                <li><a href="games.html">Live Casino</a></li>
+                                                <li><a href="games.html">New Releases</a></li>
+                                                <li><a href="games.html">Recommended</a></li>
+                                                <li><a href="games.html">Table Game</a></li>
+                                                <li><a href="games.html">BlackJacksho</a></li>
+                                                <li><a href="games.html">Roulette</a></li>
+                                                <li><a href="games.html">Baccarat</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-4">
+                                        <div class="footer_link_list">
+                                            <h5>Sports</h5>
+                                            <ul>
+                                                <li><a href="games.html">Sports Home</a></li>
+                                                <li><a href="games.html">Live</a></li>
+                                                <li><a href="games.html">Rules</a></li>
+                                                <li><a href="games.html">Sport Betting Insights</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-4">
+                                        <div class="footer_link_list">
+                                            <h5>Promo</h5>
+                                            <ul>
+                                                <li><a href="#">Vip Club</a></li>
+                                                <li><a href="#">Affiliate</a></li>
+                                                <li><a href="#">Promotions</a></li>
+                                                <li><a href="#">Lottery</a></li>
+                                                <li><a href="#">Refer a friend</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-4">
+                                        <div class="footer_link_list">
+                                            <h5>Support/Legal</h5>
+                                            <ul>
+                                                <li><a href="#">Help Center</a></li>
+                                                <li><a href="#">Important Announcement</a></li>
+                                                <li><a href="#">BlockDance B.V.</a></li>
+                                                <li><a href="#">Gamble Aware</a></li>
+                                                <li><a href="#">Faireness</a></li>
+                                                <li><a href="#">FAQ</a></li>
+                                                <li><a href="#">Privacy Policy</a></li>
+                                                <li><a href="#">Terms Of Service</a></li>
+                                                <li><a href="#">Law Enforcement</a></li>
+                                                <li><a href="#">Self-exclusion</a></li>
+                                                <li><a href="#">AML</a></li>
+                                                <li><a href="#">Design Resources</a></li>
+                                                <li><a href="#">App</a></li>
+                                                <li><a href="#">Live Support</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-4">
+                                        <div class="footer_link_list">
+                                            <h5>About Us</h5>
+                                            <ul>
+                                                <li><a href="#" target="_blank">News</a></li>
+                                                <li><a href="#">Work with us</a></li>
+                                                <li><a href="#">Business Contacts</a></li>
+                                                <li><a href="#">Help Desk</a></li>
+                                                <li><a href="#">Verify Representative</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2 col-4">
+                                        <div class="footer_link_list">
+                                            <h5>Social Links</h5>
+                                            <ul>
+                                                <li><a href="#">Casino Home</a></li>
+                                                <li><a href="#">Slots</a></li>
+                                                <li><a href="#">Live Casino</a></li>
+                                                <li><a href="#">New Releases</a></li>
+                                                <li><a href="#">Recommended</a></li>
+                                                <li><a href="#">Table Game</a></li>
+                                                <li><a href="#">BlackJacksho</a></li>
+                                                <li><a href="#">Roulette</a></li>
+                                                <li><a href="games.html">Baccarat</a></li>
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+            <!-- footer part end here  -->
+        </div>
+    </div>
+    <!-- banner section end here  -->
+    </div>
+    <!-- main content part end here  -->
+
+
+    </div>
+    <!-- content part end here  -->
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="assets/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <!-- Wow min JS -->
+    <script src="js/wow.min.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        new WOW().init();
+    </script>
+    <!-- Initialize Swiper -->
+    <script>
+        var swiper = new Swiper(".bannerSlider", {
+            pagination: {
+                el: ".swiper-pagination",
+            },
+            loop: true,
+            autoplay: {
+                delay: 3000,
+            }
+        });
+
+        new Swiper(".game_slier_1", {
+            loop: true,
+            freeMode: true,
+            spaceBetween: 10,
+            grabCursor: true,
+            slidesPerView: "5",
+            loop: true,
+            autoplay: {
+                delay: 0,
+                disableOnInteraction: true,
+            },
+            freeMode: true,
+            speed: 3000,
+            freeModeMomentum: false,
+            pagination: false,
+            navigation: false,
+            breakpoints: {
+                991: {
+                    spaceBetween: 10,
+                    slidesPerView: 14,
+                },
+                768: {
+                    spaceBetween: 12,
+                    slidesPerView: 9,
+                },
+                576: {
+                    spaceBetween: 10,
+                    slidesPerView: 9,
+                },
+            },
+        });
+
+    </script>
+</body>
+
+</html>

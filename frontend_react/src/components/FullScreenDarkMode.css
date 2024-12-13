@@ -1,0 +1,56 @@
+/* FullScreenDarkMode.css */
+
+/* Basic styles for the overlay */
+.fullscreen-overlay {
+  position: fixed; /* Fixed positioning to cover the entire viewport */
+  top: 0;          /* Align to the top */
+  left: 0;         /* Align to the left */
+  width: 100%;     /* Full width */
+  height: 100%;    /* Full height */
+  background-color: rgba(0, 0, 0, 0.8); /* Dark background with opacity */
+  display: flex;   /* Use flexbox for centering content */
+  justify-content: center; /* Center horizontally */
+  align-items: center;     /* Center vertically */
+  z-index: 9999;    /* Ensure it sits above other content */
+}
+
+/* Style for content within the overlay */
+.overlay-content {
+  color: white;      /* White text for contrast */
+  text-align: center; /* Center text */
+  font-size: 1.5rem; /* Adjust font size as needed */
+}
+
+/* Optional: Add a close button */
+.close-button {
+  margin-top: 20px; /* Space above the button */
+  padding: 10px 20px; /* Button padding */
+  background-color: #f44336; /* Red background for the button */
+  color: white; /* White text */
+  border: none; /* No border */
+  border-radius: 5px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor */
+}
+
+.close-button:hover {
+  background-color: #d32f2f; /* Darker red on hover */
+}
+
+
+/* FullScreenDarkMode.css */
+
+.overlay-content h1 {
+  font-size: 2rem; /* Larger font size for the heading */
+  margin-bottom: 10px; /* Space below the heading */
+}
+
+.overlay-content p {
+  font-size: 1.2rem; /* Slightly larger font size for the message */
+  margin-bottom: 20px; /* Space below the paragraph */
+}
+
+.close-button {
+  background-color: #007bff; /* Change to a blue background */
+  padding: 12px 24px; /* Increase padding for a more prominent button */
+  font-size: 1rem; /* Increase font size for better readability */
+}

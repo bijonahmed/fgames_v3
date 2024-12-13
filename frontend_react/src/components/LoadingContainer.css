@@ -1,0 +1,16 @@
+.live_player {
+    position: relative; /* Ensure the parent is positioned */
+}
+
+.loading-indicator {
+    position: absolute; /* Position it over the iframe */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Center it */
+    font-size: 1.5em; /* Adjust font size as needed */
+    color: #fff; /* Change color as needed */
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    padding: 10px;
+    border-radius: 5px; /* Optional: rounded corners */
+    z-index: 10; /* Make sure it's on top */
+}

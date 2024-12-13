@@ -1,0 +1,203 @@
+<template>
+  <title>Edit Game Type</title>
+  <div>
+    <div class="content-wrapper">
+      <section class="content-header">
+        <div class="container-fluid">
+          <div class="row mb-2">
+            <div class="col-sm-6">
+              <p>Edit Game Type</p>
+            </div>
+            <div class="col-sm-6">
+              <ol class="breadcrumb float-sm-right">
+                <li class="breadcrumb-item">
+                  <LazyNuxtLink to="/admin/dashboard">Home</LazyNuxtLink>
+                </li>
+                <li class="breadcrumb-item active">
+                  <LazyNuxtLink to="/game/type/list">Back to List</LazyNuxtLink>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="content">
+        <div class="container-fluid">
+          <!-- Start -->
+          <div class="card border-top border-0 border-4 border-info">
+            <div class="border p-4 rounded">
+              <form @submit.prevent="saveData()" id="formrest" class="forms-sample" enctype="multipart/form-data">
+                <div class="card card-primary card-outline card-tabs">
+                  <div class="card-header p-0 pt-1 border-bottom-0">
+                    <ul class="nav nav-tabs" id="custom-tabs-three-tab" role="tablist">
+                      <li class="nav-item">
+                        <a class="nav-link active" id="custom-tabs-three-home-tab" data-toggle="pill"
+                          href="#custom-tabs-three-home" role="tab" aria-controls="custom-tabs-three-home"
+                          aria-selected="true">General</a>
+                      </li>
+
+                    </ul>
+                  </div>
+                  <div class="card-body">
+                    <div class="tab-content" id="custom-tabs-three-tabContent">
+                      <div class="tab-pane fade active show" id="custom-tabs-three-home" role="tabpanel"
+                        aria-labelledby="custom-tabs-three-home-tab">
+                        <!-- General  -->
+                        <div class="row mb-3 required">
+                          <label for="input-name-1" class="col-sm-2 col-form-label required-label">Title</label>
+                          <div class="col-sm-10">
+                            <input type="hidden" name="name" placeholder="Name" v-model="insertdata.id"
+                            class="form-control" />
+                            <input type="text" name="name" placeholder="Name" v-model="insertdata.name"
+                              class="form-control" />
+                            <input type="hidden" name="id" id="id" class="form-control" />
+                            <span class="text-danger" v-if="errors.name">{{ errors.name[0] }}</span>
+                          </div>
+                        </div>
+
+
+
+
+
+                        <div class="row mb-3 required">
+                          <label for="input-name-1" class="col-sm-2 col-form-label required-label">Game Type
+                            Code</label>
+                          <div class="col-sm-10">
+                            <input type="text" placeholder="1" v-model="insertdata.gameTypecode" class="form-control" />
+                            <input type="hidden" name="id" id="id" class="form-control" />
+                            <span class="text-danger" v-if="errors.gameTypecode">{{ errors.gameTypecode[0] }}</span>
+                          </div>
+                        </div>
+
+
+                        <div class="row mb-3 required">
+                          <label for="input-name-1" class="col-sm-2 col-form-label required-label">Status</label>
+                          <div class="col-sm-10">
+                            <select v-model="insertdata.status" class="form-control">
+                              <option value="" disabled>Selected</option>
+                              <option value="1">Active</option>
+                              <option value="0">Inactive</option>
+                            </select>
+                            <span class="text-danger" v-if="errors.status">{{ errors.status[0] }}</span>
+                          </div>
+                        </div>
+
+
+                        <button type="submit" class="btn btn-success px-5 w-100">
+                          <i class="bx bx-check-circle mr-1"></i> Save
+                        </button>
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <!-- END -->
+      </section>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import { ref, reactive, onMounted } from 'vue';
+import axios from 'axios';
+import swal from 'sweetalert2';
+import { useRouter } from 'vue-router';
+const router = useRouter();
+import 'summernote/dist/summernote-bs4.js';
+import 'summernote/dist/summernote-bs4.css';
+///import $ from 'jquery';
+if (process.client) {
+  window.Swal = swal;
+
+}
+
+definePageMeta({
+  middleware: 'is-logged-out',
+})
+
+const summernoteEditor = ref(null);
+const insertdata = reactive({
+  id: '',
+  name: '',
+  gameTypecode: '',
+  status: '',
+});
+// Define a ref to store the HTML content of the editor
+
+const errors = ref({});
+
+const saveData = () => {
+  const formData = new FormData();
+  formData.append('id', insertdata.id);
+  formData.append('name', insertdata.name);
+  formData.append('gameTypecode', insertdata.gameTypecode);
+  formData.append('status', insertdata.status);
+  axios.post('/games/addGameType', formData, {
+    headers: {
+      'Content-Type': 'multipart/form-data'
+    }
+  }).then((res) => {
+    $('#formrest')[0].reset();
+    success_noti();
+    router.push('/game/type/list');
+
+  }).catch(error => {
+    if (error.response && error.response.status === 422) {
+      errors.value = error.response.data.errors;
+    } else {
+      // Handle other types of errors here
+      console.error("An error occurred:", error);
+    }
+  });
+};
+const success_noti = () => {
+  //alert("Your data has been successfully inserted.");
+  const Toast = Swal.mixin({
+    toast: true,
+    position: "top-end",
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.onmouseenter = Swal.stopTimer;
+      toast.onmouseleave = Swal.resumeTimer;
+    }
+  });
+  Toast.fire({
+    icon: "success",
+    title: "Your data has been successfully inserted."
+  });
+};
+
+
+const productrow = () => {
+  const id = router.currentRoute.value.query.parameter;
+  axios.get(`/games/checkGameType/${id}`).then(response => {
+    insertdata.id = response.data.id;
+    insertdata.name = response.data.name;
+    insertdata.gameTypecode = response.data.gameTypecode
+    insertdata.slug = response.data.slug
+    insertdata.status = response.data.status
+
+  });
+};
+// Call the loadeditor function when the component is mounted
+onMounted(async () => {
+  productrow();
+
+});
+// 
+</script>
+
+<style scoped>
+.required-label::after {
+  content: "\2605";
+  color: red;
+  margin-right: 4px;
+}
+</style>
