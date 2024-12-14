@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Helmet } from "react-helmet";
-import GuestNavbar from "../../components/GuestNavbar";
+import GuestNavbar from "../../components/Navbar";
 import { Link } from "react-router-dom";
 import Footer from "../../components/Footer";
 import { useNavigate } from "react-router-dom";

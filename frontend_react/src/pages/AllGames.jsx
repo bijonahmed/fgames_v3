@@ -6,12 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 
-import SliderComponent from "../components/SliderComponent";
 
 
-import '../components/Pagination.css';
+import '../components/css/Pagination.css';
 import axios from "/config/axiosConfig";
-import RightSideBarHoster from "../components/RightSideBarHoster";
 import LeftSideBarComponent from "../components/LeftSideBarComponent";
 import { LanguageContext } from "../context/LanguageContext";
 

@@ -6,11 +6,10 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import LeftSideBarComponent from "../components/LeftSideBarComponent";
-import SliderComponent from "../components/SliderComponent";
 import Loader from "../components/Loader";
 import Pagination from "../components/Pagination";
 import GameSlider from "../components/GameSlider";
-import '../components/Pagination.css';
+import '../components/css/Pagination.css';
 import axios from "/config/axiosConfig";
 
 
@@ -85,7 +84,7 @@ const Adultcategory = () => {
                                 <div className="banner_section">
                                     <div className="swiper bannerSlider">
                                         {/* SliderComponent Component */}
-                                        <SliderComponent />
+                                        {/* <SliderComponent /> */}
                                         <div className="swiper-pagination" />
                                     </div>
                                 </div>

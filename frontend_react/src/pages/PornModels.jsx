@@ -4,8 +4,7 @@ import GuestNavbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import { Link } from "react-router-dom";
 import LeftSideBarComponent from "../components/LeftSideBarComponent";
-import LightboxComponent from "../components/LightboxComponent";
-import '../components/Pagination.css';
+import '../components/css/Pagination.css';
 
 import axios from "/config/axiosConfig";
 
@@ -29,7 +28,7 @@ const PornModels = () => {
 
                                     <div>
                                         <div>
-                                            <LightboxComponent />
+                                        dfdf
                                         </div>
                                     </div>
 

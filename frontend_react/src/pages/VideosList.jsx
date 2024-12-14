@@ -5,10 +5,10 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import LeftSideBarComponent from "../components/LeftSideBarComponent";
-import SliderComponent from "../components/SliderComponent";
+
 import GameSlider from "../components/GameSlider";
 import axios from "/config/axiosConfig";
-import '../components/hosterlist.css';
+import '../components/css/hosterlist.css';
 
 const VideosList = () => {
   const navigate = useNavigate();
@@ -102,7 +102,7 @@ const VideosList = () => {
                 <div className="banner_section">
                   <div className="swiper bannerSlider">
                     {/* SliderComponent Component */}
-                    <SliderComponent />
+                    {/* <SliderComponent /> */}
                     <div className="swiper-pagination" />
                   </div>
                 </div>

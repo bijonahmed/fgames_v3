@@ -7,7 +7,6 @@ import { useNavigate } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import axios from "/config/axiosConfig";
 import LeftSideBarComponent from "../components/LeftSideBarComponent";
-import MiniSidebar from "../components/MiniSidebar";
 import AuthUser from "../components/AuthUser";
 
 const Wallet = () => {
@@ -50,7 +49,7 @@ const Wallet = () => {
           <div className="col-xxl-9">
             <div className="row">
               <div className="col-md-4">
-              <MiniSidebar/>
+            fgfgfg
               </div>
               <div className="col-md-8">
                 <div className="balance_container">

@@ -6,7 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import LeftSideBarComponent from "../components/LeftSideBarComponent";
 
-import GameSlider from "../components/GameSlider";
+
 
 const HosterProfile = () => {
     const navigate = useNavigate();
@@ -28,7 +28,7 @@ const HosterProfile = () => {
                                 <div className="live_player">
                                     <iframe width="100%" height src="https://www.youtube.com/embed/kgppJX0G--E?si=CPSDb-aBRanhEkAj" title="YouTube video player" frameBorder={0} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen />
                                 </div>
-                                <GameSlider />
+                               
 
                                 {/* GameSlider Component */}
                                 {/* <GameSlider /> */}

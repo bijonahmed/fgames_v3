@@ -5,7 +5,6 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import LeftSideBarComponent from "../components/LeftSideBarComponent";
-import MiniSidebar from "../components/MiniSidebar";
 import AuthUser from "../components/AuthUser";
 
 
@@ -54,7 +53,7 @@ const BetHistory = () => {
               <div className="row">
                 <div className="col-md-4">
                   {/* Start MiniSidebar */}
-                  <MiniSidebar />
+                  ==
                   {/* End MiniSidebar */}
                 </div>
 

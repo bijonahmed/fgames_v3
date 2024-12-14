@@ -1,0 +1,1216 @@
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+:-webkit-scrollbar {
+    width: 0px;
+    height: 10px;
+}
+
+
+.footer_space {
+    height: 65px;
+}
+
+
+
+/* navbar end here ======  */
+
+
+/* bannar part start here  */
+.bannar {}
+
+.bannar img {
+    border-radius: 10px;
+    position: relative;
+}
+
+.owl-bannar .owl-dots {
+    position: absolute;
+    right: 5%;
+    bottom: 5%;
+    display: flex;
+}
+
+/* .owl-bannar .owl-dots  .owl-dot{
+    background: #b21c1c;
+} */
+
+.owl-bannar .owl-dots .owl-dot span {
+    display: block;
+    height: 10px;
+    width: 10px;
+    background-color: #fff;
+    margin: 2px;
+    border-radius: 50%;
+    transition: .4s all ease-in-out;
+}
+
+.owl-bannar .owl-dots .active span {
+    height: 10px;
+    width: 10px;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#fa8fa9+0,fe3c56+100 */
+    background: rgb(250, 143, 169);
+    /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(250, 143, 169, 1) 0%, rgba(254, 60, 86, 1) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(250, 143, 169, 1) 0%, rgba(254, 60, 86, 1) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(250, 143, 169, 1) 0%, rgba(254, 60, 86, 1) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#fa8fa9', endColorstr='#fe3c56', GradientType=0);
+    /* IE6-9 */
+}
+
+/* bannar part end here  */
+
+/* sound part start here  */
+.sound {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    margin-top: 10px;
+    position: relative;
+    height: 30px;
+    box-shadow: 1px 1px 0px #00000021;
+    background: rgb(236, 226, 251);
+    /* Old browsers */
+    background: -moz-linear-gradient(left, rgba(236, 226, 251, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, rgba(236, 226, 251, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, rgba(236, 226, 251, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ece2fb', endColorstr='#ffffff', GradientType=1);
+    /* IE6-9 */
+}
+
+.volume {
+    position: absolute;
+    left: 2%;
+    top: 50%;
+    transform: translate(-2%, -50%);
+    color: #6d16f7;
+}
+
+.sound a {
+    position: absolute;
+    right: 0px;
+    top: 1px;
+    padding: 0px 10px;
+    color: #fff;
+    text-decoration: none;
+    height: 28px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 10px;
+    text-transform: uppercase;
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#b9a4f1+0,6b5cf3+100 */
+    background: rgb(185, 164, 241);
+    /* Old browsers */
+    background: -moz-linear-gradient(left, rgba(185, 164, 241, 1) 0%, rgba(107, 92, 243, 1) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, rgba(185, 164, 241, 1) 0%, rgba(107, 92, 243, 1) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, rgba(185, 164, 241, 1) 0%, rgba(107, 92, 243, 1) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#b9a4f1', endColorstr='#6b5cf3', GradientType=1);
+    /* IE6-9 */
+}
+
+.sound a i {
+    margin-right: 5px;
+    font-size: 10px;
+}
+
+.sound p {
+    display: flex;
+    overflow: auto;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+
+.sound p marquee {
+    margin: 0;
+    padding: 0;
+    width: 91%;
+    right: 0%;
+    top: 50%;
+    position: absolute;
+    transform: translate(0%, -50%);
+    font-size: 12px;
+    color: #7e7575;
+    font-weight: 300;
+}
+
+/* sound part end here  */
+
+/* profile function part start here  */
+.rotate {
+    -moz-transition: all .5s linear;
+    -webkit-transition: all .5s linear;
+    transition: all .5s linear;
+}
+
+.rotate.down {
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+}
+
+.profile_func {
+    box-shadow: 3px 3px 5px #0000001c;
+    margin-top: 10px;
+    border-radius: 10px;
+    padding: 5px;
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#ece2fb+0,ffffff+100 */
+    background: rgb(236, 226, 251);
+    /* Old browsers */
+    background: -moz-linear-gradient(left, rgba(236, 226, 251, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(left, rgba(236, 226, 251, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to right, rgba(236, 226, 251, 1) 0%, rgba(255, 255, 255, 1) 100%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ece2fb', endColorstr='#ffffff', GradientType=1);
+    /* IE6-9 */
+}
+
+.profile_func .col-8 {
+    padding: 0px 12px 0px 5px;
+}
+
+.profile {
+    border-right: 1px solid #00000036;
+    padding: 5px;
+    margin: 4px;
+    text-align: center;
+}
+
+.profile h1 {
+    font-size: 11px;
+}
+
+.profile p {
+    font-size: 10px;
+    margin: 0px;
+}
+
+.profile p button {
+    border: none;
+    background: transparent;
+}
+
+.profile p button i {}
+
+.f_func {
+    text-align: center;
+    box-shadow: 0px 0px 5px #000;
+    border-radius: 5px;
+    margin: 0;
+    margin-top: 5px;
+}
+
+.f_func img {
+    width: 20px;
+}
+
+.f_func p {
+    font-size: 8px;
+    margin: 0;
+}
+
+.option {
+    text-align: center;
+    color: #fff;
+    height: 45px;
+    width: 45px;
+    border-radius: 5px;
+    /* box-shadow: 3px 4px 7px 0px #00000024; */
+    /* background: #7b48cc1f; */
+    padding: 2px;
+    filter: drop-shadow(3px 3px 2px #0000004d);
+    background: rgb(239, 229, 253);
+    background: -moz-linear-gradient(top, rgba(239, 229, 253, 1) 0%, rgba(195, 169, 243, 1) 100%);
+    /* background: -webkit-linear-gradient(top, rgba(239,229,253,1) 0%,rgba(195,169,243,1) 100%); */
+    /* background: linear-gradient(to bottom, rgba(239,229,253,1) 0%,rgba(195,169,243,1) 100%); */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#efe5fd', endColorstr='#c3a9f3', GradientType=0);
+}
+
+.option img {
+    font-size: 30px;
+    width: 25px;
+    /* filter: drop-shadow(2px 5px 4px #febd554f); */
+    filter: drop-shadow(5px 3px 3px #0000004d);
+}
+
+.option h3 {
+    font-size: 8px;
+    color: #000;
+    margin: 0px;
+    margin-top: 2px;
+    filter: drop-shadow(3px 3px 2px #0000004d);
+}
+
+.s_width {
+    width: 25%;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: .4s all ease-in-out;
+}
+
+/* profile function part end here  */
+
+/* gaming part start here  */
+.cat {
+    text-align: center;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    padding: 3px;
+    background: #f5f2fb;
+    /* box-shadow: 0px 2px 3px #d0cdd5; */
+    filter: drop-shadow(3px 3px 2px #0000004d);
+}
+
+.cat img {
+    width: 30px;
+    filter: drop-shadow(5px 3px 2px #0000004d);
+    border-radius: 50px;
+    height: 40px;
+    width: 40px;
+}
+
+.cat h4 {
+    font-size: 10px;
+}
+
+.cat a {
+    text-decoration: none;
+    color: #60597b;
+    text-transform: capitalize;
+}
+
+.cat.active {
+    background: rgb(239, 229, 253);
+    background: -moz-linear-gradient(top, rgba(239, 229, 253, 1) 0%, rgba(195, 169, 243, 1) 100%);
+    background: -webkit-linear-gradient(top, rgba(239, 229, 253, 1) 0%, rgba(195, 169, 243, 1) 100%);
+    background: linear-gradient(to bottom, rgba(239, 229, 253, 1) 0%, rgba(195, 169, 243, 1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#efe5fd', endColorstr='#c3a9f3', GradientType=0);
+}
+
+.cat.active a {
+    color: #fff;
+}
+
+/* game part  */
+.game_icon {
+    box-shadow: 3px 3px 5px 3px #0000001c;
+    margin: 0px 0px;
+    text-align: center;
+    border-radius: 10px;
+    transition: .4s all ease-in-out;
+    /* filter: drop-shadow(3px 3px 2px #0000004d); */
+    min-height: 100%;
+}
+
+.game_icon a {
+    padding: 5px;
+    text-decoration: none;
+    color: #000000c7;
+    text-transform: capitalize;
+}
+
+.game_icon a img {
+    width: 50px;
+    transition: .4s all ease-in-out;
+    filter: drop-shadow(7px 3px 3px #da6f836e);
+    filter: drop-shadow(5px 3px 3px #0000004d);
+}
+
+img {
+    /* width: 20px; */
+}
+
+.game_icon a h4 {
+    font-size: 12px;
+    margin: 0;
+    margin-top: 5px;
+}
+
+.game_part .col-4 {
+
+    padding: 10px 10px 0px 0px;
+}
+
+.btn_game:active {
+    border: none;
+
+}
+
+.btn {
+    border: none !important;
+}
+
+.game_icon:hover img {
+    color: #fff;
+    transform: scale(1.1);
+}
+
+/* gaming part end here  */
+
+
+
+ 
+
+.game_footing_button {
+    position: fixed;
+    right: 10%;
+    bottom: 14%;
+    z-index: 99;
+    height: 50px;
+    width: 50px;
+    border-radius: 20px;
+}
+
+.game_footing_button button {
+
+    border-radius: 10px;
+
+    border: none;
+
+    background: transparent;
+
+    filter: drop-shadow(2px 4px 6px #894ad6a8);
+}
+
+.game_footing_button button img {}
+
+@media(max-width: 426px) {
+    .rank p {
+        font-size: 10px;
+        padding: 0px 5px;
+        margin: 0;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .rank p img {
+        width: 12px;
+        height: 12px;
+        margin-right: 3px;
+    }
+
+    .rank h4 {
+        bottom: -25px;
+        font-size: 12px;
+    }
+
+    .rank_img {
+        border: 5px solid #f8c812;
+    }
+}
+
+/* ============================ ranking page end here ========================= */
+
+/* =====================================slot game csss start here  ===========================*/
+.slot_machine {
+    position: relative;
+    background-color: transparent;
+
+}
+
+
+
+
+#slot {
+    box-sizing: content-box;
+    /* border: 35px solid #fdde3f; */
+    border-radius: 65px;
+    height: 200px;
+    width: 48%;
+    text-align: center;
+}
+
+.blink {
+    animation: blink 0.4s infinite alternate;
+    -webkit-animation: blink 0.4s infinite alternate;
+}
+
+@keyframes blink {
+    to {
+        background: #c3ad00;
+    }
+}
+
+@-webkit-keyframes blink {
+    to {
+        background: #c3ad00;
+    }
+}
+
+
+.gold {
+    color: gold !important;
+}
+
+.green {
+    color: green;
+}
+
+.v-align {
+    vertical-align: inherit !important;
+}
+
+div.modal-footer,
+div.modal-body,
+div.modal-header {
+    background-color: #d9d9d900;
+    /* color: white; */
+    width: 100%;
+}
+
+.preview {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: rgb(255, 255, 255) !important;
+    margin: auto;
+    z-index: 999999;
+    width: 480px;
+    text-align: center;
+}
+
+.preview img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    background: rgb(255, 255, 255) !important;
+    margin: auto;
+    z-index: 999999999;
+}
+
+.slt_game {
+
+    /* padding: 20px 0px; */
+}
+
+
+
+
+
+
+.game_bannar {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    min-width: 100vw;
+}
+
+.bg_game {
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%, -1%);
+    top: 1%;
+    width: 200%;
+    height: 100%;
+    overflow: hidden;
+    z-index: -1;
+}
+
+.img_game {
+    opacity: .7;
+}
+
+.game_bannar::after {
+    position: absolute;
+    content: "";
+    left: 0px;
+    top: 0px;
+    height: 100%;
+    width: 100%;
+    background-color: #1a004dab;
+    z-index: -1;
+}
+
+.slot_frame {}
+
+.slot_frame img {
+    position: absolute;
+    left: 54%;
+    top: -70px;
+    width: 65%;
+    height: 136%;
+    transform: translateX(-50%);
+}
+
+
+
+
+
+
+
+.balance_btns {
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    padding: 0px 5px;
+
+    margin: 10px 0px;
+}
+
+.balance_btns label {
+
+    font-size: 12px;
+
+    width: 115%;
+
+    background: #8e37e5;
+
+    color: #fff;
+
+    height: 100%;
+
+    margin: 0px;
+
+    border-top-left-radius: 5px;
+
+    border-bottom-left-radius: 5px;
+
+    display: flex;
+
+    justify-content: center;
+
+    align-items: center;
+
+    font-weight: 600;
+
+    padding: 1px;
+}
+
+.balance_btns input {
+    background: transparent;
+    border: 2px solid #916bb878;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+    color: #a9213c;
+    background: #fff;
+}
+
+.balance_btns input:focus {
+    box-shadow: none;
+}
+
+.help_btn {
+    background: transparent;
+    border-radius: 50%;
+    /* border: 1px solid #5859ed !important; */
+    padding: 3px 10px;
+    color: #fff;
+    position: absolute;
+    top: 5%;
+    right: 10%;
+}
+
+.win_history {
+
+    margin-bottom: 50px;
+
+    /* overflow: auto; */
+
+    scrollbar-width: none;
+}
+
+.win_history ul li img {}
+
+.win_history ul li p {
+
+    font-size: 12px;
+
+    margin: 0;
+
+    color: #8e37e5;
+}
+
+.win_history ul li {
+
+    list-style: none;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    border-bottom: 1px solid #8e37e545;
+
+    padding: 0;
+
+    margin-bottom: 5px;
+}
+
+.win_history ul {
+
+    padding: 0;
+
+    height: 200px;
+
+    overflow: auto;
+
+    scrollbar-width: none;
+}
+
+.win_history ul::-webkit-scrollbar {
+    display: none;
+}
+
+/* slot title part end here  */
+.btn_spin,
+.btn_spin:active,
+.btn_spin:focus,
+.btn_spin:hover {
+    /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#f95a78+0,940b27+99 */
+    background: #f95a78;
+    /* Old browsers */
+    background: -moz-linear-gradient(45deg, #f95a78 0%, #940b27 99%);
+    /* FF3.6-15 */
+    background: -webkit-linear-gradient(45deg, #f95a78 0%, #940b27 99%);
+    /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(45deg, #f95a78 0%, #940b27 99%);
+    /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#f95a78', endColorstr='#940b27', GradientType=1);
+    /* IE6-9 fallback on horizontal gradient */
+    color: #fff !important;
+}
+
+/*============================ slot game css end here ============================== */
+
+/* top 10 part start here  */
+.history_section {
+    background-color: #55046d;
+    border-radius: 10px;
+    padding: 10px;
+    height: 450px;
+}
+
+.history_section ul {}
+
+.history_section ul li {
+
+    margin: 0px 10px;
+}
+
+.history_section ul li button {}
+
+.top_ten,
+.history {
+    overflow: auto;
+    height: 375px;
+    scrollbar-width: none;
+}
+
+.top_ten::-webkit-scrollbar,
+.history::-webkit-scrollbar {
+    display: none;
+}
+
+.serial img {
+
+    width: 35px;
+}
+
+.serial {}
+
+.serial h2 {
+
+    color: #fff;
+
+    font-size: 18px;
+
+    border-radius: 50px;
+
+    height: 30px;
+
+    width: 30px;
+
+    /* background: red; */
+
+    padding: 3px;
+}
+
+.top_ten ul li h5 {
+
+    color: #fff;
+
+    font-size: 18px;
+}
+
+.top_ten ul li p {
+
+    color: #fff;
+
+    font-size: 16px;
+
+    margin: 0;
+}
+
+.top_ten ul li h3 {
+
+    color: #fff;
+
+    text-align: end;
+
+    font-size: 18px;
+}
+
+.top_ten ul li,
+.history ul li {
+
+    list-style: none;
+
+    padding: 0;
+
+    padding: 5px;
+
+    margin: 10px 0px;
+
+    box-shadow: 2px 3px 5px 3px #00000014;
+}
+
+.top_ten ul,
+.history ul {
+
+    padding: 0;
+
+    padding: 20px;
+}
+
+.history h3 {
+
+    font-size: 16px;
+
+    color: #fff;
+}
+
+.history p {
+
+    margin: 0;
+
+    color: #fff;
+}
+
+.history h4 {
+    text-align: end;
+    margin: 0;
+    margin: 10px;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.incrase {
+    color: #28ee92;
+}
+
+.decrase {
+    color: #ee860e;
+}
+
+@media (max-width:426px) {
+    #slot {
+        width: 210px;
+    }
+}
+
+/* top 10 part end here  */
+
+
+
+/* slider css part start here  */
+
+@-webkit-keyframes scroll {
+    0% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    100% {
+        -webkit-transform: translateX(calc(-250px * 7));
+        transform: translateX(calc(-250px * 7));
+    }
+}
+
+@keyframes scroll {
+    0% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+
+    100% {
+        -webkit-transform: translateX(calc(-250px * 7));
+        transform: translateX(calc(-250px * 7));
+    }
+}
+
+@-webkit-keyframes scrollTwo {
+    0% {
+        -webkit-transform: translateX(calc(-250px * 7));
+        transform: translateX(calc(-250px * 7));
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
+@keyframes scrollTwo {
+    0% {
+        -webkit-transform: translateX(calc(-250px * 7));
+        transform: translateX(calc(-250px * 7));
+    }
+
+    100% {
+        -webkit-transform: translateX(0);
+        transform: translateX(0);
+    }
+}
+
+.slider,
+.sliders {
+    margin: auto;
+    overflow: hidden;
+    width: 100%;
+    background: transparent;
+}
+
+.slider::before,
+.slider::after,
+.sliders::before,
+.sliders::after {
+    content: "";
+    height: 100px;
+    position: absolute;
+    width: 200px;
+    z-index: 2;
+}
+
+.slider::after,
+.sliders::after {
+    right: 0;
+    top: 0;
+    -webkit-transform: rotateZ(180deg);
+    transform: rotateZ(180deg);
+}
+
+.slide-track .slide h3 {
+    text-align: center;
+    background-color: #00000054;
+    color: #fff !important;
+    font-size: 16px;
+    border-radius: 50px;
+    padding: 10px;
+    /* position: absolute; */
+    /* top: 0px; */
+    /* left: 0px; */
+}
+
+.slider::before,
+.sliders::before {
+    left: 0;
+    top: 0;
+}
+
+.slider .slide-track {
+    -webkit-animation: scroll 40s linear infinite;
+    animation: scroll 30s linear infinite;
+    animation-iteration-count: infinite;
+    display: flex;
+    width: calc(250px * 14);
+    /* width: 82%; */
+}
+
+.sliders .slider-track {
+    -webkit-animation: scrollTwo 40s linear infinite;
+    animation: scrollTwo 40s linear infinite;
+    animation-iteration-count: infinite;
+    display: flex;
+    width: calc(250px * 14);
+}
+
+.slider .slide,
+.sliders .slide {
+    /* width: 82%; */
+    background: transparent;
+    margin: auto;
+}
+
+.win_slider {
+    position: absolute;
+    top: 10%;
+
+}
+
+.win_slidertwo {
+    position: absolute;
+    top: 15%;
+
+}
+
+/* slider css part end herer  */
+
+.scroll {
+    height: 80vh;
+    overflow: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.scrollTwo {
+    height: 75vh;
+    overflow: auto;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.scroll::-webkit-scrollbar,
+.scrollTwo::-webkit-scrollbar {
+    display: none;
+    scrollbar-width: 0;
+    scroll-behavior: smooth;
+}
+
+.footer_space {
+    height: 65px;
+}
+
+.nav-pills .nav-link {
+    background: #ffffff63;
+    margin: 0px 5px;
+    border-radius: 0px;
+    color: #00000085;
+    transition: .4s all ease-in-out;
+    border-radius: 50px;
+    box-shadow: 4px 4px 14px 3px #bfbdd68f, -5px -5px 7px #988df142;
+}
+
+.nav-pills .nav-link:hover {
+    color: #fff;
+}
+
+.nav-link.active,
+.nav-pills .show>.nav-link {
+    color: #fff;
+    background-color: #988df1 !important;
+    border-radius: 0;
+    border-radius: 50px;
+    border-radius: 50px;
+}
+
+.nav-pills .nav-items {}
+
+.nav-pills {
+    margin: 0 !important;
+    display: flex;
+    justify-content: center;
+    margin-top: 5px !important;
+}
+
+
+/* game list new  */
+.game_part_new {
+    display: grid;
+    grid-template-columns: repeat(6, 12fr);
+    grid-template-rows: auto;
+    gap: 10px;
+    margin: 10px 0px;
+}
+
+.game_pic {
+    text-align: center;
+    /* border: 1px solid #c4c4c433; */
+    padding: 0px;
+    border-radius: 5px;
+    transition: .4s all ease-in-out;
+    overflow: hidden;
+    height: 160px;
+    box-shadow: 3px 3px 10px #5a5a5a;
+}
+
+.game_pic a {
+    height: fit-content;
+    display: block;
+    height: 100%;
+}
+
+.game_pic a img {
+    border-radius: 5px;
+    transition: .4s all ease-in-out;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.game_pic:hover img {
+    transform: scale(1.05);
+}
+
+@media(max-width: 1200px) {
+    .game_pic {
+        height: 150px;
+    }
+}
+
+@media(min-width: 992px) {
+    .bannar {
+        height: 200px;
+    }
+
+    .bannar img {
+        height: 100%;
+        width: 100%;
+        object-fit: fill;
+
+    }
+}
+
+@media(max-width: 992px) {
+    .game_part_new {
+        grid-template-columns: repeat(5, 12fr);
+    }
+
+    .bannar {
+        height: 150px;
+
+    }
+
+    .game_pic {
+
+        height: 130px;
+
+    }
+
+    .bannar img {
+        height: 100%;
+        width: 100%;
+        object-fit: fill;
+
+    }
+}
+
+@media(max-width: 768px) {
+    .rank_crown {
+        width: 65px;
+    }
+
+    .game_part_new {
+        grid-template-columns: repeat(4, 12fr);
+        gap: 5px;
+    }
+
+    .game_pic {
+
+        height: 120px;
+
+    }
+}
+
+@media(max-width: 576px) {
+    .rank_crown {
+        top: -40px;
+    }
+
+    .game_pic {
+
+        height: 100px;
+
+    }
+}
+
+@media(max-width: 426px) {
+    .rank_crown {
+        width: 50px;
+        top: -30px;
+    }
+
+    .game_pic {
+
+        height: 75px;
+    }
+}
+
+@media(max-width: 376px) {
+    .rank_crown {
+        width: 45px;
+        top: -26px;
+    }
+
+    .game_pic {
+
+        height: 60px;
+
+    }
+}
+
+@media(max-width: 321px) {
+    .rank_crown {
+        width: 35px;
+        top: -23px;
+    }
+
+    .game_pic {
+        height: 55px;
+    }
+}
+
+.btn_buy {
+    background: #dd2b8d;
+    color: #fff;
+    transition: .4s all ease-in-out;
+}
+
+.btn_buy:hover {
+    background: #b52574;
+    color: #fff;
+}
+
+.modal_onload p {
+
+    font-size: 14px;
+
+    padding: 0 10px;
+
+    text-align: center;
+}
+
+.modal_onload {}
+
+.modal_onload p strong {
+
+    font-size: 20px;
+
+    color: orange;
+}
+
+.modal_onload img {
+
+    width: 17px;
+
+    margin-right: 5px;
+}
+
+.modal.modal_onload {}
+
+ 

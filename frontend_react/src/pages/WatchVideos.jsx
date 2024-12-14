@@ -8,7 +8,7 @@ import { useParams } from "react-router-dom";
 import LeftSideBarComponent from "../components/LeftSideBarComponent";
 import GameSlider from "../components/GameSlider";
 import Loader from "../components/Loader";
-import '../components/Pagination.css';
+import '../components/css/Pagination.css';
 import axios from "/config/axiosConfig";
 
 const WatchVideos = () => {

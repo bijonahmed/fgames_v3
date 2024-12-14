@@ -5,12 +5,8 @@ import Footer from "../components/Footer";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
-
-import SliderComponent from "../components/SliderComponent";
-
-import "../components/Pagination.css";
+import "../components/css/Pagination.css";
 import axios from "/config/axiosConfig";
-import RightSideBarHoster from "../components/RightSideBarHoster";
 import LeftSideBarComponent from "../components/LeftSideBarComponent";
 import { LanguageContext } from "../context/LanguageContext";
 
@@ -65,7 +61,7 @@ const GamesList = () => {
               <div className="banner_section">
                 <div className="swiper bannerSlider">
                   {/* SliderComponent Component */}
-                  <SliderComponent />
+                   
                   <div className="swiper-pagination" />
                 </div>
               </div>

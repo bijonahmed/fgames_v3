@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import { useParams } from "react-router-dom";
 import AuthUser from "../components/AuthUser";
 import Loader from "../components/Loader";
-import "../components/Pagination.css";
+import "../components/css/Pagination.css";
 import axios from "/config/axiosConfig";
 import $ from 'jquery';  // Import jQuery (if using in React/Vue)
 

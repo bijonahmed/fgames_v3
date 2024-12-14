@@ -1,6 +1,6 @@
 // FullScreenDarkMode.js
 import React, { useState, useEffect } from "react";
-import './FullScreenDarkMode.css'; // Import your CSS file
+import './css/FullScreenDarkMode.css'; // Import your CSS file
 
 const FullScreenDarkMode = () => {
   const [isMobile, setIsMobile] = useState(false);

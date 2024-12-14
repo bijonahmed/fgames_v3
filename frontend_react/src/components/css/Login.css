@@ -1,0 +1,155 @@
+body {
+    min-height: 100vh;
+
+}
+.login {
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0px;
+    margin-top: 120px;
+}
+
+.login signupfrm {
+    padding: 20px;
+    border-radius: 10px;
+    margin: 20px 0px;
+    margin-top: 120px;
+}
+
+.log_title {
+    text-align: center;
+}
+
+.log_title img {
+    width: 100px;
+    margin-top: 0px;
+    /* height: 150px; */
+    border-radius: 50px;
+    box-shadow: 2px 3px 5px 3px #6e69692e;
+    padding: 5px;
+}
+
+.log_title h1 a {
+    text-decoration: none;
+    color: #000;
+}
+
+.log_title h1 {
+    font-size: 25px;
+    margin-top: 10px;
+    margin-bottom: 30px;
+}
+
+.login form label {
+    margin-bottom: 5px;
+    margin-left: 5px;
+}
+
+.login form input,
+.login form select {
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 3px rgba(55, 84, 170, .15), inset 0px 0px 4px rgba(255, 255, 255, 0), inset 7px 7px 15px rgba(55, 84, 170, .15), inset -7px -7px 20px rgba(255, 255, 255, 1), 0px 0px 4px rgba(255, 255, 255, .2) !important;
+    border-radius: 50px;
+}
+
+.login form input::placeholder,
+.login form select::placeholder {
+    color: #00000047;
+}
+
+form a {
+
+    text-decoration: none;
+    color: #7f46d8;
+    font-weight: 500;
+    text-transform: capitalize;
+    /* margin-top: 10px; */
+    font-size: 14px;
+}
+
+.login .signin_btn {
+
+    width: 100%;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    text-transform: uppercase;
+    font-weight: 500;
+    letter-spacing: 1px;
+    margin-top: 20px;
+    box-shadow: 2px 3px 5px 3px #c9c2c296, -5px -5px 22px #ebe7f163;
+    background: #b7aef878;
+    margin-bottom: 30px;
+    transition: .4s all ease-in-out;
+}
+
+.login .signin_btn:active {
+    box-shadow: 2px 2px 3px rgba(55, 84, 170, .15), inset 0px 0px 4px rgba(255, 255, 255, 0), inset 7px 7px 15px rgba(55, 84, 170, .15), inset -7px -7px 20px rgba(255, 255, 255, 1), 0px 0px 4px rgba(255, 255, 255, .2) !important;
+}
+
+.profile_img {
+    position: relative;
+}
+
+.camera_icon {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    bottom: -5px;
+    background-color: #000000b5;
+    font-size: 12px;
+    border-radius: 50px;
+    color: #fff;
+    padding: 2px 5px;
+}
+
+.camera_icon i {}
+
+.footer_space {
+    height: 65px;
+}
+
+@media(max-width:426px) {
+    .log_title h1 {
+        font-size: 18px;
+    }
+}
+
+/* =========== login page end here =========================  */
+.group .input {}
+
+.group i {
+    position: absolute;
+    right: 10px;
+    top: 80%;
+    transform: translate(0, -80%);
+}
+
+.group {
+    position: relative;
+}
+
+
+.input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.input-wrapper input {
+    width: 100%;
+    padding-right: 40px;
+    /* Add padding to make room for the icon */
+}
+
+.input-wrapper i {
+    position: absolute;
+    right: 10px;
+    /* Position the icon inside the input */
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    /* Adjust size as needed */
+    color: #555;
+    /* Optional: change the icon color */
+}

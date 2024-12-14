@@ -4,7 +4,7 @@ import 'swiper/css';
 import 'swiper/css/pagination';
 import { Pagination, Autoplay } from 'swiper/modules';
 import { Link } from 'react-router-dom'; // Ensure you have this import for the Link component
-import './GameSlider.css'; // Import your CSS
+import './css/GameSlider.css'; // Import your CSS
 import axios from '/config/axiosConfig';
 import { LanguageContext } from "../context/LanguageContext";
 
@@ -36,48 +36,59 @@ const GameSlider = () => {
   }, [language, slug]); // Dependency array includes slug and currentPage
 
   return (
-    <section className="game-slider">
-      <Swiper
-        spaceBetween={10} // Default space between slides
-        slidesPerView={4} // Default slides per view for the smallest screens
-        autoplay={{
-          delay: 10, // Autoplay delay in milliseconds
-          disableOnInteraction: false, // Keep autoplay running even after interaction
-        }}
-        pagination={{
-          clickable: false, // Set to true if you want clickable pagination
-        }}
-        freeMode={true}
-        speed={3000}
-        breakpoints={{
-          991: {
-            spaceBetween: 10,
-            slidesPerView: 8,
-          },
-          768: {
-            spaceBetween: 10,
-            slidesPerView: 12,
-          },
-          576: {
-            spaceBetween: 10,
-            slidesPerView: 9,
-          },
-        }}
-        modules={[Autoplay, Pagination]} // Include Autoplay module here
-        className="swiper-wrapper"
-      >
-        {games.map((game) => (
-          <SwiperSlide key={game.id}>
-            <div className="games_box">
-              <Link to={`/play-game/${game.slug}`} className="game_link">
-                <img src={game.imagepath} alt={game.translate_name} className="img-fluid" />
-                <h2 className="wow fadeIn">{game.translate_name}</h2>
-              </Link>
+    <div className="col-xl-4 col-lg-4 col-md-4  desktop_view">
+              <div className="here " style={{ height: '80vh' }}>
+                <div className="right_index">
+                  <div className="premium_games">
+                    <h5>Free Games</h5>
+                    <div className="game_slide owl-carousel">
+                      <div className="game_content">
+                        <a href="#">
+                          <img src="/theme_fansgames/images/Joker_Poker.png" loading="lazy" className="img-fluid" />
+                        </a>
+                      </div>
+                      <div className="game_content">
+                        <a href="#">
+                          <img src="/theme_fansgames/images/baccarat_512.jpg" loading="lazy" className="img-fluid" />
+                        </a>
+                      </div>
+                      <div className="game_content">
+                        <a href="#">
+                          <img src="/theme_fansgames/images/gaming guide web_BACCARAT 580.jpg" loading="lazy" className="img-fluid" />
+                        </a>
+                      </div>
+
+                    </div>
+                    <p>Note: Play free games and collect Dimond</p>
+                  </div>
+                  <div className="premium_games">
+                    <h5 className="premium">Premium Games</h5>
+                    <div className="game_slide owl-carousel">
+                      <div className="game_content">
+                        <a href="#">
+                          <img src="/theme_fansgames/images/Joker_Poker.png" loading="lazy" className="img-fluid" />
+                        </a>
+                      </div>
+                      <div className="game_content">
+                        <a href="#">
+                          <img src="/theme_fansgames/images/baccarat_512.jpg" loading="lazy" className="img-fluid" />
+                        </a>
+                      </div>
+                      <div className="game_content">
+                        <a href="#">
+                          <img src="/theme_fansgames/images/gaming guide web_BACCARAT 580.jpg" loading="lazy" className="img-fluid" />
+                        </a>
+                      </div>
+
+                    </div>
+                    <p>Note: Subscribe For Play premium games.</p>
+                  </div>
+                  <div className="bottom_right">
+                    <img src="/theme_fansgames/images/transparent_img.png" className="img-fluid" />
+                  </div>
+                </div>
+              </div>
             </div>
-          </SwiperSlide>
-        ))}
-      </Swiper>
-    </section>
   );
 };
 

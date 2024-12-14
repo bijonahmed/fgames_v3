@@ -6,11 +6,11 @@ import Loader from "../components/Loader";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import LeftSideBarComponent from "../components/LeftSideBarComponent";
-import MiniSidebar from "../components/MiniSidebar";
+
 import AuthUser from "../components/AuthUser";
 import axios from "/config/axiosConfig";
 import QRCode from 'qrcode';
-import '../components/deposit.css';
+
 
 const Deposit = () => {
 
@@ -198,7 +198,7 @@ const Deposit = () => {
                 <div className="row">
                   <div className="col-md-4">
                     {/* Start MiniSidebar */}
-                    <MiniSidebar />
+                   ==========
                     {/* End MiniSidebar */}
                   </div>
 

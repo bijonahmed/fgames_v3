@@ -6,7 +6,7 @@ import AuthUser from "./AuthUser";
 import axios from "/config/axiosConfig";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Mousewheel } from "swiper/modules";
-import './VideoPlayer.css'; // Import your CSS file
+import './css/VideoPlayer.css'; // Import your CSS file
 //VideoPlayer.css
 
 const ShortVideoPlayer = () => {
