@@ -46,15 +46,16 @@ class UserAuthController extends Controller
 
     public function userRegister(Request $request)
     {
-     //  dd($request->all());
+    // dd($request->all());
         $setting = Setting::find(1);
 
         $this->validate($request, [
             'name'        => 'required',
-            'email'       => 'required|unique:users,email',
-            'username'    => 'required|unique:users,username',
+            'username'    => 'required|unique:users,username|regex:/^[a-z0-9]{5,11}$/',
+            'email'       => 'required|email|unique:users,email',
             'password'    => 'required|min:6|confirmed',
-            // 'password'   => 'required|min:6'
+        ], [
+            'username.regex' => 'The username must be 5-11 characters long and can only contain lowercase letters and numbers.',
         ]);
 
         $inviteCode       = $request->input('inviteCode');

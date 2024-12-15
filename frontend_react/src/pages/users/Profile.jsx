@@ -17,48 +17,17 @@ const Profile = () => {
   const { user } = AuthUser();
   const { language, content, changeLanguage } = useContext(LanguageContext);
   const navigate = useNavigate();
-  const [loading, setLoading] = useState(true);
-  const [responseData, setData] = useState([]);
-  const [platform_name, gtypeName] = useState();
 
+  const { token, logout } = AuthUser();
 
-
-  const settings = {
-    dots: true,
-    infinite: true,
-    speed: 500,
-    slidesToShow: 1,
-    slidesToScroll: 1,
+  const logoutUser = async () => {
+    if (token) {
+      await logout();
+      navigate('/login');
+    }
   };
-  // const defaultFetch = async () => {
-  //     setLoading(true);
-  //     try {
-  //         const response = await axios.get(`/public/gameTypeWiseCategory/${slug}`);
-  //         setData(response.data.data); // Set the video data
-  //         gtypeName(response.data.platform_name); // Set the video data
-  //         //setTotalPages(response.data.last_page); // Get total pages from response
-  //     } catch (error) {
-  //         console.error("Error Data:", error);
-  //     } finally {
-  //         setLoading(false);
-  //     }
-  // };
 
-  useEffect(() => {
-    // defaultFetch();
-  }, []); // Dependency array includes slug and currentPage
 
-  const [loadingStatus, setLoadingStatus] = useState(
-    responseData.map(() => true) // Set loading to true for all games initially
-  );
-
-  const handleImageLoad = (index) => {
-    setLoadingStatus((prevStatus) => {
-      const newStatus = [...prevStatus];
-      newStatus[index] = false; // Set loading to false once the image is loaded
-      return newStatus;
-    });
-  };
 
   return (
     <>
@@ -298,7 +267,7 @@ const Profile = () => {
                     </a>
                   </li>
                   <li>
-                    <a href="logout.html">
+                    <Link to="#" onClick={logoutUser}>
                       <div className="row justify-content-space align-items-center">
                         <div className="col-10">
                           <h3><img src="/theme_fansgames/images/logout-60.png" className="settings_i" /> Logout </h3>
@@ -307,7 +276,7 @@ const Profile = () => {
                           <i className="fa-solid fa-chevron-right" />
                         </div>
                       </div>
-                    </a>
+                    </Link>
                   </li>
                 </ul>
                 <br /><br />

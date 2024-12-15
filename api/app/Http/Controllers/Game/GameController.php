@@ -44,7 +44,7 @@ class GameController extends Controller
         // dd($request->all());
 
         $gameRow   = GameList::where('slug', $request->slug)->first();
-      //  dd($gameRow);
+        //  dd($gameRow);
         $userId    = $this->userid;
         $user      = User::find($userId);
         $username  = !empty($user->username) ? $user->username : "";
@@ -185,14 +185,17 @@ class GameController extends Controller
         $validator  = Validator::make($request->all(), [
             'name'          => 'required',
             'status'        => 'required',
+            'game_type_id'  => 'required',
             'files'         => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
-
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $request->input('name'))));
         $data = array(
             'name'                       => $request->name,
+            'slug'                       => $slug,
+            'game_type_id'               => $request->game_type_id,
             'status'                     => $request->status,
         );
 
@@ -221,7 +224,10 @@ class GameController extends Controller
     public function checkGameTypeRow($id)
     {
         $rowcheck = GameType::find($id);
-        return response()->json($rowcheck);
+        $imageurl = !empty($rowcheck->image) ? url($rowcheck->image) : "";
+        $data['data']   = $rowcheck;
+        $data['image']  = $imageurl;
+        return response()->json($data);
     }
 
     public function checkGameCategory($id)
@@ -291,6 +297,9 @@ class GameController extends Controller
     public function addGameType(Request $request)
     {
 
+
+        // dd($request->file('files'));
+
         $validator  = Validator::make($request->all(), [
             'name'          => 'required',
             'status'        => 'required',
@@ -307,6 +316,20 @@ class GameController extends Controller
             'status'                     => $request->status,
             'gameTypecode'               => $request->gameTypecode,
         );
+
+
+        if (!empty($request->file('files'))) {
+            $files = $request->file('files');
+            $fileName = Str::random(20);
+            $ext = strtolower($files->getClientOriginalExtension());
+            $path = $fileName . '.' . $ext;
+            $uploadPath = '/backend/files/';
+            $upload_url = $uploadPath . $path;
+            $files->move(public_path('/backend/files/'), $upload_url);
+            $file_url = $uploadPath . $path;
+            $data['image'] = $file_url;
+        }
+
 
         if (empty($request->id)) {
             $resdata['id']               = GameTypeModel::insertGetId($data);
@@ -432,10 +455,12 @@ class GameController extends Controller
     {
 
         $page           = $request->input('page', 1);
-        $pageSize       = $request->input('pageSize', 10);
+        $pageSize       = $request->input('pageSize', 100);
         $searchQuery    = $request->searchQuery;
         $selectedFilter = (int)$request->selectedFilter;
-        $fitlergameytype = (int)$request->game_type;
+        $fitlergameytype = (int)$request->game_type_id;
+
+
 
         $query = GamePlatform::orderBy('id', 'desc')
             ->orderBy('id', 'desc');
@@ -448,12 +473,20 @@ class GameController extends Controller
             $query->where('status', $selectedFilter);
         }
 
+
+        if (!empty($fitlergameytype)) {
+            $query->where('game_type_id', $fitlergameytype);
+        }
+
         $paginator = $query->paginate($pageSize, ['*'], 'page', $page);
         $modifiedCollection = $paginator->getCollection()->map(function ($item) {
+
+            $gametypeRow = GameType::where('id', $item->game_type_id)->first() ?? '';
 
             return [
                 'id'                => $item->id,
                 'name'              => $item->name,
+                'gametypeName'      => $gametypeRow->name ?? "",
                 'image'             => !empty($item->image) ? url($item->image) : "",
                 'status'            => $item->status == 1 ? 'Active' : 'Inactive',
             ];
@@ -474,8 +507,8 @@ class GameController extends Controller
         $pageSize       = $request->input('pageSize', 10);
         $searchQuery    = $request->searchQuery;
         $selectedFilter = (int)$request->selectedFilter;
-        $query = GameType::orderBy('id', 'desc')
-            ->orderBy('id', 'desc');
+        $query = GameType::orderBy('gameTypecode', 'asc');
+
 
         if ($searchQuery !== null) {
             $query->where('name', 'like', '%' . $searchQuery . '%');
@@ -493,6 +526,7 @@ class GameController extends Controller
                 'id'                => $item->id,
                 'name'              => substr($item->name, 0, 250),
                 'gameTypecode'      => $item->gameTypecode,
+                'image'             => !empty($item->image) ? url($item->image) : "",
                 'status'            => $item->status == 1 ? 'Active' : 'Inactive',
             ];
         });

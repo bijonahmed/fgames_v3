@@ -11,53 +11,94 @@ import AuthUser from "../components/AuthUser";
 import { LanguageContext } from "../context/LanguageContext";
 import '../components/css/GameList.css'; // Import your CSS file
 import { Carousel } from 'react-bootstrap';
+import Loader from "../components/Loader";
 const GamesList = () => {
 
     const { user } = AuthUser();
     const { language, content, changeLanguage } = useContext(LanguageContext);
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
-    const [responseData, setData] = useState([]);
-    const [platform_name, gtypeName] = useState();
+    const [pltfrmLoading, setLoadingPltfrm] = useState(true);
+    const [showPltformNameName, setPlatformName] = useState("");
+    const [responseGameType, setData] = useState([]);
+    const [responsePltfrm, setPlatformData] = useState([]);
+    const [gametypeId, setGameTypeId] = useState("");
+    const { token } = AuthUser();
+    // Function to handle the Axios request and navigation
+    const playPlatformGame = async (slug) => {
+        setLoadingPltfrm(true);
+        console.log("gametype:", gametypeId);
+        console.log("platType:", slug);
 
+        try {
+            const response = await axios.post('/games/platformTypeGames', {
+                platType: slug,
+                gameType: gametypeId
+            }, {
+                headers: {
+                    Authorization: `Bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            });
 
+            console.log(`reponse url: ${response.data.response_url.data.url}`);
+            if (response.data.success && response.data.response_url.data.url) {
+                window.open(response.data.response_url.data.url, '_blank');
+            } else {
+                console.error('No URL found in the response');
+            }
 
-    const settings = {
-        dots: true,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 1,
-        slidesToScroll: 1,
+        } catch (error) {
+            console.error('Error sending game data:', error);
+        } finally{
+            setLoadingPltfrm(false);
+        }
     };
-    // const defaultFetch = async () => {
-    //     setLoading(true);
-    //     try {
-    //         const response = await axios.get(`/public/gameTypeWiseCategory/${slug}`);
-    //         setData(response.data.data); // Set the video data
-    //         gtypeName(response.data.platform_name); // Set the video data
-    //         //setTotalPages(response.data.last_page); // Get total pages from response
-    //     } catch (error) {
-    //         console.error("Error Data:", error);
-    //     } finally {
-    //         setLoading(false);
-    //     }
-    // };
+    const defaultFetch = async () => {
+        setLoading(true);
+        try {
+            const response = await axios.get(`/public/allGamesType/`);
+            //console.log("pltfrmData:" + response.data.data);
+            setData(response.data.data);
+        } catch (error) {
+            console.error("Error Data:", error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const platformList = async (game_type_id) => {
+        setGameTypeId(game_type_id);
+        setLoadingPltfrm(true);
+        try {
+            const response = await axios.get('/public/gameTypeWisePlatformList/', {
+                params: {
+                    game_type_id: game_type_id
+                }
+            });
+            setPlatformData(response.data.data);
+            setPlatformName(response.data.gameType_name);
+        } catch (error) {
+            console.error("Error Data:", error);
+        } finally {
+            setLoadingPltfrm(false);
+        }
+    };
+
+    const [activeId, setActiveId] = useState(
+        responseGameType.length > 0 ? responseGameType[0].id : null
+    );
+    const handleGameTypeClick = (id) => {
+        console.log(`Game Type ID: ${id}`);
+        setActiveId(id); // Update the active ID
+        platformList(id);
+    };
 
     useEffect(() => {
-        // defaultFetch();
+        defaultFetch();
+        handleGameTypeClick(4);
+        platformList(4);
     }, []); // Dependency array includes slug and currentPage
-
-    const [loadingStatus, setLoadingStatus] = useState(
-        responseData.map(() => true) // Set loading to true for all games initially
-    );
-
-    const handleImageLoad = (index) => {
-        setLoadingStatus((prevStatus) => {
-            const newStatus = [...prevStatus];
-            newStatus[index] = false; // Set loading to false once the image is loaded
-            return newStatus;
-        });
-    };
 
     return (
         <>
@@ -69,7 +110,6 @@ const GamesList = () => {
                 <div style={{ height: 54 }} />
                 {/* navbar end here  */}
                 {/* banner part start here  */}
-
 
                 <div className="container-fluid">
                     <div className="row">
@@ -123,7 +163,6 @@ const GamesList = () => {
                         </div>
                     </div>
                 </div>
-
 
                 {/* profile and function part start here  */}
                 <div className="container-fluid">
@@ -184,52 +223,33 @@ const GamesList = () => {
                 {/* gaming part start here  */}
                 <div className="container-fluid ">
                     <div className="row ">
+                        {/* {showPltformNameName} */}
                         <div className="col-3 scroll mt-3"> {/*cat part start here */}
                             <div className="row">
                                 <div className="col-12">
-                                    <div className="cat sub_cat active">
-                                        <a href="#">
-                                            <img src="/theme_fansgames/images/fire.png" />
-                                            <h4>Video</h4>
-                                        </a>
+                                    <div>
+                                        {/* Show loading spinner or any loader */}
+                                        {loading ? (
+                                            <p>Loading.....</p>
+                                        ) : (
+                                            responseGameType.map((gameType) => (
+                                                <div
+                                                    className={`cat sub_cat ${activeId === gameType.id ? "active" : ""}`}
+                                                    key={gameType.id}
+                                                    onClick={() => handleGameTypeClick(gameType.id)}>
+                                                    {/* [{gameType.id}] */}
+                                                    <Link to="#">
+                                                        <img
+                                                            src={gameType.imagepath}
+                                                            alt={gameType.name}
+                                                            onError={(e) => (e.target.src = "/theme_fansgames/images/dimond.png")} // Fallback image
+                                                        />
+                                                        <h4>{gameType.name}</h4>
+                                                    </Link>
+                                                </div>
+                                            ))
+                                        )}
                                     </div>
-                                    <div className="cat sub_cat">
-                                        <a href="#">
-                                            <img src="/theme_fansgames/images/chips.png" />
-                                            <h4>Slot machine</h4>
-                                        </a>
-                                    </div>
-                                    <div className="cat sub_cat">
-                                        <a href="#">
-                                            <img src="/theme_fansgames/images/card.png" />
-                                            <h4>lottery</h4>
-                                        </a>
-                                    </div>
-                                    <div className="cat sub_cat">
-                                        <a href="#">
-                                            <img src="/theme_fansgames/images/jackpot.png" />
-                                            <h4>sports</h4>
-                                        </a>
-                                    </div>
-                                    <div className="cat sub_cat">
-                                        <a href="#">
-                                            <img src="/theme_fansgames/images/football.png" />
-                                            <h4>e-sports</h4>
-                                        </a>
-                                    </div>
-                                    <div className="cat sub_cat">
-                                        <a href="#">
-                                            <img src="/theme_fansgames/images/fire.png" />
-                                            <h4>hunting</h4>
-                                        </a>
-                                    </div>
-                                    <div className="cat sub_cat">
-                                        <a href="#">
-                                            <img src="/theme_fansgames/images/chips.png" />
-                                            <h4>chess and cards</h4>
-                                        </a>
-                                    </div>
-
                                 </div>
                             </div>
                         </div> {/*cat part end here */}
@@ -237,26 +257,34 @@ const GamesList = () => {
                             {/*Games part start here */}
                             <div className="row mt-3 px-3" style={{ borderRadius: 5 }}>
                                 <div className="game_icon text-center py-2" style={{ backgroundImage: 'linear-gradient(to bottom, rgba(239,229,253,1) 0%,rgba(195,169,243,1) 100%)' }}>
-                                    <h6 className="m-0">AG</h6>
+                                    <h6>{showPltformNameName}</h6>
+
                                 </div>
+                                <center> {pltfrmLoading && <p><Loader />Loading.....</p>}</center>
                             </div>
                             <div className="scrollTwo mt-3">
                                 <div className=" game_part_new mt-0">
-                                    <div className="game_pic">
-                                        <a href="games.html" className="btn_fav_pop">
-                                            <img src="/theme_fansgames/images/Joker_Poker.png" loading="lazy" className="img-fluid" />
-                                        </a>
-                                    </div>
-                                    <div className="game_pic">
-                                        <a href="games.html" className="btn_fav_pop">
-                                            <img src="/theme_fansgames/images/baccarat_512.jpg" loading="lazy" className="img-fluid" />
-                                        </a>
-                                    </div>
-                                    <div className="game_pic">
-                                        <a href="games.html" className="btn_fav_pop">
-                                            <img src="/theme_fansgames/images/gaming guide web_BACCARAT 580.jpg" loading="lazy" className="img-fluid" />
-                                        </a>
-                                    </div>
+
+                                    {responsePltfrm.map((game) => (
+                                        <div key={game.id}>
+                                            <div className="game_pic">
+                                                <Link to="#" onClick={(e) => {
+                                                    e.preventDefault(); // Prevent default link behavior
+                                                    playPlatformGame(game.slug);
+                                                }} className="btn_fav_pop">
+                                                    <img
+                                                        src={game.imagepath || "/theme_fansgames/images/dimond.png"} // Fallback image if imagepath is empty
+                                                        loading="lazy"
+                                                        alt={game.name}
+                                                        className="img-fluid" />
+                                                </Link>
+
+                                            </div>
+                                            <p className="text-center mb-1">{game.name}</p>
+
+                                        </div>
+
+                                    ))}
 
                                 </div>
                             </div>
@@ -273,7 +301,6 @@ const GamesList = () => {
             </div>
 
             <Footer />
-
 
             {/* END */}
         </>

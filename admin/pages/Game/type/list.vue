@@ -58,6 +58,7 @@
                                                 <tr>
                                                     <th class="text-left">Name</th>
                                                     <th class="text-center">GameTypeCode</th>
+                                                    <th class="text-center">Images</th>
                                                     <th class="text-center">Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
@@ -66,6 +67,9 @@
                                                 <tr v-for="item in productdata" :key="item.id">
                                                     <td class="text-left">{{ item.name }}</td>
                                                     <td class="text-center">{{ item.gameTypecode }}</td>
+                                                    <td class="text-center">
+                                                        <img :src="item.image ? item.image : '/avatar.png'" alt="Image" />
+                                                    </td>
                                                     <td class="text-center">{{ item.status }} </td>
                                                     <td>
                                                         <center>
@@ -80,6 +84,7 @@
                                                 <tr>
                                                     <th class="text-left">Name</th>
                                                     <th class="text-center">GameTypeCode</th>
+                                                    <th class="text-center">Images</th>
                                                     <th class="text-center">Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>

@@ -71,6 +71,18 @@
                         </div>
 
 
+
+                        <div class="row mb-3">
+                                                    <label for="input-name-1" class="col-sm-2 col-form-label">Images</label>
+                                                    <div class="col-sm-10">
+    
+                                                        <input type="file" value class="form-control" id="fileInput" accept="image/png,image/jpeg" ref="files" @change="onFileSelected" />
+                                                        <span class="text-danger" v-if="errors.files">{{ errors . files[0] }}</span>
+                                                        <img v-if="previewUrl" :src="previewUrl" alt="Preview" class="img-fluids" />
+                                                    </div>
+                                                </div>
+
+
                         <div class="row mb-3 required">
                           <label for="input-name-1" class="col-sm-2 col-form-label required-label">Status</label>
                           <div class="col-sm-10">
@@ -121,6 +133,8 @@ definePageMeta({
 })
 
 const summernoteEditor = ref(null);
+const file = ref(null);
+const files = ref(null);
 const insertdata = reactive({
   id: '',
   name: '',
@@ -130,9 +144,26 @@ const insertdata = reactive({
 // Define a ref to store the HTML content of the editor
 
 const errors = ref({});
+const previewUrl = ref(null);
+
+const previewImage = (event) => {
+    const file = event.target.files[0];
+    previewUrl.value = URL.createObjectURL(file);
+    //  checkImageDimensionsThunbnail(file);
+};
+
+const onFileSelected = (event) => {
+    previewImage(event)
+    file.value = event.target.files[0];
+};
+
+
+
+
 
 const saveData = () => {
   const formData = new FormData();
+  formData.append('files', file.value);
   formData.append('id', insertdata.id);
   formData.append('name', insertdata.name);
   formData.append('gameTypecode', insertdata.gameTypecode);
@@ -178,11 +209,12 @@ const success_noti = () => {
 const productrow = () => {
   const id = router.currentRoute.value.query.parameter;
   axios.get(`/games/checkGameType/${id}`).then(response => {
-    insertdata.id = response.data.id;
-    insertdata.name = response.data.name;
-    insertdata.gameTypecode = response.data.gameTypecode
-    insertdata.slug = response.data.slug
-    insertdata.status = response.data.status
+    insertdata.id = response.data.data.id;
+    insertdata.name = response.data.data.name;
+    insertdata.gameTypecode = response.data.data.gameTypecode
+    insertdata.slug = response.data.data.slug
+    previewUrl.value = response.data.image
+    insertdata.status = response.data.data.status
 
   });
 };

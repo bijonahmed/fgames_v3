@@ -14,7 +14,9 @@
 }
 
 
-
+.cat.sub_cat.active {
+    background-color: #f9f9f9;
+  }
 /* navbar end here ======  */
 
 

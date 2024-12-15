@@ -133,7 +133,8 @@ class AuthController extends Controller
 
         $this->validate($request, [
             'name'        => 'required',
-            'email'       => 'required|unique:users,email',
+            'email'       => 'required|unique:users,username',
+            'username'    => 'required|unique:users,username|regex:/^[a-z0-9]{5,11}$/', // Lowercase letters and numbers, 5-11 characters
             'password'    => 'required|min:6|confirmed',
             // 'password'   => 'required|min:6'
         ]);

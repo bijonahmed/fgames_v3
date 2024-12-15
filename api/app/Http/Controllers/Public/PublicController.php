@@ -314,10 +314,37 @@ class PublicController extends Controller
         }
     }
 
+
+    public function gameTypeWisePlatformList(Request $request)
+    {
+        $game_type_id  = $request->game_type_id ?? "";
+        $gameTyperow   = GameType::where('id', $game_type_id)->where('status', 1)->first();
+        $platformrows  = GamePlatform::where('game_type_id', $game_type_id)->where('status', 1)->get();
+
+        $dataList = [];
+        foreach ($platformrows as $v) {
+            $imagePath = !empty($v->image) ? url($v->image) : "";
+            $dataList[] = [
+                'id'            => $v->id,
+                'name'          => $v->name,
+                'slug'          => $v->slug,
+                'status'        => $v->status,
+                'imagepath'     => $imagePath, // Path for the image
+            ];
+        }
+        // Return success response with the fetched categories
+        return response()->json([
+            'gameType_name' => !empty($gameTyperow) ? $gameTyperow->name : "",
+            'success' => true,
+            'message' => 'Fetched successfully.',
+            'data'    => $dataList,
+        ], 200);
+
+       
+    }
+
     public function gameTypeWiseCategory($slug)
     {
-
-
         // Fetch the GameType based on the slug
         $platformrow  = GamePlatform::where('slug', $slug)->where('status', 1)->first();
         $platformid   = !empty($platformrow) ? $platformrow->id : "";
@@ -348,8 +375,29 @@ class PublicController extends Controller
 
     public function allGamesTypes()
     {
-        $result = GameType::where('status', 1)->get();
-        return response()->json($result);
+        $result = GameType::where('status', 1)
+            ->orderBy('gameTypeCode', 'asc')
+            ->get();
+
+        $dataList = [];
+        foreach ($result as $v) {
+            $imagePath = !empty($v->image) ? url($v->image) : "";
+            $dataList[] = [
+                'id'            => $v->id,
+                'gameTypecode'  => $v->gameTypecode,
+                'name'          => $v->name,
+                'game_type'     => !empty($platformrow) ? $platformrow->name : "",
+                'slug'          => $v->slug,
+                'status'        => $v->status,
+                'imagepath'     => $imagePath, // Path for the image
+            ];
+        }
+        // Return success response with the fetched categories
+        return response()->json([
+            'success' => true,
+            'message' => 'Fetched successfully.',
+            'data'    => $dataList,
+        ], 200);
     }
 
 

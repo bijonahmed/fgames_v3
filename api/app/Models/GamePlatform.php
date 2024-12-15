@@ -18,6 +18,8 @@ class GamePlatform extends Authenticatable
   protected $fillable = [
     'name',
     'status',
+    'slug',
+    'game_type_id',
     'image',
     'status'
   ];

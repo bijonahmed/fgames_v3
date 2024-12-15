@@ -29,6 +29,11 @@ use Illuminate\Support\Facades\Hash;
 class GameRequestController extends Controller
 {
     protected $userid;
+    protected $sn;
+    protected $secretKey;
+    protected $currency;
+    protected $len;
+    protected $ingress;
     public function __construct()
     {
         $this->middleware('auth:api');
@@ -36,151 +41,284 @@ class GameRequestController extends Controller
         if (!empty($id)) {
             $user = User::find($id->id);
             $this->userid = $user->id;
+            $this->sn = "guw"; // Replace with your SN
+            $this->secretKey = "2SW80tB9C22800TrO64f9HcA761JR299"; // Replace with your secret key
+            $this->currency  = "USD";
+            $this->len       = 'en';
+            $this->ingress   = 'device1';
         }
     }
 
-    public function requesttoGame(Request $request)
+
+
+    public function platformTypeGames(Request $request)
     {
-
         // dd($request->all());
-
-        $gamechkPoint = GamesAll::where('slug', $request->slug)->first();
         $uCheckPoint  = User::where('id', $this->userid)->first();
+        $username     = $uCheckPoint->username ?? "";
+        $chkGameType  = GameType::where('id', $request->gameType)->first();
+        $gameTypeCode = (int)$chkGameType->gameTypecode ?? "";
 
-        $gameId       = $gamechkPoint->gameid ?? ""; // Use null coalescing operator to handle null cases
-        $uname        = $uCheckPoint->username ?? ""; // Use null coalescing operator to handle null cases
-        
-        //dd($gameId);
-        $apiUrl       = 'https://api-gametest.omgapi.cc/api/usr/ingame';
-        $secretKey    = 'dc7df6a77d8e82fcf26062d773b8d385'; // Replace with your actual secret key
-        $appId        = '771'; // Replace with your actual app ID
-        $traceId      = uniqid();
+        // Input Data
+        $playerId = $username; //"test001";
+        $platType = $request->platType ?? ""; //"ag";
+        $currency = $this->currency; //"CNY";
+        $gameType = $gameTypeCode; //2; // Adding gameType parameter
+        $return   = $this->createPlayer($playerId, $platType, $currency, $gameType);
 
-        /*
-        $request->validate([
-            'gameId'    => 'required',
-            'token'     => 'required',
-            'lang'      => 'required',
-            'nick'      => 'required',
-            //'nick'      => 'required|unique:request_games,nick',
-            'cid'       => 'required',
-        ]);
-        */
+        // $responseCode      = $return['response']['code'] ?? null;
+        // $responseMessage   = $return['response']['msg'] ?? null;
+        // $request_success   =  10000;
 
-        // Dynamic request parameters
-        $getDynamicToken = $this->generateToken();
-        $gameId = "{$gameId}";
-        $token  = "{$getDynamicToken}"; //"{$request->token}";  
-        $lang   = "en";   //'{$request->lang}';
-        $nick   = "{$uname}"; //'{$request->nick}';
-        $cid    = 0;
+        $platformPlayGames = $this->platformPlayGames($playerId, $platType, $currency, $gameType, $gameTypeCode);
+        // Decode the response
+        $responseData = json_decode(json_encode($platformPlayGames), true);
 
-        // Generate a unique trace ID for this request
-        $traceId = uniqid();
+        // Extract code and msg from response_url
+        $responseCode    = $responseData['response_url']['code'] ?? null;
+        $responseMessage = $responseData['response_url']['msg'] ?? null;
+        $dataUrl         = $responseData['response_url']['data']['url'] ?? null;
 
-        // Prepare request data as an array
-        $requestData = [
-            'gameid' => $gameId,
-            'token'  => $token,
-            'lang'   => $lang,
-            'nick'   => $nick,
-            'app_id' => $appId,
-            'cid'    => $cid
+        // Debug extracted variables
+        // Conditions based on responseCode
+        if ($responseCode == 10000) {
+            // Success: Return JSON URL
+            return response()->json([
+                'success' => true,
+                'url' => $dataUrl,
+            ]);
+        } else {
+            // Map error codes to messages
+            $errorMessages = [
+                10001 => "Request error",
+                10002 => "PlayerId already exists",
+                10003 => "PlayerId does not exist",
+                10004 => "PlayerId format error",
+                10005 => "Transfer error",
+                10006 => "Amount error",
+                10007 => "Wrong time format",
+                10008 => "ReturnUrl error",
+                10009 => "Frequent interface requests",
+                10010 => "Request error",
+                10011 => "OrderId is not specified",
+                10012 => "OrderId already exists",
+                10013 => "OrderId does not exist",
+                10014 => "Insufficient quota",
+                10403 => "IP restricted access",
+                10404 => "Signature verification failed",
+                10405 => "Missing parameter: playerId/platType/amount/type/currency/gameType",
+                10407 => "PlatType code error",
+                10408 => "GameType error",
+                10409 => "Type error",
+            ];
+
+            $errorMessage = $errorMessages[$responseCode] ?? "Unknown error";
+
+            return response()->json([
+                'success' => false,
+                'code' => $responseCode,
+                'message' => $errorMessage,
+            ]);
+        }
+    }
+
+
+    public function platformPlayGames($playerId, $platType, $currency, $gameType, $gameTypeCode)
+    {
+        //dd($request->all());
+
+        // echo "$playerId, $platType, $currency, $gameType-----,$gameTypeCode";
+
+
+        $uCheckPoint  = User::where('id', $this->userid)->first();
+        $username     = $uCheckPoint->username ?? "";
+        //dd($gameTypeCode);
+
+        // Configuration
+        $apiUrl     = "https://ap.api-bet.net/api/server/gameUrl";
+        $sn         = $this->sn;
+        $secretKey  = $this->secretKey; // Replace with your secret key
+
+        // Input Data
+        $playerId = $username; //"test001";
+        $platType = $platType ?? ""; //"ag";
+        $currency = $this->currency; //"CNY";
+        $gameType = $gameTypeCode; //2; // Adding gameType parameter
+        $this->createPlayer($playerId, $platType, $currency, $gameType);
+        //exit;
+        // Generate headers
+        $random    = $this->generateRandomString();
+        $signature = $this->generateSignature($random, $sn, $secretKey);
+
+        // Prepare the request payload
+        $data = [
+            "playerId" => $playerId,
+            "platType" => $platType,
+            "currency" => $currency,
+            "gameType" => $gameType,
+            "lan"      => $this->len, //'en',
+            "ingress"  => $this->ingress, //'device1',
+
         ];
 
 
-        $originalJsonBody = json_encode($requestData, JSON_UNESCAPED_SLASHES);
-        // Create URL parameters for signature
-        $urlParams = 'trace_id=' . $traceId;
-        // Generate the signature using the original JSON string
-        $signature = $this->generateSignature($urlParams, $originalJsonBody, $secretKey);
-        // Prepare request data as an array
-        $requestData['sign']      = $signature;
-        $requestData['traceId']   = $traceId;
-        $requestData['uname']     = $uname;
-        $requestData['userid']    = $this->userid;
-
-        // Convert the request data to JSON without re-encoding for signature
+        $headers = [
+            "Content-Type: application/json",
+            "random: $random",
+            "sign: $signature",
+            "sn: $sn",
+        ];
         // Initialize cURL
-        $ch = curl_init();
+        $curl = curl_init();
 
-        // Set cURL options
-        curl_setopt($ch, CURLOPT_URL, $apiUrl . '?' . $urlParams);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        curl_setopt($ch, CURLOPT_POST, true);
-        curl_setopt($ch, CURLOPT_HTTPHEADER, [
-            'Content-Type: application/json;charset=UTF-8',
-            'sign: ' . $signature,
+        curl_setopt_array($curl, [
+            CURLOPT_URL => $apiUrl,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode($data),
+            CURLOPT_HTTPHEADER => $headers,
         ]);
-        // Attach the original JSON body to the request
-        curl_setopt($ch, CURLOPT_POSTFIELDS, $originalJsonBody);
-        // Execute the cURL request
-        $response = curl_exec($ch);
 
-        // Check for cURL errors
-        if ($response === false) {
-            echo 'cURL Error: ' . curl_error($ch);
-        } else {
-            // Decode the API response
-            $responseData = json_decode($response, true);
-            if (isset($responseData['data']['gameurl']) && !empty($responseData['data']['gameurl'])) {
-                $gameUrl = $responseData['data']['gameurl'];
-                // dd($gameUrl);
-                Game::create($requestData);
+        $response = curl_exec($curl);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        $err      = curl_error($curl);
+        $jsonData = json_encode($data, JSON_PRETTY_PRINT);
+        curl_close($curl);
 
-                $url = isset($responseData['Data']['url']) ? $responseData['Data']['url'] : null;
-                return response()->json(['url' => $gameUrl]);
 
-                return response()->json([
-                    'url'   => $gameUrl,
-                    'token' => $token, // Passing traceId along with the URL
-                ]);
+        $decodedResponse = json_decode($response, true); // Decode the JSON response
 
-                //  header("Location: $gameUrl");
-                // exit(); // Important to stop further script execution after redirect
-            } else {
-                // Output the response if no game URL is present
-                $code = isset($responseData['code']) ? $responseData['code'] : 'Unknown Code';
-                $msg  = isset($responseData['msg']) ? $responseData['msg'] : 'No message available';
-               
-                return response()->json([
-                    'success' => false,
-                    'code' => $code,
-                    'message' => $msg,
-                    'data' => $responseData['data'] ?? [],
-                ]);
-            }
+        if ($err) {
+            return [
+                'error' => true,
+                'message' => $err,
+            ];
         }
 
-        // Close cURL session
-        curl_close($ch);
-        return response()->json("Success");
+        return [
+            'httpCode' => $httpCode,
+            'response_url' => json_decode($response, true),
+            'requestPayload' => $data,
+        ];
+
+        // Handle the response
+        /*
+        if ($err) {
+            echo "cURL Error: " . $err;
+        } else {
+            echo "<h3>Request Details</h3>";
+            echo "<p>URL: $apiUrl</p>";
+            echo "<p>Headers: <pre>" . print_r($headers, true) . "</pre></p>";
+            echo "<p>Payload: <pre>" . json_encode($data, JSON_PRETTY_PRINT) . "</pre></p>";
+            echo "<h3>Response</h3>";
+            echo "<p>HTTP Status Code: $httpCode</p>";
+            echo "<pre>" . htmlspecialchars($response) . "</pre>";
+        }*/
+    }
+
+    public function createPlayer($playerId, $platType, $currency, $gameType)
+    {
+        //echo "$playerId , $platType, $currency, $gameType";
+        // Configuration
+        $apiUrl     = "https://ap.api-bet.net/api/server/create";
+        $sn         = $this->sn;
+        $secretKey  = $this->secretKey; // Replace with your secret key
+
+        // Input Data
+        $playerId = $playerId; //"test01";
+        $platType = $platType; //"bg";
+        $currency = $currency; //"CNY";
+        $gameType = $gameType; //1; // Adding gameType parameter
+
+        // Generate headers
+        $random    = $this->generateRandomString();
+        $signature = $this->generateSignature($random, $sn, $secretKey);
+
+        // Prepare the request payload
+        $data = [
+            "platType" => $platType,
+            "playerId" => $playerId,
+            "currency" => $currency,
+            "gameType" => $gameType,
+        ];
+
+        $headers = [
+            "Content-Type: application/json",
+            "random: $random",
+            "sign: $signature",
+            "sn: $sn",
+        ];
+
+        // Initialize cURL
+        $curl = curl_init();
+
+        curl_setopt_array($curl, [
+            CURLOPT_URL => $apiUrl,
+            CURLOPT_RETURNTRANSFER => true,
+            CURLOPT_CUSTOMREQUEST => "POST",
+            CURLOPT_POSTFIELDS => json_encode($data),
+            CURLOPT_HTTPHEADER => $headers,
+        ]);
+
+        $response = curl_exec($curl);
+        $httpCode = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+        $err = curl_error($curl);
+
+        curl_close($curl);
+
+        $createPlayerResponse = htmlspecialchars($response);
+        $jsondata = json_encode($data, JSON_PRETTY_PRINT);
+
+        //$jdata['createPlayerResponse']=$createPlayerResponse;
+        //$jdata['jsondata']            =$jsondata;
+
+        if ($err) {
+            return [
+                'error' => true,
+                'message' => $err,
+            ];
+        }
+
+        return [
+            'httpCode' => $httpCode,
+            'response' => json_decode($response, true),
+            'requestPayload' => $data,
+        ];
+
+        // echo '<pre>';
+        //print_r($jdata);
+
+
+        // return response()->json($jsondata,200);
+
+        // Handle the response
+        // if ($err) {
+        //     echo "cURL Error: " . $err;
+        // } else {
+        //     echo "<h3>Request Details</h3>";
+        //     echo "<p>URL: $apiUrl</p>";
+        //     echo "<p>Headers: <pre>" . print_r($headers, true) . "</pre></p>";
+        //     echo "<p>Payload: <pre>" . json_encode($data, JSON_PRETTY_PRINT) . "</pre></p>";
+        //     echo "<h3>Response</h3>";
+        //     echo "<p>HTTP Status Code: $httpCode</p>";
+        //     echo "<pre>" . htmlspecialchars($response) . "</pre>";
+        // }
+
     }
 
 
-    function generateToken()
+
+
+
+
+
+    function generateRandomString($length = 16)
     {
-
-        $uniqueId = uniqid('', true);
-        // Create a version 4 UUID format (like your example)
-        $data = random_bytes(16);
-        // Set the version (4) and variant (10xx) bits according to RFC 4122
-        $data[6] = chr(ord($data[6]) & 0x0f | 0x40); // set version to 4
-        $data[8] = chr(ord($data[8]) & 0x3f | 0x80); // set variant to 10xx
-
-        // Format the data into a UUID string
-        $uuid = vsprintf('%s-%s-%s-%s-%s', str_split(bin2hex($data), 4));
-        return $uuid;
+        return substr(str_shuffle(str_repeat('0123456789abcdefghijklmnopqrstuvwxyz', $length)), 0, $length);
     }
 
-    private function generateTraceId()
+    function generateSignature($random, $sn, $secretKey)
     {
-        return 'omg_' . time() . '_' . bin2hex(random_bytes(8));
-    }
-
-    function generateSignature($urlParams, $body, $secretKey)
-    {
-        // Concatenate URL parameters, original JSON body string, and secret key
-        return md5($urlParams . $body . $secretKey);
+        return md5($random . $sn . $secretKey);
     }
 }

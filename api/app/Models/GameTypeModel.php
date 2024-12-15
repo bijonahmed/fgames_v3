@@ -14,6 +14,7 @@ class GameTypeModel extends Authenticatable
     protected $fillable = [
         'name',
         'slug',
+        'image',
         'gameTypecode',
         'status',
     ];

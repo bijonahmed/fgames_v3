@@ -26,10 +26,10 @@ const LeftSideBarComponent = () => {
 
   const menuItems = token
     ? [
-      { path: "index.html", label: "Reels", icon: "/theme_fansgames/images/reels-60.png" },
-      { path: "livestream.html", label: "Stream", icon: "/theme_fansgames/images/live-streaming.png" },
-      { path: "ranking.html", label: "Ranking", icon: "/theme_fansgames/images/trophy.png" },
-      { path: "gamelist.html", label: "Games", icon: "/theme_fansgames/images/casino (1).png" },
+      { path: "/", label: "Reels", icon: "/theme_fansgames/images/reels-60.png" },
+      { path: "/model-list", label: "Stream", icon: "/theme_fansgames/images/live-streaming.png" },
+      { path: "#", label: "Ranking", icon: "/theme_fansgames/images/trophy.png" },
+      { path: "/game-list", label: "Games", icon: "/theme_fansgames/images/casino (1).png" },
       { path: "wallet.html", label: "Wallet", icon: "/theme_fansgames/images/wallet.png" },
       { path: "referal.html", label: "Refer", icon: "/theme_fansgames/images/refferal-transformed-removebg-preview.png" },
       { path: "affiliate.html", label: "Affiliate", icon: "/theme_fansgames/images/affiliate-60.png" },
@@ -39,18 +39,18 @@ const LeftSideBarComponent = () => {
       { path: "#", label: "Logout", icon: "/theme_fansgames/images/user.png", onClick: logoutUser },
     ]
     : [
-      { path: "index.html", label: "Reels", icon: "/theme_fansgames/images/reels-60.png" },
-      { path: "livestream.html", label: "Stream", icon: "/theme_fansgames/images/live-streaming.png" },
-      { path: "ranking.html", label: "Ranking", icon: "/theme_fansgames/images/trophy.png" },
-      { path: "gamelist.html", label: "Games", icon: "/theme_fansgames/images/casino (1).png" },
+      { path: "/", label: "Reels", icon: "/theme_fansgames/images/reels-60.png" },
+      { path: "/model-list", label: "Stream", icon: "/theme_fansgames/images/live-streaming.png" },
+      { path: "#", label: "Ranking", icon: "/theme_fansgames/images/trophy.png" },
+      { path: "/game-list", label: "Games", icon: "/theme_fansgames/images/casino (1).png" },
       { path: "wallet.html", label: "Wallet", icon: "/theme_fansgames/images/wallet.png" },
       { path: "referal.html", label: "Refer", icon: "/theme_fansgames/images/refferal-transformed-removebg-preview.png" },
       { path: "affiliate.html", label: "Affiliate", icon: "/theme_fansgames/images/affiliate-60.png" },
       { path: "deposite.html", label: "Deposite", icon: "/theme_fansgames/images/money-bag-green60.png" },
       { path: "withdraw.html", label: "Withdraw", icon: "/theme_fansgames/images/cash_in.png" },
       { path: "video_gallery.html", label: "Video Gallery", icon: "/theme_fansgames/images/video-gallery-100.png" },
-      { path: "login.html", label: "Login", icon: "/theme_fansgames/images/user.png" },
-      { path: "register.html", label: "Register", icon: "/theme_fansgames/images/user.png" },
+      { path: "/login", label: "Login", icon: "/theme_fansgames/images/user.png" },
+      { path: "/signup", label: "Register", icon: "/theme_fansgames/images/user.png" },
     ];
   const socialLinks = [
     { href: "https://www.facebook.com/Fansgame.online/", icon: "/theme_fansgames/images/facebook-100.png" },
@@ -74,9 +74,9 @@ const LeftSideBarComponent = () => {
           <div className="page_links">
             <h6>Pages</h6>
             {menuItems.map((item, index) => (
-              <a
+              <Link
                 key={index}
-                href={item.path}
+                to={item.path}
                 onClick={(e) => {
                   if (item.onClick) {
                     e.preventDefault(); // Prevent default navigation for items with actions
@@ -85,7 +85,7 @@ const LeftSideBarComponent = () => {
                 }}
               >
                 <img src={item.icon} alt={item.label} /> {item.label}
-              </a>
+              </Link>
             ))}
             <h6>Social Links</h6>
             <div className="index_social">

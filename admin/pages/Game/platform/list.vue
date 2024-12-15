@@ -1,12 +1,13 @@
 <template>
-    <title>Game Platform</title>
+    <title>
+        Game Platform</title>
     <div>
         <div class="content-wrapper">
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
                         <div class="col-sm-6">
-                            <p>Game Platform List</p>
+                            <p>Game Platform List ({{ totalRecords }})</p>
                         </div>
                         <div class="col-sm-6">
                             <ol class="breadcrumb float-sm-right">
@@ -21,82 +22,100 @@
                     </div>
                 </div>
             </section>
-
+    
             <section class="content">
                 <div class="container-fluid">
                     <div class="row">
                         <div class="col-12">
                             <div class="row">
-                                <div class="col-lg-8 col-md-8 col-sm-12 mb-2">
-                                    <input type="text" v-model="searchQuery" class="form-control"
-                                        placeholder="Search By Name" />
+                                <div class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                                    <input type="text" v-model="searchQuery" class="form-control" placeholder="Search By Name" />
                                 </div>
-
+    
+    
+    
+                                <div class="col-lg-2 col-md-2 col-sm-6 mb-2">
+                                    <select v-model="game_type_id" class="form-control" @change="filterData">
+                                                              <option selected value="">Select Game Type</option>
+                                                                <option v-for="(gameType, index) in selectedGameType"
+                                                                    :key="gameType.id" :value="gameType.id">{{ gameType.name }}
+                                                                </option>
+                                                            </select>
+                                </div>
+    
+    
+    
                                 <div class="col-lg-2 col-md-2 col-sm-6 mb-2">
                                     <select v-model="selectedFilter" class="form-control" @change="filterData">
-                                        <option value="1">Active</option>
-                                        <option value="0">Inactive</option>
-                                    </select>
+                                            <option value="1">Active</option>
+                                            <option value="0">Inactive</option>
+                                        </select>
                                 </div>
-
+    
                                 <div class="col-lg-2 col-md-2 col-sm-6 mb-2">
                                     <button @click="filterData()" class="btn btn-primary w-100">Filter</button>
                                 </div>
                             </div>
-
+    
                             <br />
-
+    
                             <div class="card">
                                 <div class="loading-indicator" v-if="loading" style="text-align: center;">
                                     <Loader />
                                 </div>
                                 <div class="card-body">
                                     <div>
-                                          
+    
                                         <table class="table w-100 table-wrapper">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-left">Name</th>
+                                                    <th class="text-left">SL NO</th>
+                                                    <th class="text-left">Game Type</th>
+                                                    <th class="text-left">Platform Name</th>
                                                     <th class="text-center">Images</th>
                                                     <th class="text-center">Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr v-for="item in productdata" :key="item.id">
+                                                <tr v-for="(item,index) in productdata" :key="item.id">
+                                                    <td class="text-left">{{ index+1 }}</td>
+                                                    <td class="text-left">{{ item.gametypeName }}</td>
                                                     <td class="text-left">{{ item.name }}</td>
                                                     <td class="text-center">
                                                         <img :src="item.image ? item.image : '/avatar.png'" alt="Image" />
                                                     </td>
-                                                    
+    
                                                     <td class="text-center">{{ item.status }} </td>
                                                     <td class="text-center">
                                                         <button type="button"><i class="fas fa-edit"
-                                                                @click="edit(item.id)"></i></button>
+                                                                    @click="edit(item.id)"></i></button>
                                                     </td>
                                                 </tr>
                                             </tbody>
                                             <tfoot>
                                                 <tr>
-                                                    <th class="text-left">Name</th>
+                                                    <th class="text-left">SL NO</th>
+                                                    <th class="text-left">Game Type</th>
+                                                    <th class="text-left">Platofrm Name</th>
                                                     <th class="text-center">Images</th>
                                                     <th class="text-center">Status</th>
                                                     <th class="text-center">Action</th>
                                                 </tr>
                                             </tfoot>
                                         </table>
-
+    
                                         <center>
+                                          
                                             <div class="pagination" style="text-align: center">
-                                                <button :disabled="currentPage === 1"
-                                                    @click="fetchData(currentPage - 1)">
-                                                    Previous
-                                                </button>
-                                                <template v-for="pageNumber in displayedPages" :key="pageNumber">
-                                                    <button @click="fetchData(pageNumber)">
-                                                        {{ pageNumber }}
+                                                <button :disabled="currentPage === 1" @click="fetchData(currentPage - 1)">
+                                                        Previous
                                                     </button>
-                                                </template>
+                                                <template v-for="pageNumber in displayedPages" :key="pageNumber">
+                                                        <button @click="fetchData(pageNumber)">
+                                                            {{ pageNumber }}
+                                                        </button>
+</template>
                                                 <button :disabled="currentPage === totalPages"
                                                     @click="fetchData(currentPage + 1)">
                                                     Next
@@ -113,6 +132,7 @@
         </div>
     </div>
 </template>
+
 <script setup>
 import { ref, watch, onMounted } from "vue";
 import axios from "axios";
@@ -126,6 +146,7 @@ const loading = ref(false);
 const currentPage = ref(1);
 const pageSize = 100;
 const totalRecords = ref(0);
+const game_type_id = ref("");
 const totalPages = ref(0);
 const game_type = ref('');
 const selectedGameType = ref([]);
@@ -142,7 +163,7 @@ const fetchData = async (page) => {
                 pageSize: pageSize,
                 searchQuery: searchQuery.value, // Pass the search query parameter
                 selectedFilter: selectedFilter.value,
-                game_type: game_type.value,
+                game_type_id: game_type_id.value,
             },
         });
         productdata.value = response.data.data;
@@ -200,8 +221,7 @@ const displayedPages = computed(() => {
         totalPages.value,
         startPage + maxDisplayedPages - 1
     );
-    return Array.from(
-        { length: endPage - startPage + 1 },
+    return Array.from({ length: endPage - startPage + 1 },
         (_, i) => startPage + i
     );
 });
@@ -249,6 +269,7 @@ const filterData = () => {
 }
 
 /* Table */
+
 .table-wrapper {
     width: 100%;
     /* max-width: 500px; */

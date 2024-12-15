@@ -86,7 +86,7 @@ const Login = () => {
                         {errors.password[0]}
                       </div>
                     )}
-                    <input type="checkbox" id="togglePassword" /><label>Show password</label>
+                    {/* <input type="checkbox" id="togglePassword" /><label>Show password</label> */}
                   </div>
                   <div className="row justify-content-center">
                     <div className="col-md-12 ">
