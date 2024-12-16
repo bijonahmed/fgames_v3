@@ -23,6 +23,7 @@ import TermsAndConditions from "../pages/TermsAndConditions.jsx";
 import Adultcategory from "../pages/Adultcategory.jsx";
 import HosterProfile from "../pages/users/Profile.jsx";
 import GameList from "../pages/GamesList.jsx";
+import AllGameList from "../pages/AllGameList.jsx";
 
 //For Admin Panel 
 import Dashboard from "../pages/Dashboard";
@@ -65,6 +66,7 @@ const AppRouter = () => {
       <Route path="/terms-and-conditions" element={<TermsAndConditions />} />
       <Route path="/privacy-policy" element={<PrivacyPolicy />} />
       <Route path="/game-list" element={<GameList />} />
+      <Route path="/all-game-list" element={<AllGameList />} />
  
       <Route path="/withdraw" element={<Withdraw />} />
       <Route path="/hoster-profile" element={<HosterProfile />} />

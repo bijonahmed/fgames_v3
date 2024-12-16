@@ -23,16 +23,25 @@ const GamesList = () => {
     const [responseGameType, setData] = useState([]);
     const [responsePltfrm, setPlatformData] = useState([]);
     const [gametypeId, setGameTypeId] = useState("");
+    const [show_errorcode, set_errorcode] = useState("");
+    const [show_errorMSg, set_errorMessage] = useState("");
+    const [show_pltName, set_pltName] = useState("");
     const { token } = AuthUser();
+    const [showModal, setShowModal] = useState(false);
+
+    const closeModal = () => {
+        setShowModal(false);
+    };
+
     // Function to handle the Axios request and navigation
-    const playPlatformGame = async (slug) => {
+    const playPlatformGame = async (game) => {
         setLoadingPltfrm(true);
         console.log("gametype:", gametypeId);
-        console.log("platType:", slug);
+        console.log("platType:", game.slug);
 
         try {
             const response = await axios.post('/games/platformTypeGames', {
-                platType: slug,
+                platType: game.slug,
                 gameType: gametypeId
             }, {
                 headers: {
@@ -41,23 +50,41 @@ const GamesList = () => {
                 },
             });
 
-            console.log(`reponse url: ${response.data.response_url.data.url}`);
-            if (response.data.success && response.data.response_url.data.url) {
-                window.open(response.data.response_url.data.url, '_blank');
+            if (response.data.status == 200) {
+
+                if (response.data.success && response.data.url) {
+                    console.log(`Response URL: ${response.data.url}`);
+                    window.open(response.data.url, '_blank');
+                } else {
+                    console.error('No URL found in the response');
+                }
+            } else if (response.data.status == 422) {
+
+                const errorCode = response.data.code;
+                const pltName = game.name;
+                const errorMessage = response.data.message || 'An unknown error occurred.';
+                setShowModal(true);
+                set_errorcode(errorCode);
+                set_errorMessage(errorMessage);
+                set_pltName(pltName);
+
+                console.error(`Error Code: ${errorCode}, Message: ${errorMessage}`);
+                //alert(`Error: ${errorMessage} (Code: ${errorCode})`);
             } else {
-                console.error('No URL found in the response');
+                console.error('Unhandled response status:', response.status);
+                alert('An unexpected error occurred. Please try again later.');
             }
 
         } catch (error) {
             console.error('Error sending game data:', error);
-        } finally{
+        } finally {
             setLoadingPltfrm(false);
         }
     };
     const defaultFetch = async () => {
         setLoading(true);
         try {
-            const response = await axios.get(`/public/allGamesType/`);
+            const response = await axios.get(`/public/allGamesType`);
             //console.log("pltfrmData:" + response.data.data);
             setData(response.data.data);
         } catch (error) {
@@ -71,7 +98,7 @@ const GamesList = () => {
         setGameTypeId(game_type_id);
         setLoadingPltfrm(true);
         try {
-            const response = await axios.get('/public/gameTypeWisePlatformList/', {
+            const response = await axios.get('/public/gameTypeWisePlatformList', {
                 params: {
                     game_type_id: game_type_id
                 }
@@ -104,12 +131,9 @@ const GamesList = () => {
         <>
             <Navbar />
 
-            {/* Start */}
             <div>
-                {/* space  */}
+
                 <div style={{ height: 54 }} />
-                {/* navbar end here  */}
-                {/* banner part start here  */}
 
                 <div className="container-fluid">
                     <div className="row">
@@ -174,7 +198,7 @@ const GamesList = () => {
                                         <h1>{user?.name ? user.name : user?.email ? user.email : 'User'}</h1>
                                     </div>
                                     <div>
-                                        <p>$ 00.00 <button><i className="fa-solid fa-arrows-rotate rotate" /></button></p>
+                                        <p>$ 00.00 <button><i className="fa-solid fa-arrows-rotate rotate" onClick={() => platformList(4)} /></button></p>
                                     </div>
                                 </div>
                             </div>
@@ -270,7 +294,7 @@ const GamesList = () => {
                                             <div className="game_pic">
                                                 <Link to="#" onClick={(e) => {
                                                     e.preventDefault(); // Prevent default link behavior
-                                                    playPlatformGame(game.slug);
+                                                    playPlatformGame(game);
                                                 }} className="btn_fav_pop">
                                                     <img
                                                         src={game.imagepath || "/theme_fansgames/images/dimond.png"} // Fallback image if imagepath is empty
@@ -299,6 +323,33 @@ const GamesList = () => {
                     </div>
                 </div>
             </div>
+
+            {/* Modal */}
+            {showModal && (
+                <div
+                    className="modal modal_onload fade show"
+                    id="onloadpopup"
+                    tabIndex="-1"
+                    aria-labelledby="staticBackdropLabel"
+                    aria-hidden="true"
+                    style={{ display: "block", backgroundColor: "rgba(0, 0, 0, 0.5)" }}>
+                    <div className="modal-dialog modal-dialog-centered">
+                        <div className="modal-content h-100">
+                            <div className="modal-body text-center">
+                                <h3>{show_pltName}</h3>
+                                <h4>Error code: {show_errorcode}</h4>
+                                <h4>Response: {show_errorMSg}</h4>
+                            </div>
+                            <div className="modal-footer justify-content-center">
+                                <button onClick={closeModal} className="btn btn-danger">
+                                    Close
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             <Footer />
 
