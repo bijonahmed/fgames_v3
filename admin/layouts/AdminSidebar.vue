@@ -115,6 +115,7 @@ const menuItems = ref([
     children: [
       { label: 'Gaming Type', icon: 'fa-circle', route: '/game/type/list' },
       { label: 'Gaming Platform', icon: 'fa-circle', route: '/game/platform/list' },
+      { label: 'Only Platform', icon: 'fa-circle', route: '/game/onlyplatform/list' },
       { label: 'Games List', icon: 'fa-circle', route: '/game/allgames/list' },
       { label: 'Games List (Translate)', icon: 'fa-circle', route: '/game/allgames/list-translate' },
       { label: 'Player List', icon: 'fa-circle', route: '/game/player/list' },

@@ -157,10 +157,6 @@ const onFileSelected = (event) => {
     file.value = event.target.files[0];
 };
 
-
-
-
-
 const saveData = () => {
   const formData = new FormData();
   formData.append('files', file.value);

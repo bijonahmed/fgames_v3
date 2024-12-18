@@ -45,51 +45,25 @@
                         aria-labelledby="custom-tabs-three-home-tab">
                         <!-- General  -->
                         <div class="row mb-3">
-                          <label for="input-name-1" class="col-sm-2 col-form-label">Name</label>
+                          <label for="input-name-1" class="col-sm-2 col-form-label">Eng. Name</label>
                           <div class="col-sm-10">
-                            <input type="hidden" name="id" placeholder="Name" v-model="insertdata.id"
+                            <input type="text"  placeholder="Name" v-model="insertdata.gameName_en"
                               class="form-control" />
-                            {{ insertdata.name }}
+                              <span class="text-danger" v-if="errors.name">{{ errors . gameName_en[0] }}</span>
                           </div>
                         </div>
-
-                        <div class="row mb-3">
-                          <label for="gameid" class="col-sm-2 col-form-label">Game ID</label>
-                          <div class="col-sm-10"> {{ insertdata.gameid }} </div>
-                        </div>
-
-
-
-                        <div class="row mb-3">
-                          <label for="input-name-1" class="col-sm-2 col-form-label">Platform</label>
-                          <div class="col-sm-10">
-                            {{ insertdata.platform }}
-                          </div>
-                        </div>
-
-
-                        <div class="row mb-3">
-                          <label for="input-name-1" class="col-sm-2 col-form-label">Game Type</label>
-                          <div class="col-sm-10">
-                            {{ insertdata.gametype }}
-                          </div>
-                        </div>
-
 
                         <div class="row mb-3">
                           <label for="input-name-1" class="col-sm-2 col-form-label">Img</label>
                           <div class="col-sm-10">
 
-                            <input type="file" value class="form-control" id="fileInput_1" accept="image/png,image/jpeg"
-                              ref="files" @change="onFileSelected_1" />
-                            <div v-if="previewUrl">
-                              <img :src="previewUrl" alt="Image Preview" style="height:50px;width: 50px;" />
-                            </div>
-
-
-
-
-                            <img :src="insertdata.img" />
+                            <input type="file" value class="form-control" id="fileInput"
+                                                            accept="image/png,image/jpeg" ref="files"
+                                                            @change="onFileSelected" />
+                                                        <span class="text-danger"
+                                                            v-if="errors.files">{{ errors . files[0] }}</span>
+                                                        <img v-if="previewUrl" :src="previewUrl" alt="Preview"
+                                                            class="img-fluids" />
                           </div>
                         </div>
 
@@ -104,7 +78,6 @@
                             <span class="text-danger" v-if="errors.status">{{ errors.status[0] }}</span>
                           </div>
                         </div>
-
 
                         <button type="submit" class="btn btn-success px-5 w-100">
                           <i class="bx bx-check-circle mr-1"></i> Save
@@ -142,25 +115,24 @@ definePageMeta({
   middleware: 'is-logged-out',
 })
 const bg_images = ref(null);
+
 const insertdata = reactive({
   id: '',
-  name: '',
-  gameid: '',
-  platform: '',
-  gametype: '',
+  gameName_en: '',
   img: '',
   status: '',
 });
 // Define a ref to store the HTML content of the editor
 
 const errors = ref({});
-
+const file = ref(null);
 const saveData = () => {
 
   const formData = new FormData();
   formData.append('id', insertdata.id);
+  formData.append('gameName_en', insertdata.gameName_en);
   formData.append('status', insertdata.status);
-  formData.append('bg_images', bg_images.value);
+  formData.append('files', file.value);
 
   axios.post('/games/updateGame', formData, {
     headers: {
@@ -193,19 +165,20 @@ const checkImageDimensionsThunbnail = (file) => {
   reader.readAsDataURL(file);
   //resetInput();
 };
+
 const previewUrl = ref(null);
 
-const previewImage_bg = (event) => {
-  const file = event.target.files[0];
-  previewUrl.value = URL.createObjectURL(file);
-  checkImageDimensionsThunbnail(file);
+const previewImage = (event) => {
+    const file = event.target.files[0];
+    previewUrl.value = URL.createObjectURL(file);
+    //  checkImageDimensionsThunbnail(file);
 };
 
-
-const onFileSelected_1 = (event) => {
-  previewImage_bg(event);
-  bg_images.value = event.target.files[0];
+const onFileSelected = (event) => {
+    previewImage(event)
+    file.value = event.target.files[0];
 };
+
 
 const success_noti = () => {
   //alert("Your data has been successfully inserted.");
@@ -226,16 +199,12 @@ const success_noti = () => {
   });
 };
 
-
 const productrow = () => {
   const id = router.currentRoute.value.query.parameter;
   axios.get(`/games/checkGame/${id}`).then(response => {
     console.log("Preview uirl: " + response.data.images);
     insertdata.id = response.data.id;
-    insertdata.name = response.data.name;
-    insertdata.gameid = response.data.gameid;
-    insertdata.platform = response.data.platform;
-    insertdata.gametype = response.data.gametype;
+    insertdata.gameName_en = response.data.gameName_en;
     previewUrl.value = response.data.images;
     insertdata.status = response.data.status
 

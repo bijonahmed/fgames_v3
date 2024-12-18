@@ -20,7 +20,7 @@ const LeftSideBarComponent = () => {
     }
   };
 
-  
+
   const { content } = useContext(LanguageContext);
 
 
@@ -29,14 +29,6 @@ const LeftSideBarComponent = () => {
       { path: "/", label: "Reels", icon: "/theme_fansgames/images/reels-60.png" },
       { path: "/model-list", label: "Stream", icon: "/theme_fansgames/images/live-streaming.png" },
       { path: "#", label: "Ranking", icon: "/theme_fansgames/images/trophy.png" },
-
-      { path: "/game-list", label: "Video Games", icon: "/theme_fansgames/images/casino (1).png" },
-      { path: "/game-list", label: "Slot Machine Games", icon: "/theme_fansgames/images/casino (1).png" },
-      { path: "/game-list", label: "Lottery Games", icon: "/theme_fansgames/images/casino (1).png" },
-      { path: "/game-list", label: "Sports Games", icon: "/theme_fansgames/images/casino (1).png" },
-      { path: "/game-list", label: "E-sports Games", icon: "/theme_fansgames/images/casino (1).png" },
-      { path: "/game-list", label: "Hunting Games", icon: "/theme_fansgames/images/casino (1).png" },
-      { path: "/game-list", label: "Chess and Cards Games", icon: "/theme_fansgames/images/casino (1).png" },
       { path: "/game-list", label: "Gaming Platform", icon: "/theme_fansgames/images/casino (1).png" },
       { path: "/all-game-list", label: "All Game List", icon: "/theme_fansgames/images/casino (1).png" },
       { path: "wallet.html", label: "Wallet", icon: "/theme_fansgames/images/wallet.png" },
@@ -52,13 +44,6 @@ const LeftSideBarComponent = () => {
       { path: "/model-list", label: "Stream", icon: "/theme_fansgames/images/live-streaming.png" },
       { path: "#", label: "Ranking", icon: "/theme_fansgames/images/trophy.png" },
       { path: "/game-list", label: "Gaming Platform", icon: "/theme_fansgames/images/casino (1).png" },
-      { path: "/game-list", label: "Video Games", icon: "/theme_fansgames/images/casino (1).png" },
-      { path: "/game-list", label: "Slot Machine Games", icon: "/theme_fansgames/images/casino (1).png" },
-      { path: "/game-list", label: "Lottery Games", icon: "/theme_fansgames/images/casino (1).png" },
-      { path: "/game-list", label: "Sports Games", icon: "/theme_fansgames/images/casino (1).png" },
-      { path: "/game-list", label: "E-sports Games", icon: "/theme_fansgames/images/casino (1).png" },
-      { path: "/game-list", label: "Hunting Games", icon: "/theme_fansgames/images/casino (1).png" },
-      { path: "/game-list", label: "Chess and Cards Games", icon: "/theme_fansgames/images/casino (1).png" },
       { path: "/all-game-list", label: "All Game List", icon: "/theme_fansgames/images/casino (1).png" },
       { path: "wallet.html", label: "Wallet", icon: "/theme_fansgames/images/wallet.png" },
       { path: "referal.html", label: "Refer", icon: "/theme_fansgames/images/refferal-transformed-removebg-preview.png" },
@@ -85,48 +70,48 @@ const LeftSideBarComponent = () => {
 
   return (
     <div className="left_index">
-    <div className="top_part">
-      <div className="row">
-        <div className="col-12 ms-auto">
-          <div className="page_links">
-            <h6>Pages</h6>
-            {menuItems.map((item, index) => (
-              <Link
-                key={index}
-                to={item.path}
-                onClick={(e) => {
-                  if (item.onClick) {
-                    e.preventDefault(); // Prevent default navigation for items with actions
-                    item.onClick(); // Execute the associated method
-                  }
-                }}
-              >
-                <img src={item.icon} alt={item.label} /> {item.label}
-              </Link>
-            ))}
-            <h6>Social Links</h6>
-            <div className="index_social">
-              {socialLinks.map((link, index) => (
-                <a
+      <div className="top_part">
+        <div className="row">
+          <div className="col-12 ms-auto">
+            <div className="page_links">
+              <h6>Pages</h6>
+              {menuItems.map((item, index) => (
+                <Link
                   key={index}
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
+                  to={item.path}
+                  onClick={(e) => {
+                    if (item.onClick) {
+                      e.preventDefault(); // Prevent default navigation for items with actions
+                      item.onClick(); // Execute the associated method
+                    }
+                  }}
                 >
-                  <img
-                    src={link.icon}
-                    className="img-fluid"
-                    alt="social icon"
-                  />
-                </a>
+                  <img src={item.icon} alt={item.label} /> {item.label}
+                </Link>
               ))}
+              <h6>Social Links</h6>
+              <div className="index_social">
+                {socialLinks.map((link, index) => (
+                  <a
+                    key={index}
+                    href={link.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    <img
+                      src={link.icon}
+                      className="img-fluid"
+                      alt="social icon"
+                    />
+                  </a>
+                ))}
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-  
+
   );
 };
 

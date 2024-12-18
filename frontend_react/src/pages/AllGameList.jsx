@@ -7,10 +7,11 @@ import axios from "/config/axiosConfig";
 import AuthUser from "../components/AuthUser";
 import { LanguageContext } from "../context/LanguageContext";
 import LeftSideBarComponent from "../components/LeftSideBarComponent";
+import LeftSideBarComponentPlt from "../components/LeftSideBarComponentAlllGames";
 import Loader from "../components/Loader";
-import { Swiper, SwiperSlide } from 'swiper/react';
-import GameSlider from "../components/GameSlider";
-import { Pagination, Autoplay } from 'swiper/modules';
+
+import Carousel from 'react-bootstrap/Carousel';
+
 import { useNavigate } from "react-router-dom";
 
 
@@ -30,19 +31,12 @@ const AllGameList = () => {
     const [show_pltName, set_pltName] = useState("");
     const { token } = AuthUser();
     const [showModal, setShowModal] = useState(false);
+    const [index, setIndex] = useState(0);
 
-    const images = [
-        'https://via.placeholder.com/100x100?text=1',
-        'https://via.placeholder.com/100x100?text=2',
-        'https://via.placeholder.com/100x100?text=3',
-        'https://via.placeholder.com/100x100?text=4',
-        'https://via.placeholder.com/100x100?text=5',
-        'https://via.placeholder.com/100x100?text=6',
-        'https://via.placeholder.com/100x100?text=7',
-        'https://via.placeholder.com/100x100?text=8',
-        'https://via.placeholder.com/100x100?text=9',
-        'https://via.placeholder.com/100x100?text=10',
-    ];
+    const handleSelect = (selectedIndex) => {
+        setIndex(selectedIndex);
+    };
+
     const closeModal = () => {
         setShowModal(false);
     };
@@ -143,33 +137,88 @@ const AllGameList = () => {
 
     return (
         <>
-            <Navbar />
-
-
-
             <div style={{ height: 54 }} />
-
-
             <Navbar />
+
+
             <div className="container-fluid" style={{ minHeight: "100vh" }}>
+
                 <div className="row">
-                    <div className="col-3">
+                    <div className="col-2">
                         <LeftSideBarComponent />
                     </div>
-                    <div className="col-9 mt-4" >
-                    Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
-                    Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
-                    Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
-                    Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
-                    Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
-                    Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
-                    Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
-                    Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
-                    Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
-                    Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
-                    Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
-                    Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
+                    <div className="col-8 mt-4" >
 
+                        <div style={{
+                             display: 'block',
+                             width: '100%',
+                             height: '300px',
+                             borderRadius: '5px',
+                             background: 'linear-gradient(135deg,#aea5f4, // Gradient background',
+                             boxShadow: '0 8px 15px rgba(0, 0, 0, 0.2)', // Subtle shadow
+                             padding: '5px',
+                             overflow: 'hidden'
+
+                        }}>
+                            <Carousel activeIndex={index} onSelect={handleSelect}>
+                                <Carousel.Item interval={1500}>
+                                    <img
+                                        className="d-block w-100"
+                                        src="/theme_fansgames/images/sliders/slider(1).jpg"
+                                        alt="Image One"
+                                        style={{ height: '300px', objectFit: 'cover' }}
+                                    />
+                                    <Carousel.Caption>
+                                        <h3>Label for first slide</h3>
+                                        <p>Sample Text for Image One</p>
+                                    </Carousel.Caption>
+                                </Carousel.Item>
+                                <Carousel.Item interval={500}>
+                                    <img
+                                        className="d-block w-100"
+                                        src="/theme_fansgames/images/sliders/slider(2).jpg"
+                                        alt="Image Two"
+                                        style={{ height: '300px', objectFit: 'cover' }}
+                                    />
+                                    <Carousel.Caption>
+                                        <h3>Label for second slide</h3>
+                                        <p>Sample Text for Image Two</p>
+                                    </Carousel.Caption>
+                                </Carousel.Item>
+
+                                <Carousel.Item interval={500}>
+                                    <img
+                                        className="d-block w-100"
+                                        src="/theme_fansgames/images/sliders/slider(3).jpg"
+                                        alt="Image Two"
+                                        style={{ height: '300px', objectFit: 'cover' }}
+                                    />
+                                    <Carousel.Caption>
+                                        <h3>Label for second slide</h3>
+                                        <p>Sample Text for Image Two</p>
+                                    </Carousel.Caption>
+                                </Carousel.Item>
+
+
+                            </Carousel>
+                        </div>
+                        <br />
+                        Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
+                        Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
+                        Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
+                        Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
+                        Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
+                        Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
+                        Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
+                        Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
+                        Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
+                        Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
+                        Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
+                        Make sure your container has enough space for the images. If necessary, inspect your layout using developer tools to ensure everything is sized correctly.
+
+                    </div>
+                    <div className="col-2">
+                        <LeftSideBarComponentPlt />
                     </div>
 
                 </div>

@@ -34,7 +34,7 @@
 
 
                                 <div class="col-lg-2">
-                                    <input type="text" v-model="searchGameCode" class="form-control"
+                                    <input type="text" v-model="searchGameCode" class="form-control" @keyup="filterData"
                                         placeholder="Search By Game ID" />
                                 </div>
 
@@ -51,7 +51,7 @@
                                 <div class="col-lg-2 col-md-2 col-sm-6 mb-2">
                                     <select v-model="game_platform" class="form-control" @change="filterData">
                                         <option value="">All Game Platform</option>
-                                        <option v-for="gtype in selectedGamePltfrm" :key="gtype.id" :value="gtype.id">
+                                        <option v-for="gtype in selectedGamePltfrm" :key="gtype.id" :value="gtype.slug">
                                             {{ gtype.name }}
                                         </option>
                                     </select>
@@ -82,42 +82,39 @@
                                         <table class="table w-100 table-wrapper">
                                             <thead>
                                                 <tr>
-                                                    <th class="text-left">Name</th>
-                                                    <th class="text-center">Game Code</th>
-                                                    <th class="text-center">Game Type</th>
-                                                    <th class="text-center">Game Platform</th>
-                                                    <th class="text-center">Img</th>
-                                                    <th class="text-center">Status</th>
-                                                    <th class="text-center">Action</th>
+                                                    <th>Platform Type</th>
+                                                    <th>Game Type</th>
+                                                    <th>Ingress</th>
+                                                    <th>Images</th>
+                                                    <th>GameName_zh_hant</th>
+                                                    <th>GameName_zh_hans</th>
+                                                    <th>GameName_en</th>
+                                                    <th>GameCode</th>
+                                                    <th>Status</th>
+                                                   <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr v-for="item in productdata" :key="item.id">
-                                                    <td class="text-left">{{ item.name }}</td>
-                                                    <td class="text-center">{{ item.code }}</td>
-                                                    <td class="text-center">{{ item.game_type }} </td>
-                                                    <td class="text-center">{{ item.game_platfrm }}</td>
-                                                    <td class="text-center">
-                                                        <img :src="item.images ? item.images : '/avatar.png'" alt="Image" /> </td>
-                                                    <td class="text-center">{{ item.status }} </td>
-                                                    <td class="text-center">
+
+                                                <tr v-for="item in productdata" :key="item.gameid">
+                                                    <td>{{ item.platType }}</td>
+                                                    <td>{{ item.gameTypeName }}</td>
+                                                    <td>{{ item.ingressStatus }}</td>
+                                                    <td> <img :src="item.game_images ? item.game_images : '/avatar.png'" alt="Image" /></td>
+                                                    <td>{{ item.gameName_zh_hant }}</td>
+                                                    <td>{{ item.gameName_zh_hans }}</td>
+                                                    <td>{{ item.gameName_en }}</td>
+                                                    <td>{{ item.gameCode }}</td>
+                                                    <td>{{ item.status }}</td>
+												 <td class="text-center">
                                                         <button type="button"><i class="fas fa-edit"
                                                                 @click="edit(item.id)"></i></button>
                                                     </td>
+                                                </tr>
 
-                                                </tr>
+                                                
                                             </tbody>
-                                            <tfoot>
-                                                <tr>
-                                                    <th class="text-left">Name</th>
-                                                    <th class="text-center">Game Code</th>
-                                                    <th class="text-center">Game Type</th>
-                                                    <th class="text-center">Game Platform</th>
-                                                    <th class="text-center">Img</th>
-                                                    <th class="text-center">Status</th>
-                                                    <th class="text-center">Action</th>
-                                                </tr>
-                                            </tfoot>
+                                           
                                         </table>
 
                                         <center>
@@ -158,7 +155,7 @@ definePageMeta({
 const router = useRouter();
 const loading = ref(false);
 const currentPage = ref(1);
-const pageSize = 30;
+const pageSize = 100;
 const totalRecords = ref(0);
 const totalPages = ref(0);
 const game_type = ref('');
@@ -210,8 +207,8 @@ const getGameTypeData = async () => {
 const getGamePltfrmData = async () => {
    // alert("test");
     try {
-        const response = await axios.get(`checkGamesPlatform`);
-        selectedGamePltfrm.value = response.data;
+        const response = await axios.get(`/gamePlatformOnly`);
+        selectedGamePltfrm.value = response.data.data;
 
     } catch (error) {
         console.log(error);

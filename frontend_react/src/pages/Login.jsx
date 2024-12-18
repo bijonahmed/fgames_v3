@@ -58,10 +58,11 @@ const Login = () => {
                 <Link to="/" style={{ textDecoration: 'none' }}><center>Back to home</center></Link>
               </div>
               <div>
+                
                 <form onSubmit={handleSubmit}>
                   <center>{errors.account && <div style={{ color: 'red' }}>{errors.account[0]}</div>}</center>
                   <div>
-                    <label> <label>{content.lvl_sing_up_username || "Username"}</label> </label>
+                    <label> Username </label>
                     <input
                       type="text"
                       name="username"

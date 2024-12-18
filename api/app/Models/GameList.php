@@ -14,10 +14,25 @@ class GameList extends Authenticatable
 {
   use HasApiTokens, HasFactory, Notifiable;
   public $table = "api_gamelist";
-  
+
   protected $fillable = [
-    'gameid', 'name', 'slug', 'game_images', 'platform_id', 'gametype_id','status'
-  ];
+    'platType',
+    'gameType',
+    'gameTypeName',
+    'gameCode',
+    'ingress',
+    'ingressStatus',
+    'gameName_zh_hant',
+    'gameName_zh_hans',
+    'gameName_en',
+    'gameid',
+    'name',
+    'slug',
+    'game_images',
+    'platform_id',
+    'gametype_id',
+    'status',
+];
  
  
 

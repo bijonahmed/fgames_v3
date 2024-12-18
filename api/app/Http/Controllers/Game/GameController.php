@@ -8,6 +8,7 @@ use Helper;
 use Session;
 use Validator;
 use App\Models\User;
+use App\Models\GameList;
 use App\Models\GamesAll;
 use App\Models\GameType;
 use App\Models\ApiConfig;
@@ -16,14 +17,14 @@ use Illuminate\Support\Str;
 use App\Models\GameCategory;
 use App\Models\GamePlatform;
 use Illuminate\Http\Request;
+use App\Models\GamePlatforms;
 use App\Models\GameTypeModel;
 use App\Rules\MatchOldPassword;
+use App\Models\GamePlatformOnly;
 use Illuminate\Http\JsonResponse;
 use App\Models\GamesListTranslate;
 use App\Http\Controllers\Controller;
-use App\Models\GameList;
 use Illuminate\Support\Facades\Hash;
-use App\Models\GamePlatforms;
 
 class GameController extends Controller
 {
@@ -152,14 +153,19 @@ class GameController extends Controller
     {
 
         $validator  = Validator::make($request->all(), [
-            'status'        => 'required',
+            'gameName_en' => 'required',
+            'status'      => 'required',
         ]);
         if ($validator->fails()) {
             return response()->json(['errors' => $validator->errors()], 422);
         }
 
-        if (!empty($request->file('bg_images'))) {
-            $files      = $request->file('bg_images');
+        $data['status']        = $request->status;
+        $data['gameName_en']   = $request->gameName_en;
+
+
+        if (!empty($request->file('files'))) {
+            $files      = $request->file('files');
             $fileName   = Str::random(20);
             $ext        = strtolower($files->getClientOriginalExtension());
             $path       = $fileName . '.' . $ext;
@@ -170,11 +176,50 @@ class GameController extends Controller
             $data['game_images'] = $file_url;
         }
 
-        $data['status'] = $request->status;
         $post           = GamesAll::find($request->id);
         $post->update($data);
         $resdata['id']  = $request->id;
 
+        return response()->json($resdata);
+    }
+
+    public function addonlyGamepltform(Request $request)
+    {
+
+        $validator  = Validator::make($request->all(), [
+            'name'          => 'required',
+            'status'        => 'required',
+            'files'         => 'required',
+        ]);
+        if ($validator->fails()) {
+            return response()->json(['errors' => $validator->errors()], 422);
+        }
+        $slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $request->input('name'))));
+        $data = array(
+            'name'                       => $request->name,
+            'slug'                       => $slug,
+            'status'                     => $request->status,
+        );
+
+        if (!empty($request->file('files'))) {
+            $files = $request->file('files');
+            $fileName = Str::random(20);
+            $ext = strtolower($files->getClientOriginalExtension());
+            $path = $fileName . '.' . $ext;
+            $uploadPath = '/backend/files/';
+            $upload_url = $uploadPath . $path;
+            $files->move(public_path('/backend/files/'), $upload_url);
+            $file_url = $uploadPath . $path;
+            $data['image'] = $file_url;
+        }
+
+        if (empty($request->id)) {
+            $resdata['id']               = GamePlatformOnly::insertGetId($data);
+        } else {
+            $post = GamePlatformOnly::find($request->id);
+            $post->update($data);
+            $resdata['id']               = $request->id;
+        }
         return response()->json($resdata);
     }
 
@@ -240,19 +285,23 @@ class GameController extends Controller
         return response()->json($data);
     }
 
+    public function checkGamePltfm($id)
+    {
+        $rowcheck = GamePlatformOnly::find($id);
+        $imageurl = !empty($rowcheck->image) ? url($rowcheck->image) : "";
+        $data['data']   = $rowcheck;
+        $data['image']  = $imageurl;
+
+        return response()->json($data);
+    }
+
     public function checkGame($id)
     {
-        $rowcheck = GamesAll::where('id', $id)->select('id', 'name', 'game_images', 'gameid', 'platform_id', 'gametype_id', 'status')->first();
-
-        $pltformName =  GamePlatform::where('id', $rowcheck->platform_id)->first();
-        $gameTypeModel =  GameTypeModel::where('id', $rowcheck->gametype_id)->first();
+        $rowcheck = GamesAll::where('id', $id)->first();
 
         $roomData = [
             'id'        => $rowcheck->id,
-            'name'      => $rowcheck->name,
-            'gameid'    => $rowcheck->gameid,
-            'platform'  => !empty($pltformName) ? $pltformName->name : "",
-            'gametype'  => !empty($gameTypeModel) ? $gameTypeModel->name : "",
+            'gameName_en'=> $rowcheck->gameName_en,
             'status'    => $rowcheck->status,
             'images'    => !empty($rowcheck->game_images) ? url($rowcheck->game_images) :  ""
         ];
@@ -297,7 +346,6 @@ class GameController extends Controller
     public function addGameType(Request $request)
     {
 
-
         // dd($request->file('files'));
 
         $validator  = Validator::make($request->all(), [
@@ -317,7 +365,6 @@ class GameController extends Controller
             'gameTypecode'               => $request->gameTypecode,
         );
 
-
         if (!empty($request->file('files'))) {
             $files = $request->file('files');
             $fileName = Str::random(20);
@@ -329,7 +376,6 @@ class GameController extends Controller
             $file_url = $uploadPath . $path;
             $data['image'] = $file_url;
         }
-
 
         if (empty($request->id)) {
             $resdata['id']               = GameTypeModel::insertGetId($data);
@@ -392,13 +438,13 @@ class GameController extends Controller
 
     public function allGamesList(Request $request)
     {
-        //dd($request->all());
+       // dd($request->all());
         $page           = $request->input('page', 1);
         $pageSize       = $request->input('pageSize', 10);
         $searchQuery    = $request->searchQuery;
         $selectedFilter = (int)$request->selectedFilter;
-        $fitlergameytype = (int)$request->game_type;
-        $game_platform  = (int)$request->game_platform;
+        $fitlergameytype= (int)$request->game_type;
+        $game_platform  = $request->game_platform;
         $searchGameCode = $request->searchGameCode;
 
         //images
@@ -409,7 +455,7 @@ class GameController extends Controller
             $query->where('name', 'like', '%' . $searchQuery . '%');
         }
         if ($searchGameCode !== null) {
-            $query->where('gameid', 'like', '%' . $searchGameCode . '%');
+            $query->where('gameCode', 'like', '%' . $searchGameCode . '%');
         }
 
         if (!empty($fitlergameytype)) {
@@ -417,7 +463,8 @@ class GameController extends Controller
         }
 
         if (!empty($game_platform)) {
-            $query->where('platform_id', $game_platform);
+            //$query->where('platType', $game_platform);
+            $query->where('platType', 'like', '%' . $game_platform . '%');
         }
 
         if ($selectedFilter !== null) {
@@ -429,16 +476,85 @@ class GameController extends Controller
         // }
 
         $paginator = $query->paginate($pageSize, ['*'], 'page', $page);
+
         $modifiedCollection = $paginator->getCollection()->map(function ($item) {
             $gtype = GameTypeModel::where('id', $item->gametype_id)->first();
             $pfrm  = GamePlatforms::where('id', $item->platform_id)->first();
+
+            $gametypeId = $item->platType;
+
+            $chkGameType = GameType::where('gameTypecode', $gametypeId)->first();
+            $ingressStatus = '';
+            // Check the value of $item->ingress using if-else statements
+            if ($item->ingress == 1) {
+                $ingressStatus = 'Computer web page';
+            } elseif ($item->ingress == 2) {
+                $ingressStatus = 'Mobile web page';
+            } elseif ($item->ingress == 3) {
+                $ingressStatus = 'Mobile web page';
+            } elseif ($item->ingress == 4) {
+                $ingressStatus = 'Launch in App';
+            } elseif ($item->ingress == 6) {
+                $ingressStatus = 'PC web page';
+            } elseif ($item->ingress == 7) {
+                $ingressStatus = 'Ultimate version';
+            } else {
+                $ingressStatus = 'Unknown'; // Default if no match
+            }
             return [
                 'id'                => $item->id,
-                'code'              => $item->gameid,
-                'name'              => $item->name,
-                'images'            => !empty($item->game_images) ? url($item->game_images) : "",
+                'platType'          => $item->platType ?? "",
+                'gameType'          => $item->gameType ?? "",
+                'gameTypeName'      => $item->gameTypeName ?? "",
+                'gameCode'          => $item->gameCode ?? "",
+                'ingress'           => $item->ingress ?? "",
+                'game_images'       => !empty($item->game_images) ? url($item->game_images) : "" ,
+                'ingressStatus'     => $ingressStatus ?? "",
+                'gameName_zh_hant'  => $item->gameName_zh_hant ?? null,
+                'gameName_zh_hans'  => $item->gameName_zh_hans ?? null,
+                'gameName_en'       => $item->gameName_en ?? null,
+                'status'            => 1,
+                'created_at'        => now(),
+                'updated_at'        => now(),
                 'game_type'         => !empty($gtype) ? $gtype->name : "",
                 'game_platfrm'      => !empty($pfrm) ? $pfrm->name : "",
+                'status'            => $item->status == 1 ? 'Active' : 'Inactive',
+            ];
+        });
+
+        return response()->json([
+            'data' => $modifiedCollection,
+            'current_page' => $paginator->currentPage(),
+            'total_pages' => $paginator->lastPage(),
+            'total_records' => $paginator->total(),
+        ], 200);
+    }
+
+    public function onlyPltformList(Request $request)
+    {
+        $page           = $request->input('page', 1);
+        $pageSize       = $request->input('pageSize', 100);
+        $searchQuery    = $request->searchQuery;
+        $selectedFilter = (int)$request->selectedFilter;
+        $fitlergameytype = (int)$request->game_type_id;
+
+        $query = GamePlatformOnly::orderBy('id', 'desc')
+            ->orderBy('id', 'desc');
+
+        if ($searchQuery !== null) {
+            $query->where('name', 'like', '%' . $searchQuery . '%');
+        }
+
+        if ($selectedFilter !== null) {
+            $query->where('status', $selectedFilter);
+        }
+
+        $paginator = $query->paginate($pageSize, ['*'], 'page', $page);
+        $modifiedCollection = $paginator->getCollection()->map(function ($item) {
+            return [
+                'id'                => $item->id,
+                'name'              => $item->name,
+                'image'             => !empty($item->image) ? url($item->image) : "",
                 'status'            => $item->status == 1 ? 'Active' : 'Inactive',
             ];
         });
@@ -460,8 +576,6 @@ class GameController extends Controller
         $selectedFilter = (int)$request->selectedFilter;
         $fitlergameytype = (int)$request->game_type_id;
 
-
-
         $query = GamePlatform::orderBy('id', 'desc')
             ->orderBy('id', 'desc');
 
@@ -472,7 +586,6 @@ class GameController extends Controller
         if ($selectedFilter !== null) {
             $query->where('status', $selectedFilter);
         }
-
 
         if (!empty($fitlergameytype)) {
             $query->where('game_type_id', $fitlergameytype);
@@ -508,7 +621,6 @@ class GameController extends Controller
         $searchQuery    = $request->searchQuery;
         $selectedFilter = (int)$request->selectedFilter;
         $query = GameType::orderBy('gameTypecode', 'asc');
-
 
         if ($searchQuery !== null) {
             $query->where('name', 'like', '%' . $searchQuery . '%');

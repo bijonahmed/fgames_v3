@@ -8,17 +8,15 @@
     height: 10px;
 }
 
-
 .footer_space {
     height: 65px;
 }
 
-
 .cat.sub_cat.active {
     background-color: #f9f9f9;
-  }
-/* navbar end here ======  */
+}
 
+/* navbar end here ======  */
 
 /* bannar part start here  */
 .bannar {}
@@ -368,10 +366,6 @@ img {
 
 /* gaming part end here  */
 
-
-
- 
-
 .game_footing_button {
     position: fixed;
     right: 10%;
@@ -429,9 +423,6 @@ img {
 
 }
 
-
-
-
 #slot {
     box-sizing: content-box;
     /* border: 35px solid #fdde3f; */
@@ -457,7 +448,6 @@ img {
         background: #c3ad00;
     }
 }
-
 
 .gold {
     color: gold !important;
@@ -506,11 +496,6 @@ div.modal-header {
     /* padding: 20px 0px; */
 }
 
-
-
-
-
-
 .game_bannar {
     position: relative;
     min-height: 100vh;
@@ -554,12 +539,6 @@ div.modal-header {
     height: 136%;
     transform: translateX(-50%);
 }
-
-
-
-
-
-
 
 .balance_btns {
 
@@ -838,8 +817,6 @@ div.modal-header {
 
 /* top 10 part end here  */
 
-
-
 /* slider css part start here  */
 
 @-webkit-keyframes scroll {
@@ -1030,7 +1007,6 @@ div.modal-header {
     margin-top: 5px !important;
 }
 
-
 /* game list new  */
 .game_part_new {
     display: grid;
@@ -1215,4 +1191,434 @@ div.modal-header {
 
 .modal.modal_onload {}
 
- 
+/* gamelist */
+/* gamelist */
+.game_pic {
+    position: relative;
+
+    margin: 5px;
+    overflow: hidden;
+    border-radius: 12px;
+    /* Rounded corners */
+
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+}
+
+.game_pic:hover {
+    transform: translateY(-5px);
+    /* Slight lift effect on hover */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+    /* Enhanced shadow on hover */
+}
+
+.image-wrapper {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    text-align: center;
+}
+
+.imgFluid {
+    display: block;
+    width: 100%;
+    height: auto;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.image-wrapper:hover .imgFluid {
+    transform: scale(1.05);
+    /* Slight zoom effect on hover */
+    filter: brightness(85%);
+    /* Slightly darkens the image */
+}
+
+.hover-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.75);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.4rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.image-wrapper:hover .hover-overlay {
+    opacity: 1;
+    /* Shows overlay on hover */
+}
+
+.game-title {
+    margin: 0;
+    position: absolute;
+    bottom: 10px;
+    /* Position the title at the bottom of the box */
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    /* Hide title by default */
+    transition: opacity 0.3s ease;
+}
+
+.image-wrapper:hover .game-title {
+    opacity: 1;
+    /* Show title on hover */
+}
+
+/* gamesList */
+
+/* Popup ============================== */
+.login_popup {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100vh;
+    background: #000000db;
+    z-index: 10;
+    display: none;
+}
+
+.login_content {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    background-image: linear-gradient(45deg, #7565f38a, #cfcafb4a, #c4bdfa61);
+}
+
+.user_icon {
+
+    height: 100px;
+    width: 100px;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #7b6ee4;
+    border-radius: 50px;
+    box-shadow: 2px 3px 5px 3px #d2d2d2fc;
+    box-shadow: 5px 5px 10px #f5f5f5,
+    -5px -5px 10px #ffffff;
+
+    color: #fff;
+}
+
+.user_icon i {
+
+    font-size: 50px;
+}
+
+.login_content form {}
+
+.login_content form label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.login_content form input {
+
+    border-radius: 20px;
+    box-shadow: 2px 2px 3px rgba(55, 84, 170, .15), inset 0px 0px 4px rgba(255, 255, 255, 0), inset 7px 7px 15px rgba(55, 84, 170, .15), inset -7px -7px 20px rgba(255, 255, 255, 1), 0px 0px 4px rgba(255, 255, 255, .2) !important;
+    padding: 5px 20px;
+    padding-left: 35px;
+}
+
+.login_content form input:focus {}
+
+
+
+/* Modal Styles */
+.modal {
+    display: block !important; /* Ensure modal is visible */
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+}
+
+.modal-dialog {
+    max-width: 500px;
+    margin: 10% auto; /* Center the modal */
+}
+
+.modal-content {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: none;
+}
+
+.modal-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+}
+
+.modal-body {
+    padding-top: 10px;
+}
+
+/* Form Inputs Styling */
+.input_group {
+    margin-bottom: 15px;
+}
+
+.input_group label {
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.input_group input {
+    padding: 10px;
+    font-size: 1rem;
+    width: 100%;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+}
+
+.input_group i {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 1.2rem;
+}
+
+/* Button Styles */
+.btn_close {
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.btn_login {
+    background-color: #007bff;
+    color: white;
+    font-size: 1.2rem;
+    padding: 10px 15px;
+    border-radius: 4px;
+    border: none;
+    width: 100%;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+.btn_login:hover {
+    background-color: #0056b3;
+}
+
+.btn-secondary {
+    background-color: #6c757d;
+    color: white;
+    font-size: 1rem;
+    padding: 8px 12px;
+    border-radius: 4px;
+    border: none;
+}
+
+.text-center a {
+    text-decoration: none;
+    color: #007bff;
+    font-size: 0.9rem;
+}
+
+.text-center a:hover {
+    text-decoration: underline;
+}
+
+/* Eye Icon */
+.show_pass {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+}
+
+
+/* General Modal Styling */
+.login_popup_test {
+    display: block;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 999;
+    overflow: hidden;
+}
+
+.login_content_test {
+    max-width: 500px;
+    background-color: white;
+    margin: 10% auto;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Form input fields */
+.input_group {
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.input_group label {
+    display: block;
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.input_group input {
+    width: 100%;
+    padding: 10px 40px 10px 10px; /* Add extra space on the right for the eye icon */
+    font-size: 1rem;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+}
+
+/* Styling for the eye icon */
+.input_group i.fa-eye {
+    position: absolute;
+    top: 50%;
+    right: 10px; /* Position the eye icon 10px from the right side */
+    transform: translateY(-50%);
+    font-size: 1.2rem;
+    cursor: pointer;
+    z-index: 2;
+}
+
+/* Styling for the eye icon */
+.show_pass {
+    font-size: 1.2rem;
+    color: #007bff; /* Eye icon color */
+}
+
+.show_pass:hover {
+    color: #0056b3;
+}
+
+/* Remember Password */
+.d-flex {
+    margin-bottom: 15px;
+}
+
+.d-flex input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.d-flex label {
+    font-size: 0.9rem;
+}
+
+/* Button Styling */
+.btn_login {
+    width: 100%;
+    padding: 12px;
+    font-size: 1.2rem;
+    background-color: #007bff;
+    color: white;
+    border-radius: 4px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.btn_login:hover {
+    background-color: #0056b3;
+}
+
+/* Link Styling */
+.text-center a {
+    color: #007bff;
+    font-size: 0.9rem;
+    text-decoration: none;
+}
+
+.text-center a:hover {
+    text-decoration: underline;
+}
+
+/* Fixing close icon position */
+.btn-close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+
+/* new login code */
+/* Input group container */
+.input_group {
+    position: relative;
+    margin-bottom: 25px; /* Add more space between input groups */
+}
+
+.input_group label {
+    display: block;
+    font-size: 1.1rem; /* Slightly larger label font */
+    font-weight: bold;
+    margin-bottom: 8px; /* Add some space below the label */
+    color: #333; /* Darker text color for better readability */
+}
+
+/* Input fields styling */
+.input_group input {
+    width: 100%;
+    padding: 12px 15px 12px 45px; /* Increase padding for a more spacious look */
+    font-size: 1rem;
+    border-radius: 8px; /* Softer rounded corners */
+    border: 1px solid #ddd; /* Subtle border */
+    background-color: #f9f9f9; /* Light background for better focus */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1); /* Add a slight inner shadow */
+    transition: all 0.3s ease; /* Smooth focus effect */
+}
+
+.input_group input:focus {
+    border-color: #007bff; /* Highlight border on focus */
+    background-color: #fff; /* White background on focus */
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Glow effect */
+}
+
+/* Icons inside the input fields */
+.input_group i {
+    position: absolute;
+    top: 50%;
+    left: 15px; /* Adjust icon spacing from the left */
+    transform: translateY(-50%);
+    font-size: 1.4rem; /
+}
+
+.col-lg-1-5 {
+    flex: 0 0 12.5%; /* 100% / 8 */
+    max-width: 12.5%;
+}

@@ -21,6 +21,8 @@ class GamesAll extends Authenticatable
     'gameid',
     'game_images',
     'gametype_id',
+    'platType',
+    'gameName_en',
     'platform_id',
     'game_type',
     'status',

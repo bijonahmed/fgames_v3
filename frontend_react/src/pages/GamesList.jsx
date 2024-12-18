@@ -12,6 +12,7 @@ import { LanguageContext } from "../context/LanguageContext";
 import '../components/css/GameList.css'; // Import your CSS file
 import { Carousel } from 'react-bootstrap';
 import Loader from "../components/Loader";
+import $ from 'jquery';
 const GamesList = () => {
 
     const { user } = AuthUser();
@@ -28,10 +29,55 @@ const GamesList = () => {
     const [show_pltName, set_pltName] = useState("");
     const { token } = AuthUser();
     const [showModal, setShowModal] = useState(false);
+    const [username, setUsername] = useState("");
+    const [password, setPassword] = useState("");
+    const [errors, setErrors] = useState({});
+    const { http, setToken } = AuthUser();
 
-    const closeModal = () => {
-        setShowModal(false);
+
+
+    const [isModalOpen, setIsModalOpen] = useState(false);
+
+    // Function to open the modal
+    const openModal = () => setIsModalOpen(true);
+
+    // Function to close the modal
+    const closeModal = () => setIsModalOpen(false);
+
+
+
+    // Function to handle login
+    const userLogin = () => {
+        // Your login logic here
+        console.log('User logged in');
+        closeModal(); // Close modal after login (optional)
     };
+    const handleUsernameChange = (e) => {
+        setUsername(e.target.value);
+    };
+
+    const handlePasswordlChange = (e) => {
+        setPassword(e.target.value);
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await http.post("/auth/userLogin", { username, password });
+            setToken(response.data.user, response.data.access_token);
+            navigate("/"); // Adjust the navigation path as needed
+        } catch (error) {
+            const fieldErrors = error.response?.data.errors || {};
+            setErrors({
+                general: fieldErrors.account
+                    ? fieldErrors.account[0]
+                    : "Invalid username or password.",
+                ...fieldErrors,
+            });
+        }
+    };
+
 
     // Function to handle the Axios request and navigation
     const playPlatformGame = async (game) => {
@@ -122,6 +168,24 @@ const GamesList = () => {
     };
 
     useEffect(() => {
+
+
+
+
+
+
+
+
+
+        // Open the modal when the "Login" button is clicked
+        // $('.btn_login_popup').click(function () {
+        //     $('.login_popup').fadeIn(); // Show the modal
+        // });
+        // // Close the modal when the close button (fa-x) is clicked
+        // $('.btn_close').click(function () {
+        //     $('.login_popup').fadeOut(); // Hide the modal
+        // });
+
         defaultFetch();
         handleGameTypeClick(4);
         platformList(4);
@@ -177,10 +241,10 @@ const GamesList = () => {
                             <i className="fa-solid fa-volume-high" />
                         </div>
                         <div>
-                            <p>
-                                <marquee behavior="scroll" scrollamount={5} direction="left">Lorem ipsum dolor sit amet consectetur
-                                    adipisicing elit. Unde, neque! </marquee>
-                            </p>
+
+                            <marquee behavior="scroll" scrollamount={5} direction="left">Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Unde, neque! </marquee>
+
                         </div>
                         <div>
                             <a href="#"><i className="fa-solid fa-list" />Lorem</a>
@@ -198,7 +262,7 @@ const GamesList = () => {
                                         <h1>{user?.name ? user.name : user?.email ? user.email : 'User'}</h1>
                                     </div>
                                     <div>
-                                        <p>$ 00.00 <button><i className="fa-solid fa-arrows-rotate rotate" onClick={() => platformList(4)} /></button></p>
+                                        <div>$ 00.00 <button><i className="fa-solid fa-arrows-rotate rotate" onClick={() => platformList(4)} /></button></div>
                                     </div>
                                 </div>
                             </div>
@@ -254,7 +318,7 @@ const GamesList = () => {
                                     <div>
                                         {/* Show loading spinner or any loader */}
                                         {loading ? (
-                                            <p>Loading.....</p>
+                                            <div>Loading.....</div>
                                         ) : (
                                             responseGameType.map((gameType) => (
                                                 <div
@@ -278,36 +342,56 @@ const GamesList = () => {
                             </div>
                         </div> {/*cat part end here */}
                         <div className="col-9 ">
+                            {/* <button className="btn btn-primary" onClick={openModal}>
+                                Login
+                            </button> */}
                             {/*Games part start here */}
                             <div className="row mt-3 px-3" style={{ borderRadius: 5 }}>
                                 <div className="game_icon text-center py-2" style={{ backgroundImage: 'linear-gradient(to bottom, rgba(239,229,253,1) 0%,rgba(195,169,243,1) 100%)' }}>
                                     <h6>{showPltformNameName}</h6>
 
                                 </div>
-                                <center> {pltfrmLoading && <p><Loader />Loading.....</p>}</center>
+                                <div className="loader-container">
+                                    {pltfrmLoading && (
+                                        <>
+                                            <Loader />
+                                            <span>Loading.....</span>
+                                        </>
+                                    )}
+                                </div>
                             </div>
                             <div className="scrollTwo mt-3">
                                 <div className=" game_part_new mt-0">
-
                                     {responsePltfrm.map((game) => (
-                                        <div key={game.id}>
+                                        <div key={game.id} className="game-container">
                                             <div className="game_pic">
-                                                <Link to="#" onClick={(e) => {
-                                                    e.preventDefault(); // Prevent default link behavior
-                                                    playPlatformGame(game);
-                                                }} className="btn_fav_pop">
-                                                    <img
-                                                        src={game.imagepath || "/theme_fansgames/images/dimond.png"} // Fallback image if imagepath is empty
-                                                        loading="lazy"
-                                                        alt={game.name}
-                                                        className="img-fluid" />
+                                                <Link to="#" className="btn_fav_pop">
+                                                    <div className="image-wrapper">
+                                                        <img
+                                                            src={game.imagepath || "/theme_fansgames/images/dimond.png"} // Fallback image if imagepath is empty
+                                                            loading="lazy"
+                                                            alt={game.name}
+                                                            className="imgFluid"
+                                                        />
+                                                        <div className="hover-overlay">
+                                                            {token ? (
+                                                                <span
+                                                                    onClick={(e) => {
+                                                                        e.preventDefault();
+                                                                        playPlatformGame(game); // Call play function
+                                                                    }}>
+                                                                    Play
+                                                                </span>
+                                                            ) : (
+                                                                <span onClick={openModal}>Login</span>
+                                                            )}
+                                                        </div>
+
+                                                    </div>
                                                 </Link>
-
                                             </div>
-                                            <p className="text-center mb-1">{game.name}</p>
-
+                                            <h5 className="text-center mb-1" style={{ textAlign: 'center' }}><center>{game.name}</center></h5>
                                         </div>
-
                                     ))}
 
                                 </div>
@@ -317,11 +401,11 @@ const GamesList = () => {
                 </div>
                 {/* gaming part end here  */}
                 {/* -=========footer start ========-  */}
-                <div className="container">
+                {/* <div className="container">
                     <div className="row ">
                         <div className="col-md-12" style={{ height: 70 }} />
                     </div>
-                </div>
+                </div> */}
             </div>
 
             {/* Modal */}
@@ -345,6 +429,110 @@ const GamesList = () => {
                                     Close
                                 </button>
 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
+
+
+            {/* Login Popup Modal */}
+            {/* Modal (Bootstrap modal) */}
+            {isModalOpen && (
+                <div
+                    className="modal fade show"
+                    tabIndex="-1"
+                    role="dialog"
+                    aria-labelledby="loginModal"
+                    aria-hidden="true"
+                    style={{ display: 'block' }} // Ensures the modal is shown
+                >
+                    <div className="modal-dialog" role="document">
+                        <div className="modal-content">
+                            <div className="modal-header">
+                                <h5 className="modal-title" id="loginModal">
+                                    Login
+                                </h5>
+                                <button
+                                    type="button"
+                                    className="btn-close"
+                                    onClick={closeModal}
+                                    aria-label="Close"
+                                >
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div className="modal-body">
+                                {/* Login form */}
+                                <div className="">
+                                    <div className="">
+                                        <div className="user_icon">
+                                            <i className="fa-solid fa-user "></i>
+                                        </div>
+                                        <form action="" method="">
+                                            {/* Username Field */}
+                                            <div className="input_group">
+                                                <i className="fa-solid fa-user"></i>
+                                                <label htmlFor="User_name">User Name</label>
+
+                                                <input
+                                                    type="text"
+                                                    id="User_name"
+                                                    className="form-control"
+                                                    placeholder="Enter your username"
+                                                />
+
+                                            </div>
+
+                                            {/* Password Field */}
+                                            <div className="input_group">
+                                                <label htmlFor="password">Password</label>
+                                                <i className="fa-solid fa-lock"></i>
+                                                <input
+                                                    type="password"
+                                                    id="password"
+                                                    className="form-control"
+                                                    placeholder="Enter your password"
+                                                />
+
+                                            </div>
+
+                                            {/* Remember Password */}
+                                            <div className="d-flex justify-content-between">
+                                                <div>
+                                                    <input type="checkbox" id="save_pass" />
+                                                    <label htmlFor="save_pass">Remember Password</label>
+                                                </div>
+                                            </div>
+
+                                            {/* Buttons */}
+                                            <button
+                                                type="button"
+                                                className="btn_login"
+                                                onClick={userLogin}
+                                            >
+                                                Login
+                                            </button>
+                                            <div className="text-center mt-2">
+                                                <a href="forgetpass.html">Forget Password?</a>
+                                            </div>
+                                            <div className="text-center">
+                                                <a href="register.html">Don't have an account? Sign Up</a>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Modal Footer */}
+                            <div className="modal-footer">
+                                <button
+                                    type="button"
+                                    className="btn btn-secondary"
+                                    onClick={closeModal}
+                                >
+                                    Close
+                                </button>
                             </div>
                         </div>
                     </div>

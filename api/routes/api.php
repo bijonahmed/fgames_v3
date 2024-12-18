@@ -47,6 +47,7 @@ Route::post('/luck/balance/get_balance', [SessionVerificationController::class, 
 
 Route::get('checkGamesPlatform', [GameApiController::class, 'allGamesPltfrmData']);
 Route::get('api_gameList', [GameApiController::class, 'gameList']);
+Route::get('gamePlatformOnly', [GameApiController::class, 'gamePlatformOnly']);
 Route::get('api_gameCategory', [GameApiController::class, 'GameCategory']);
 Route::get('api_getGames', [GameApiController::class, 'getgame']);
 Route::get('api_checkgamerow', [GameApiController::class, 'gameRow']);
@@ -275,9 +276,13 @@ Route::middleware(['auth:api', CheckUserStatus::class])->group(function () {
             Route::get('allGamesList', [Gcontroller::class, 'allGamesList']);
             Route::get('allGamesListTranslate', [GameController::class, 'allGamesListTranslate']);
             Route::post('addGameCategory', [Gcontroller::class, 'addGameCategory']);
+            Route::post('addonlyGamepltform', [Gcontroller::class, 'addonlyGamepltform']);
             Route::get('allGameCategoryList', [Gcontroller::class, 'allGameCategoryList']);
+            Route::get('onlyPltformList', [Gcontroller::class, 'onlyPltformList']);
+
             Route::get('checkGameType/{id}', [Gcontroller::class, 'checkGameTypeRow']);
             Route::get('checkGameCategory/{id}', [Gcontroller::class, 'checkGameCategory']);
+            Route::get('checkGamePltfm/{id}', [Gcontroller::class, 'checkGamePltfm']);
             Route::get('checkGame/{id}', [Gcontroller::class, 'checkGame']);
             Route::get('allgametype', [Gcontroller::class, 'allGameType']);
             Route::post('addGameType', [Gcontroller::class, 'addGameType']);
