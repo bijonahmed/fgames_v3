@@ -35,12 +35,13 @@ const Index = () => {
       <div>
         <FullScreenDarkMode />
         <div className="container-fluid p-0" style={{ minHeight: "100vh" }}>
-          <Navbar />
-          <div style={{ height: 50 }} />
-          <button type="button" className="btn btn-primary d-none" data-bs-toggle="modal" data-bs-target="#log_modal">
-            Modal
-          </button>
-          <div className="row m-auto justify-content-center p-0 m-0">
+          <div className="row">
+            <div className="col-md-12">
+            <Navbar />
+            </div>
+          </div>
+          {/* <div style={{ height: 50 }} /> */}
+          <div className="row m-auto justify-content-center">
             <div className="col-md-4 tablet_view_home ">
               <LeftSideBarComponent />
             </div>
@@ -50,8 +51,6 @@ const Index = () => {
           </div>
         </div>
         <Footer />
-
-        
       </div>
     </div>
   );

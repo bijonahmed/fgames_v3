@@ -45,3 +45,70 @@
   height: 100%;
   object-fit: cover; /* Ensure the video fills the container */
 }
+/* Apply negative margin-top to the component */
+.mt-neg-20 {
+  margin-top: -40px;
+}
+
+/* previous arrow */
+
+.swiper-container {
+  position: relative;
+  height: 100vh;
+  width: 100%;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 30px;
+  z-index: 10;
+  color: #fff;
+  background-color: rgba(0, 0, 0, 0.6); /* Semi-transparent background */
+  border-radius: 50%;
+  padding: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-button-prev {
+  left: 10px;
+}
+
+.swiper-button-next {
+  right: 10px;
+}
+
+/* Add hover effect */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  background-color: rgba(0, 0, 0, 0.8); /* Darker background on hover */
+  transform: translateY(-50%) scale(1.1); /* Slight zoom effect */
+}
+
+/* Font Awesome arrow styles */
+.swiper-button-prev i,
+.swiper-button-next i {
+  font-size: 24px; /* Adjust icon size */
+}
+
+/* Optional: Add shadow to the buttons */
+.swiper-button-prev,
+.swiper-button-next {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Optional: Adjust video styling */
+.video-rounded {
+  border-radius: 10px;
+ 
+}
+.swiper-container.position-relative .swiper-button-prev,.swiper-container.position-relative .swiper-button-next{
+  /* top: 50%;
+  transform: translateY(-50%); */
+}

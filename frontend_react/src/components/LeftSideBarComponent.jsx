@@ -29,8 +29,8 @@ const LeftSideBarComponent = () => {
       { path: "/", label: "Reels", icon: "/theme_fansgames/images/reels-60.png" },
       { path: "/model-list", label: "Stream", icon: "/theme_fansgames/images/live-streaming.png" },
       { path: "#", label: "Ranking", icon: "/theme_fansgames/images/trophy.png" },
-      { path: "/game-list", label: "Gaming Platform", icon: "/theme_fansgames/images/casino (1).png" },
-      { path: "/all-game-list", label: "All Game List", icon: "/theme_fansgames/images/casino (1).png" },
+      { path: "/game-list", label: "Games", icon: "/theme_fansgames/images/casino (1).png" },
+      { path: "/all-platform-list", label: "Gaming Platform", icon: "/theme_fansgames/images/casino (1).png" },
       { path: "wallet.html", label: "Wallet", icon: "/theme_fansgames/images/wallet.png" },
       { path: "referal.html", label: "Refer", icon: "/theme_fansgames/images/refferal-transformed-removebg-preview.png" },
       { path: "affiliate.html", label: "Affiliate", icon: "/theme_fansgames/images/affiliate-60.png" },
@@ -43,8 +43,8 @@ const LeftSideBarComponent = () => {
       { path: "/", label: "Reels", icon: "/theme_fansgames/images/reels-60.png" },
       { path: "/model-list", label: "Stream", icon: "/theme_fansgames/images/live-streaming.png" },
       { path: "#", label: "Ranking", icon: "/theme_fansgames/images/trophy.png" },
-      { path: "/game-list", label: "Gaming Platform", icon: "/theme_fansgames/images/casino (1).png" },
-      { path: "/all-game-list", label: "All Game List", icon: "/theme_fansgames/images/casino (1).png" },
+      { path: "/game-list", label: "Games", icon: "/theme_fansgames/images/casino (1).png" },
+      { path: "/all-platform-list", label: "Gaming Platform", icon: "/theme_fansgames/images/casino (1).png" },
       { path: "wallet.html", label: "Wallet", icon: "/theme_fansgames/images/wallet.png" },
       { path: "referal.html", label: "Refer", icon: "/theme_fansgames/images/refferal-transformed-removebg-preview.png" },
       { path: "affiliate.html", label: "Affiliate", icon: "/theme_fansgames/images/affiliate-60.png" },
@@ -69,7 +69,10 @@ const LeftSideBarComponent = () => {
   }, []); // Dependency array includes slug and currentPage
 
   return (
-    <div className="left_index">
+    <div className="left_index" style={{ 
+      marginTop: "60px" ,
+      marginLeft: "30px",
+      marginRight: "30px" }}>
       <div className="top_part">
         <div className="row">
           <div className="col-12 ms-auto">

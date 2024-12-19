@@ -15,7 +15,7 @@ const GameSlider = () => {
   const defaultFetch = async () => {
     try {
 
-      const response = await axios.get(`/public/categoryWiseGames/${slug}`);
+     // const response = await axios.get(`/public/categoryWiseGames/${slug}`);
       // const response = await axios.get(`/public/categoryWiseGames/`, {
       //   params: { 
       //     language: language,
@@ -23,7 +23,7 @@ const GameSlider = () => {
       //   }, // Pass the selected language (e.g., 'bn', 'en')
       // });
 
-      setData(response.data.data); // Set the video data
+     // setData(response.data.data); // Set the video data
       //setTotalPages(response.data.last_page); // Get total pages from response
     } catch (error) {
       console.error("Error Data:", error);
@@ -36,7 +36,7 @@ const GameSlider = () => {
   }, [language, slug]); // Dependency array includes slug and currentPage
 
   return (
-    <div className="col-xl-4 col-lg-4 col-md-4  desktop_view">
+    <div className="col-xl-4 col-lg-4 col-md-4 desktop_view p-0 mt-neg-20">
               <div className="here " style={{ height: '80vh' }}>
                 <div className="right_index">
                   <div className="premium_games">

@@ -301,7 +301,7 @@ class GameController extends Controller
 
         $roomData = [
             'id'        => $rowcheck->id,
-            'gameName_en'=> $rowcheck->gameName_en,
+            'gameName_en' => $rowcheck->gameName_en,
             'status'    => $rowcheck->status,
             'images'    => !empty($rowcheck->game_images) ? url($rowcheck->game_images) :  ""
         ];
@@ -438,12 +438,12 @@ class GameController extends Controller
 
     public function allGamesList(Request $request)
     {
-       // dd($request->all());
+        // dd($request->all());
         $page           = $request->input('page', 1);
         $pageSize       = $request->input('pageSize', 10);
         $searchQuery    = $request->searchQuery;
         $selectedFilter = (int)$request->selectedFilter;
-        $fitlergameytype= (int)$request->game_type;
+        $fitlergameytype = (int)$request->game_type;
         $game_platform  = $request->game_platform;
         $searchGameCode = $request->searchGameCode;
 
@@ -471,9 +471,6 @@ class GameController extends Controller
             $query->where('status', $selectedFilter);
         }
 
-        // if ($searchGameCode !== null) {
-        //     $query->where('game_code', 'like', '%' . $searchGameCode . '%');
-        // }
 
         $paginator = $query->paginate($pageSize, ['*'], 'page', $page);
 
@@ -508,7 +505,7 @@ class GameController extends Controller
                 'gameTypeName'      => $item->gameTypeName ?? "",
                 'gameCode'          => $item->gameCode ?? "",
                 'ingress'           => $item->ingress ?? "",
-                'game_images'       => !empty($item->game_images) ? url($item->game_images) : "" ,
+                'game_images'       => !empty($item->game_images) ? url($item->game_images) : "",
                 'ingressStatus'     => $ingressStatus ?? "",
                 'gameName_zh_hant'  => $item->gameName_zh_hant ?? null,
                 'gameName_zh_hans'  => $item->gameName_zh_hans ?? null,
@@ -529,6 +526,9 @@ class GameController extends Controller
             'total_records' => $paginator->total(),
         ], 200);
     }
+
+
+
 
     public function onlyPltformList(Request $request)
     {

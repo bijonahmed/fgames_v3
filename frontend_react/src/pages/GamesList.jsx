@@ -12,6 +12,7 @@ import { LanguageContext } from "../context/LanguageContext";
 import '../components/css/GameList.css'; // Import your CSS file
 import { Carousel } from 'react-bootstrap';
 import Loader from "../components/Loader";
+import Swal from 'sweetalert2'
 import $ from 'jquery';
 const GamesList = () => {
 
@@ -43,30 +44,34 @@ const GamesList = () => {
 
     // Function to close the modal
     const closeModal = () => setIsModalOpen(false);
-
+    const closeModalWorningMsg = () => setShowModal(false);
 
 
     // Function to handle login
-    const userLogin = () => {
-        // Your login logic here
-        console.log('User logged in');
-        closeModal(); // Close modal after login (optional)
-    };
-    const handleUsernameChange = (e) => {
-        setUsername(e.target.value);
-    };
-
-    const handlePasswordlChange = (e) => {
-        setPassword(e.target.value);
-    };
-
-    const handleSubmit = async (e) => {
+    const userLogin = async (e) => {
         e.preventDefault();
-
         try {
             const response = await http.post("/auth/userLogin", { username, password });
             setToken(response.data.user, response.data.access_token);
-            navigate("/"); // Adjust the navigation path as needed
+            navigate("/game-list"); // Adjust the navigation path as needed
+            console.log("Login Successfully");
+            const Toast = Swal.mixin({
+                toast: true,
+                position: "top-end",
+                showConfirmButton: false,
+                timer: 3000,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                    toast.onmouseenter = Swal.stopTimer;
+                    toast.onmouseleave = Swal.resumeTimer;
+                }
+            });
+            Toast.fire({
+                icon: "success",
+                title: "Signed in successfully"
+            });
+            location.reload();
+            closeModal();
         } catch (error) {
             const fieldErrors = error.response?.data.errors || {};
             setErrors({
@@ -76,9 +81,15 @@ const GamesList = () => {
                 ...fieldErrors,
             });
         }
+
+    };
+    const handleUsernameChange = (e) => {
+        setUsername(e.target.value);
     };
 
-
+    const handlePasswordlChange = (e) => {
+        setPassword(e.target.value);
+    };
     // Function to handle the Axios request and navigation
     const playPlatformGame = async (game) => {
         setLoadingPltfrm(true);
@@ -168,24 +179,6 @@ const GamesList = () => {
     };
 
     useEffect(() => {
-
-
-
-
-
-
-
-
-
-        // Open the modal when the "Login" button is clicked
-        // $('.btn_login_popup').click(function () {
-        //     $('.login_popup').fadeIn(); // Show the modal
-        // });
-        // // Close the modal when the close button (fa-x) is clicked
-        // $('.btn_close').click(function () {
-        //     $('.login_popup').fadeOut(); // Hide the modal
-        // });
-
         defaultFetch();
         handleGameTypeClick(4);
         platformList(4);
@@ -393,12 +386,21 @@ const GamesList = () => {
                                             <h5 className="text-center mb-1" style={{ textAlign: 'center' }}><center>{game.name}</center></h5>
                                         </div>
                                     ))}
-
+                                   
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
+
+
+
+
+
+
+
+
                 {/* gaming part end here  */}
                 {/* -=========footer start ========-  */}
                 {/* <div className="container">
@@ -425,7 +427,7 @@ const GamesList = () => {
                                 <h4>Response: {show_errorMSg}</h4>
                             </div>
                             <div className="modal-footer justify-content-center">
-                                <button onClick={closeModal} className="btn btn-danger">
+                                <button onClick={closeModalWorningMsg} className="btn btn-danger">
                                     Close
                                 </button>
 
@@ -469,55 +471,43 @@ const GamesList = () => {
                                         <div className="user_icon">
                                             <i className="fa-solid fa-user "></i>
                                         </div>
-                                        <form action="" method="">
+                                        <form onSubmit={userLogin}>
+                                            <center>{errors.account && <div style={{ color: 'red' }}>{errors.account[0]}</div>}</center>
                                             {/* Username Field */}
                                             <div className="input_group">
                                                 <i className="fa-solid fa-user"></i>
                                                 <label htmlFor="User_name">User Name</label>
 
-                                                <input
-                                                    type="text"
-                                                    id="User_name"
-                                                    className="form-control"
-                                                    placeholder="Enter your username"
-                                                />
-
+                                                <input type="text" id="User_name" className="form-control" placeholder="Enter your username" value={username} onChange={handleUsernameChange} />
+                                                <center><small>{errors.username && (<div style={{ color: "red" }}>{errors.username[0]}</div>)}</small></center>
                                             </div>
 
                                             {/* Password Field */}
                                             <div className="input_group">
                                                 <label htmlFor="password">Password</label>
+
                                                 <i className="fa-solid fa-lock"></i>
-                                                <input
-                                                    type="password"
-                                                    id="password"
-                                                    className="form-control"
-                                                    placeholder="Enter your password"
-                                                />
-
+                                                <input type="password" id="password" className="form-control" placeholder="Enter your password" value={password} onChange={handlePasswordlChange} />
+                                                <center><small>{errors.password && (
+                                                    <div className="error" style={{ color: "red" }}>
+                                                        {errors.password[0]}
+                                                    </div>
+                                                )}</small></center>
                                             </div>
 
-                                            {/* Remember Password */}
-                                            <div className="d-flex justify-content-between">
-                                                <div>
-                                                    <input type="checkbox" id="save_pass" />
-                                                    <label htmlFor="save_pass">Remember Password</label>
-                                                </div>
-                                            </div>
-
-                                            {/* Buttons */}
                                             <button
-                                                type="button"
+                                                type="submit"
                                                 className="btn_login"
-                                                onClick={userLogin}
-                                            >
+                                                onClick={userLogin}>
                                                 Login
                                             </button>
                                             <div className="text-center mt-2">
-                                                <a href="forgetpass.html">Forget Password?</a>
+                                                <a href="#" style={{ textDecoration: 'none' }}>Forget Password?</a>
                                             </div>
                                             <div className="text-center">
-                                                <a href="register.html">Don't have an account? Sign Up</a>
+                                                <Link to="/signup" style={{ textDecoration: 'none' }}>
+                                                    Don't have an account? Sign Up
+                                                </Link>
                                             </div>
                                         </form>
                                     </div>

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Helmet } from "react-helmet";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-import { Link } from "react-router-dom";
+import { Link, useParams, useNavigate } from "react-router-dom";
 import axios from "/config/axiosConfig";
 import AuthUser from "../components/AuthUser";
 import { LanguageContext } from "../context/LanguageContext";
@@ -11,10 +11,11 @@ import LeftSideBarComponentPlt from "../components/LeftSideBarComponentAlllGames
 import Loader from "../components/Loader";
 import '../components/css/allGamesList.css'; // Import your CSS file
 import Carousel from 'react-bootstrap/Carousel';
-import { useNavigate } from "react-router-dom";
 
 
-const AllGameList = () => {
+const PlatformGames = () => {
+
+    const { slug } = useParams();
     const { user } = AuthUser();
     const { language, content, changeLanguage } = useContext(LanguageContext);
     const navigate = useNavigate();
@@ -50,6 +51,7 @@ const AllGameList = () => {
     };
 
     useEffect(() => {
+        console.log("Platform: " + slug);
         defaultFetch();
 
     }, []); // Dependency array includes slug and currentPage
@@ -122,6 +124,7 @@ const AllGameList = () => {
                         </div>
                         <br />
 
+                        <center>{slug}</center>
                         {loading ? (
                             <div>
                                 <Loader />
@@ -131,7 +134,7 @@ const AllGameList = () => {
                             <div className="grid-container">
                                 {responsePltFrm.map((platform) => (
                                     <div className="grid-item" key={platform.id}>
-                                        <Link to={`/platform-games/${platform.slug}`} style={{ textDecoration: 'none' }}>
+                                        <Link to={`/games/${platform.slug}`} style={{ textDecoration: 'none' }}>
                                             <div className="card">
                                                 <img
                                                     src={platform.image}
@@ -150,7 +153,8 @@ const AllGameList = () => {
                         )}
 
                     </div>
-                    <div className="col-2">
+                    <div className="col-2 mt-4">
+                    <Link to="/all-game-list"><i className="fa fa-chevron-circle-left"></i> Back to list</Link>
                         <LeftSideBarComponentPlt />
                     </div>
 
@@ -169,4 +173,4 @@ const AllGameList = () => {
     );
 };
 
-export default AllGameList;
+export default PlatformGames;

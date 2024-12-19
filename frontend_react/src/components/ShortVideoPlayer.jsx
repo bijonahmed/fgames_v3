@@ -7,12 +7,14 @@ import axios from "/config/axiosConfig";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Mousewheel } from "swiper/modules";
 import './css/VideoPlayer.css'; // Import your CSS file
+import { translate } from "pdf-lib";
 //VideoPlayer.css
 
 const ShortVideoPlayer = () => {
 
   const swiperRef = useRef(null);  // Create a reference to Swiper
   const videoRefs = useRef([]);    // Array to store video references
+  const [currentIndex, setCurrentIndex] = useState(0);
 
   // Enable mousewheel for vertical scrolling
   const videos = [
@@ -46,6 +48,8 @@ const ShortVideoPlayer = () => {
 
   // Handle video play and pause based on the current slide index
   const handleSlideChange = (swiper) => {
+
+    setCurrentIndex(swiper.activeIndex); // Update the active slide index
     const currentIndex = swiper.activeIndex;
     videoRefs.current.forEach((video) => {
       if (video && !video.paused) {
@@ -60,6 +64,8 @@ const ShortVideoPlayer = () => {
     }
   };
 
+
+
   // Handle keyboard arrow key navigation
   const handleKeydown = (event) => {
     if (event.key === "ArrowDown") {
@@ -69,15 +75,34 @@ const ShortVideoPlayer = () => {
     }
   };
 
-  const handleReachEnd = () => {
-    if (swiperRef.current && swiperRef.current.swiper) {
-      swiperRef.current.swiper.slideTo(0); // Reset to the first slide
+
+  // Function to handle playing the video
+
+
+  const togglePlayPause = (index) => {
+    const video = videoRefs.current[index];  // Access the specific video using the index
+    if (video.paused) {
+      video.play();  // Play the video
+    } else {
+      video.pause(); // Pause the video
     }
-  };
+  }
 
 
 
+
+  const playButtonRef = useRef(null); // Reference for the play button
   useEffect(() => {
+
+    if (playButtonRef.current) {
+      playButtonRef.current.click(); // Programmatically click the play button
+    }
+
+    if (videoRefs.current[0]) {
+      videoRefs.current[0].play();
+    }
+
+
     const randomIndex = Math.floor(Math.random() * videos.length);
     if (swiperRef.current && swiperRef.current.swiper) {
       swiperRef.current.swiper.slideTo(randomIndex);
@@ -87,16 +112,18 @@ const ShortVideoPlayer = () => {
     return () => {
       window.removeEventListener("keydown", handleKeydown);
     };
+
+
   }, []);
 
 
   return (
     <>
-      <div className="col-md-4 col-12 p-0 v_container text-center">
+      <div className="col-md-4 col-12 v_container text-center p-0">
         <div className="swiper-container">
-          <div className="swiper-wrapper">
-            {/* Reels video part start here */}
-            <div className="container-fluid p-0">
+          {/* Reels video part start here */}
+          <div className="container-fluid p-0 d-flex justify-content-center align-items-center">
+            <div className="swiper-container position-relative h-80 w-100" style={{ maxWidth: "450px" }}>
               <Swiper
                 ref={swiperRef}
                 modules={[Mousewheel]} // Enable mousewheel scrolling
@@ -104,76 +131,45 @@ const ShortVideoPlayer = () => {
                 slidesPerView={1}
                 mousewheel
                 style={{ height: "100vh" }}
-                onSlideChange={handleSlideChange} // Listen to slide change
-                onReachEnd={handleReachEnd}
-              >
+                onSlideChange={(swiper) => handleSlideChange(swiper)}>
                 {videos.map((video, index) => (
                   <SwiperSlide key={video.id} className="custom-slide">
-                    <div className="position-relative d-flex justify-content-center align-items-center vh-100">
+                    <div className="position-relative d-flex justify-content-center align-items-center w-100">
                       <video
-                        ref={(el) => (videoRefs.current[index] = el)} // Store video references
+                        id={`myVideo-${index}`}  // Make sure to give each video a unique id
+                        ref={(el) => (videoRefs.current[index] = el)}  // Store reference to video
+                        onClick={() => togglePlayPause(index)}  // Fix: Use an arrow function
+                        style={{ objectFit: "cover", maxHeight: "80vh" }}
                         src={video.src}
-                        className="video-rounded w-100 h-100"
-                        controls
-                        autoPlay={index === 0} // Play the first video initially
+                        className="video-rounded w-100 h-80"
                         loop
                       />
-                      {/* Icons Section */}
-                      <div
-                        className="position-absolute d-flex flex-column align-items-center d-none"
-                        style={{
-                          top: "50%",
-                          right: "20px",
-                          transform: "translateY(-50%)",
-                        }}
-                      >
-                        <div
-                          className="mb-3"
-                          style={{
-                            width: "30px",
-                            height: "30px",
-                            background: "rgba(0, 0, 0, 0.5)",
-                            borderRadius: "50%",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          <a href="#"><img
-                            src="/theme_fansgames/images/like.png"
-                            alt="Like"
-                            style={{ width: "30px", height: "30px" }}
-                          /></a>
-                        </div>
-                        <div
-                          style={{
-                            width: "30px",
-                            height: "30px",
-                            background: "rgba(0, 0, 0, 0.5)",
-                            borderRadius: "50%",
-                            display: "flex",
-                            justifyContent: "center",
-                            alignItems: "center",
-                          }}
-                        >
-                          <a href="#"><img
-                            src="https://purepng.com/public/uploads/large/share-icon-7nl.png"
-                            alt="Share"
-                            style={{ width: "30px", height: "30px" }}
-                          /></a>
-                        </div>
-                      </div>
                     </div>
                   </SwiperSlide>
+
                 ))}
               </Swiper>
+              {/* Left Arrow Button */}
+              <div
+                style={{ top: "50%", left: "10px", transform: "translateY(-50%)" }}
+                className="swiper-button-prev position-absolute"
+                onClick={() => swiperRef.current.swiper.slidePrev()}>
+                <i className="fas fa-chevron-up"></i>
+              </div>
+
+              {/* Right Arrow Button */}
+              <div className="swiper-button-next position-absolute me-3"
+                onClick={() => swiperRef.current.swiper.slideNext()}>
+                <i className="fas fa-chevron-down"></i>
+              </div>
             </div>
-
-
-            {/* reels videos end here  */}
           </div>
+
+
+          {/* reels videos end here  */}
         </div>
       </div>
+
 
     </>
   );

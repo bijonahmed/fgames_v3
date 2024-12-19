@@ -101,6 +101,8 @@ Route::group(
         'prefix' => 'public',
     ],
     function () {
+        Route::get('getonlyPltform', [PublicController::class, 'getonlyPltform']);
+
         Route::get('/language', [LanguageController::class, 'index']);
         Route::post('/texts', [LanguageController::class, 'getTexts']);
         Route::get('getPornStarPic/', [PublicController::class, 'getPornStarPics']);
@@ -279,7 +281,7 @@ Route::middleware(['auth:api', CheckUserStatus::class])->group(function () {
             Route::post('addonlyGamepltform', [Gcontroller::class, 'addonlyGamepltform']);
             Route::get('allGameCategoryList', [Gcontroller::class, 'allGameCategoryList']);
             Route::get('onlyPltformList', [Gcontroller::class, 'onlyPltformList']);
-
+            
             Route::get('checkGameType/{id}', [Gcontroller::class, 'checkGameTypeRow']);
             Route::get('checkGameCategory/{id}', [Gcontroller::class, 'checkGameCategory']);
             Route::get('checkGamePltfm/{id}', [Gcontroller::class, 'checkGamePltfm']);

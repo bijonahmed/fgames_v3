@@ -25,6 +25,7 @@ use App\Models\MystoreHistory;
 use App\Models\VideosThunmnail;
 use App\Jobs\ProcessExcelUpload;
 use App\Models\GamelistTransate;
+use App\Models\GamePlatformOnly;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Crypt;
@@ -36,6 +37,28 @@ use Illuminate\Support\Facades\Redirect;
 class PublicController extends Controller
 {
 
+
+
+    public function getonlyPltform()
+    {
+
+        $data = GamePlatformOnly::orderBy('id', 'desc')->get();
+
+
+        $result = [];
+        foreach ($data as $key => $v) {
+            $result[] = [
+                'id'    => $v->id,
+                'name'  => $v->name,
+                'slug'  => $v->slug,
+                'image' => !empty($v->image) ? url($v->image) : "",
+            ];
+        }
+        return response()->json([
+            'data' => $result,
+        ], 200);
+    }
+    
     public function getPornStarPics(Request $request)
     {
         $directory = public_path('backend/files/model');
