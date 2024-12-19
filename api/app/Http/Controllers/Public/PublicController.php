@@ -37,14 +37,31 @@ use Illuminate\Support\Facades\Redirect;
 class PublicController extends Controller
 {
 
+    public function pltformWiseGame(Request $request)
+    {
 
+        $slug = $request->slug ?? ""; 
+
+        $data = GameList::where('platType',$slug)->orderBy('id', 'desc')->get();
+        $result = [];
+        foreach ($data as $key => $v) {
+            $result[] = [
+                'id'    => $v->id,
+                'name'  => $v->gameName_en,
+                'slug'  => $v->platType,
+                'image' => !empty($v->game_images) ? url($v->game_images) : "",
+            ];
+        }
+        return response()->json([
+            'count' => count($data),
+            'data'  => $result,
+        ], 200);
+    }
 
     public function getonlyPltform()
     {
 
         $data = GamePlatformOnly::orderBy('id', 'desc')->get();
-
-
         $result = [];
         foreach ($data as $key => $v) {
             $result[] = [
@@ -58,7 +75,12 @@ class PublicController extends Controller
             'data' => $result,
         ], 200);
     }
-    
+
+
+
+
+
+
     public function getPornStarPics(Request $request)
     {
         $directory = public_path('backend/files/model');
@@ -117,18 +139,12 @@ class PublicController extends Controller
                 'status'        => $v->status,
             ];
         }
-
-
-
-
         return response()->json([
             'gameTypeName' => "",
             'success' => true,
             'message' => 'Games fetched successfully.',
             'data'    => $dataList,
         ], 200);
-        // Return filtered games as a JSON response
-        //return response()->json($games);
     }
 
     public function gameCategoryGame(Request $request)
@@ -362,8 +378,6 @@ class PublicController extends Controller
             'message' => 'Fetched successfully.',
             'data'    => $dataList,
         ], 200);
-
-       
     }
 
     public function gameTypeWiseCategory($slug)

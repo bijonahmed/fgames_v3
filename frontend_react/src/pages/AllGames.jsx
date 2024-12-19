@@ -186,13 +186,7 @@ const AllGames = () => {
 
                             </div>
 
-                            <style>
-                                {`
-          .form-control::placeholder {
-            color: gray; /* Placeholder color */
-          }
-        `}
-                            </style>
+                          
                             {loading && (
                                 <div className="text-center">
                                     <div className="spinner-border text-primary" role="status">

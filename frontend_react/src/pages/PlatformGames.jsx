@@ -21,6 +21,7 @@ const PlatformGames = () => {
     const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [responsePltFrm, setPltfrmData] = useState([]);
+    const [responsePltFrmCount, setPltfrmDataCount] = useState([]);
     const { getToken, token, logout } = AuthUser();
     const [index, setIndex] = useState(0);
 
@@ -28,17 +29,21 @@ const PlatformGames = () => {
         setIndex(selectedIndex);
     };
 
+
+    const backtoList = () =>{
+        navigate("/all-platform-list"); // Adjust the navigation path as needed
+    }
     const defaultFetch = async () => {
         setLoading(true);
         try {
-
-            const response = await axios.get(`/public/getonlyPltform`, {
-                headers: {
-                    Authorization: `Bearer ${token}`, // Add the token to the Authorization header
-                },
+            const response = await axios.get('/public/pltformWiseGame', {
+                params: {
+                    slug: slug,
+                }
             });
             //console.log("pltfrmData:", response.data);
             setPltfrmData(response.data.data);
+            setPltfrmDataCount(response.data.count);
         } catch (error) {
             console.error("Error Data:", error);
             if (error.response && error.response.status === 401) {
@@ -65,7 +70,7 @@ const PlatformGames = () => {
             <div className="container-fluid" style={{ minHeight: "100vh" }}>
 
                 <div className="row">
-                    <div className="col-2">
+                    <div className="col-2" style={{ marginTop: '-50px' }}>
                         <LeftSideBarComponent />
                     </div>
                     <div className="col-8 mt-4" >
@@ -124,7 +129,19 @@ const PlatformGames = () => {
                         </div>
                         <br />
 
-                        <center>{slug}</center>
+                        <div className="row">
+                            <div className="col-12">
+                              <div className="d-flex justify-content-between">
+                              <button  onClick={backtoList}> <i className="fas fa-arrow-left me-2"></i></button>
+                              <center><span className="pt-3">{slug.toUpperCase()} ({responsePltFrmCount})</span></center>
+                              </div>
+
+                            </div>
+                            
+                        </div>
+
+
+                      
                         {loading ? (
                             <div>
                                 <Loader />
@@ -137,15 +154,16 @@ const PlatformGames = () => {
                                         <Link to={`/games/${platform.slug}`} style={{ textDecoration: 'none' }}>
                                             <div className="card">
                                                 <img
-                                                    src={platform.image}
+                                                    src={platform.image || '/theme_fansgames/images/default.png'}  // Use default image if platform.image is null or undefined
                                                     alt={platform.name}
                                                     className="platform-image"
                                                 />
                                                 <div className="card-content">
-                                                    <p className="platform-name">{platform.name}</p>
+                                                    <p className="platform-name">{platform.name.length > 15 ? platform.name.substring(0, 15) + "..." : platform.name}</p>
                                                 </div>
                                             </div>
                                         </Link>
+
                                     </div>
                                 ))}
                             </div>
@@ -153,8 +171,8 @@ const PlatformGames = () => {
                         )}
 
                     </div>
-                    <div className="col-2 mt-4">
-                    <Link to="/all-game-list"><i className="fa fa-chevron-circle-left"></i> Back to list</Link>
+                    <div className="col-2" style={{ marginTop: '-50px' }}>
+
                         <LeftSideBarComponentPlt />
                     </div>
 

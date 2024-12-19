@@ -63,7 +63,7 @@ const AllGameList = () => {
             <div className="container-fluid" style={{ minHeight: "100vh" }}>
 
                 <div className="row">
-                    <div className="col-2">
+                    <div className="col-2" style={{ marginTop: '-50px' }}>
                         <LeftSideBarComponent />
                     </div>
                     <div className="col-8 mt-4" >
@@ -150,7 +150,7 @@ const AllGameList = () => {
                         )}
 
                     </div>
-                    <div className="col-2">
+                    <div className="col-2" style={{ marginTop: '-50px' }}>
                         <LeftSideBarComponentPlt />
                     </div>
 
